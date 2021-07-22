@@ -1,4 +1,4 @@
-.card-details-container{
+.card-details-container {
     z-index: 2;
     position: fixed;
     top: 0;
@@ -21,7 +21,7 @@
     margin: 50px auto 80px;
     border-radius: 3px;
 
-    h4{
+    h4 {
         font-weight: 600;
         font-size: 17px;
     }
@@ -64,10 +64,10 @@
             background-color: rgba($color: #000000, $alpha: 0.2);
         }
     }
-    .no-cover-details{
+    .no-cover-details {
         background-color: transparent;
         &:hover {
-            background-color: $clr3
+            background-color: $clr3;
         }
     }
     .choose-cover {
@@ -109,7 +109,7 @@
     }
 }
 
-.details-bottom-left{
+.details-bottom-left {
     margin-left: 40px;
 }
 
@@ -117,7 +117,7 @@
     padding-top: 16px;
     margin: 0 56px 8px;
     position: relative;
-    h2{
+    h2 {
         font-weight: 600;
     }
 }
@@ -132,7 +132,7 @@
 }
 
 .right-side {
-    h5{
+    h5 {
         color: $clr2;
     }
     display: flex;
@@ -144,84 +144,128 @@
         margin-top: 10px;
         margin-right: 10px;
         padding: 8px;
-        &:hover{
+        &:hover {
             background-color: $clr3;
         }
     }
 
-    .member-join::before{
+    .member-join::before {
         font-family: fontAwesome, sans serif;
-        content:'\f007'
+        content: "\f007";
     }
 
-    .add-member::before{
+    .add-member::before {
         font-family: fontAwesome, sans serif;
-        content:'\f0c0'
+        content: "\f0c0";
     }
-    
-    .add-label::before{
+
+    .add-label::before {
         font-family: fontAwesome, sans serif;
-        content:'\f02b'
+        content: "\f02b";
     }
-    
-    .add-checklist::before{
+
+    .add-checklist::before {
         font-family: fontAwesome, sans serif;
-        content:'\f14a'
+        content: "\f14a";
     }
-    
-    .add-date::before{
+
+    .add-date::before {
         font-family: fontAwesome, sans serif;
-        content:'\f017'
+        content: "\f017";
     }
-    
-    .add-attachment::before{
+
+    .add-attachment::before {
         font-family: fontAwesome, sans serif;
-        content:'\f0c6'
+        content: "\f0c6";
+    }
+    .add-cover::before {
+        font-family: fontAwesome, sans serif;
+        content: "\f03e";
+    }
+
+    &.btns {
+        button {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 3px;
+            clear: both;
+            color: #e6e6e6;
+            display: block;
+            float: left;
+            margin: 0 0 4px 8px;
+            padding: 6px 12px 6px 8px;
+            text-decoration: none;
+            transition: transform 85ms ease-in;
+            height: 32px;
+            &.delete-card-btn::before {
+                font-family: fontAwesome, sans serif;
+                content: "\f1f8";
+            }
+            &:hover {
+                background: rgba(0, 0, 0, 0.8);
+                color: #fff;
+                transform: translateX(5px);
+            }
+        }
+        .add-member {
+            width: fit-content;
+        }
+        .add-label {
+            width: fit-content;
+        }
+        .add-date {
+            width: fit-content;
+        }
+        .add-cover {
+            width: fit-content;
+        }
+        .delete-card-btn {
+            width: fit-content;
+        }
     }
 }
 
-.details-desc{
+.details-desc {
     position: relative;
     margin-bottom: 16px;
 }
 
-.details-attachment{
+.details-attachment {
     position: relative;
 }
 
-.details-checklist{
+.details-checklist {
     position: relative;
 }
 
-.details-activity{
+.details-activity {
     margin-top: 32px;
     position: relative;
 }
 
-.details-desc-icon::before{
+.details-desc-icon::before {
     position: absolute;
     font-family: fontAwesome, sans serif;
-    content:'\f036';
+    content: "\f036";
     left: -30px;
     top: 3px;
     height: 24px;
     width: 24px;
 }
 
-.details-attachment-icon::before{
+.details-attachment-icon::before {
     position: absolute;
     font-family: fontAwesome, sans serif;
-    content:'\f0c6';
+    content: "\f0c6";
     left: -30px;
     top: 3px;
     height: 24px;
     width: 24px;
 }
 
-.details-checklist-icon::before{
+.details-checklist-icon::before {
     position: absolute;
     font-family: fontAwesome, sans serif;
-    content:'\f14a';
+    content: "\f14a";
     left: -30px;
     top: 5px;
     font-size: 18px;
@@ -229,16 +273,12 @@
     width: 24px;
 }
 
-.details-activity-icon::before{
+.details-activity-icon::before {
     position: absolute;
     font-family: fontAwesome, sans serif;
-    content:'\f0ca';
+    content: "\f0ca";
     left: -30px;
     top: 3px;
     height: 24px;
     width: 24px;
 }
-
-
-
-

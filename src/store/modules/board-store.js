@@ -52,6 +52,7 @@ export const boardStore = {
         },
         removeCard(state, { group, cardId }) {
             const idx = state.selectedBoard.groups.findIndex(gr => gr.id === group.id)
+            console.log(idx, 'idx');
             state.selectedBoard.groups[idx].cards = state.selectedBoard.groups[idx].cards.filter((card) => card.id !== cardId)
         },
         addCard(state, { groupId, card }) {
@@ -148,8 +149,11 @@ export const boardStore = {
                     context.commit({ type: 'removeGroup', groupId })
                 })
                 socketService.off('removeCard')
-                socketService.on('removeCard', ({ group, cardId }) => {
-                    context.commit({ type: 'removeCard', group, cardId })
+                socketService.on('removeCard', ( board ) => {
+                    console.log(board, 'board');
+                    context.commit({ type: 'setBoard', board })
+                    // context.commit({ type: 'removeCard', group, cardId })
+
                 })
                 socketService.off('addCard')
                 socketService.on('addCard', ({ groupId, card }) => {
@@ -245,11 +249,15 @@ export const boardStore = {
             }
         },
         async removeCard(context, { board, group, cardId }) {
+            console.log(group, 'group');
             try {
-                await boardService.removeCard(board, group, cardId)
-                context.commit({ type: 'removeCard', group, cardId })
-                const data = { group, cardId }
+                const savedBoard = await boardService.removeCard(board, group, cardId)
+                console.log(board, 'board');
+                // context.commit({ type: 'removeCard', group, cardId })
+                context.commit({ type: 'setBoard', board: savedBoard })
+                const data = savedBoard
                 socketService.emit('cardRemoved', data)
+                return savedBoard._id
             } catch (err) {
                 console.log('Cant remove card', err);
             }
