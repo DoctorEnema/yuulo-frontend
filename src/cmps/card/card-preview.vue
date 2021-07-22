@@ -23,7 +23,7 @@
           <div v-if="label" :style="{ backgroundColor: label.color }"></div>
         </div>
       </div>
-      <div class="card-preview-title">{{ card.title }}</div>
+      <p class="card-preview-title">{{ card.title }}</p>
       <div class="card-preview-bottom">
         <div class="card-preview-badges">
           <div
