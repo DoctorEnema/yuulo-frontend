@@ -1,6 +1,6 @@
 <template>
   <div v-if="card" @click="closeCard" class="card-details-container">
-    <section  v-if="!isEditCard"  class="card-details" @click.stop="closeModal">
+    <section v-if="!isEditCard" class="card-details" @click.stop="closeModal">
       <div
         v-if="card.cover"
         class="details-cover"
@@ -15,14 +15,24 @@
           Cover
         </button>
       </div>
-      <button :class="{'no-cover-details':!card.cover}" class="close-details" @click="closeCard"></button>
+      <button
+        :class="{ 'no-cover-details': !card.cover }"
+        class="close-details"
+        @click="closeCard"
+      ></button>
       <header class="details-header">
         <span class="details-title"></span>
         <div>
           <!-- <h2>{{ card.title }}</h2> -->
           <form @submit.prevent="saveTitle">
-        <textarea ref="title" @keydown.13.prevent @keyup.13="saveTitle" @blur="saveTitle">{{card.title}}</textarea>
-      </form>
+            <textarea
+              ref="title"
+              @keydown.13.prevent
+              @keyup.13="saveTitle"
+              @blur="saveTitle"
+              >{{ card.title }}</textarea
+            >
+          </form>
           <!--this is a textarea in trello -->
           <h5>in list {{ group.title }}</h5>
         </div>
@@ -143,25 +153,25 @@
           </button>
         </div>
       </div>
-        <section class="modal" v-if="openModalType" @click.stop="stop">
-          <component
-            :is="openModalType"
-            @closeModal="closeModal"
-            @addUser="addMember"
-            @linkAdded="linkAdded"
-            @addDate="addDate"
-            @createLabel="createLabel"
-            @setLabel="setLabel"
-            @listAdded="addList"
-            @setCover="setCover"
-            @removeCover="removeCover"
-            @search="setSearch"
-            @removeDate="removeDate"
-            :card="card"
-            :labels="labelsToShow"
-            :users="usersToShow"
-          ></component>
-        </section>
+      <section class="modal" v-if="openModalType" @click.stop="stop">
+        <component
+          :is="openModalType"
+          @closeModal="closeModal"
+          @addUser="addMember"
+          @linkAdded="linkAdded"
+          @addDate="addDate"
+          @createLabel="createLabel"
+          @setLabel="setLabel"
+          @listAdded="addList"
+          @setCover="setCover"
+          @removeCover="removeCover"
+          @search="setSearch"
+          @removeDate="removeDate"
+          :card="card"
+          :labels="labelsToShow"
+          :users="usersToShow"
+        ></component>
+      </section>
     </section>
     <div v-if="isEditCard" class="card-editor">
       <div class="right-side">
@@ -183,7 +193,7 @@
         <button class="add-date" data-cmp="add-date" @click.stop="setModalType">
           Dates
         </button>
-        
+
         <button
           v-if="!card.cover"
           class="add-cover"
@@ -193,29 +203,32 @@
           Cover
         </button>
       </div>
-       <section class="modal" v-if="openModalType" @click.stop="stop">
-          <component
-            :is="openModalType"
-            @closeModal="closeModal"
-            @addUser="addMember"
-            @linkAdded="linkAdded"
-            @addDate="addDate"
-            @createLabel="createLabel"
-            @setLabel="setLabel"
-            @listAdded="addList"
-            @setCover="setCover"
-            @removeCover="removeCover"
-            @search="setSearch"
-            @removeDate="removeDate"
-            :card="card"
-            :labels="labelsToShow"
-            :users="usersToShow"
-          ></component>
-        </section>
-      <card-edit-preview :style="position" :group="group" :card="card"></card-edit-preview>
+      <section class="modal" v-if="openModalType" @click.stop="stop">
+        <component
+          :is="openModalType"
+          @closeModal="closeModal"
+          @addUser="addMember"
+          @linkAdded="linkAdded"
+          @addDate="addDate"
+          @createLabel="createLabel"
+          @setLabel="setLabel"
+          @listAdded="addList"
+          @setCover="setCover"
+          @removeCover="removeCover"
+          @search="setSearch"
+          @removeDate="removeDate"
+          :card="card"
+          :labels="labelsToShow"
+          :users="usersToShow"
+        ></component>
+      </section>
+      <card-edit-preview
+        :style="position"
+        :group="group"
+        :card="card"
+      ></card-edit-preview>
     </div>
   </div>
-  
 </template>
 
 <script>
@@ -270,8 +283,8 @@ export default {
   async created() {
     try {
       const { cardId, groupId, boardId, isEditCard } = this.$route.params;
-      if(isEditCard === 'true')this.isEditCard = true;
-      else this.isEditCard=false
+      if (isEditCard === "true") this.isEditCard = true;
+      else this.isEditCard = false;
       this.boardId = boardId;
       const card = await this.$store.dispatch({
         type: "loadCard",
@@ -279,7 +292,7 @@ export default {
         groupId,
         cardId,
       });
-      window.document.title = `Yuulo - ${this.card.title}`
+      window.document.title = `Yuulo - ${this.card.title}`;
       socketService.emit("card topic", cardId);
       // this.isUserAssignedToCard()
     } catch (err) {
@@ -294,7 +307,7 @@ export default {
     //   card: null,
     // });
     this.$store.commit("removeCurrent");
-    document.title = `Yuulo`
+    document.title = `Yuulo`;
   },
   computed: {
     selectedBoard() {
@@ -313,15 +326,15 @@ export default {
       if (!this.card.attachments || !this.card.attachments.length) return false;
       return true;
     },
-    isItEditCard(){
-      return (this.isEditCard && this.card)
+    isItEditCard() {
+      return this.isEditCard && this.card;
     },
     isLabels() {
       if (!this.card.labelIds || !this.card.labelIds.length) return false;
       return true;
     },
-    isCover(){
-      if(!this.card.cover || !this.card.cover) return 'transparent'
+    isCover() {
+      if (!this.card.cover || !this.card.cover) return "transparent";
     },
     isMembers() {
       if (!this.card.members || !this.card.members.length) return false;
@@ -361,20 +374,20 @@ export default {
     },
     position() {
       const position = this.$store.getters.position;
-      console.log(position, 'cardDetails');
-      return `top: ${position.posY-1}px; left: ${position.posX-229}px`
-    }
+      console.log(position, "cardDetails");
+      return `top: ${position.posY - 1}px; left: ${position.posX - 229}px`;
+    },
   },
   methods: {
     saveTitle(ev) {
-      if (this.isUpdated) return 
+      if (this.isUpdated) return;
       console.log(ev);
-      const card = this.card
-      card.title = this.$refs.title.value
-      this.updateCard()
-      setTimeout(()=> this.isUpdated = false, 100)
-      this.isUpdated = true
-      this.$refs.title.blur()
+      const card = this.card;
+      card.title = this.$refs.title.value;
+      this.updateCard();
+      setTimeout(() => (this.isUpdated = false), 100);
+      this.isUpdated = true;
+      this.$refs.title.blur();
     },
     editCard() {
       this.isEditCard = true;
@@ -389,14 +402,14 @@ export default {
     //   const isUserMember = this.card.members.some(member => member._id === this.loggedinUser._id)
     //   console.log('isUserMember',isUserMember);
     emitToUsers(fullActivity) {
-      if (!this.card?.members.length) return
-      this.card.members.forEach(member => {
-        const data = {fullActivity, userId: member._id}
-        if (this.loggedinUser._id !== member._id){
-        this.$store.dispatch({type: 'updateUserNotifications', data})
-        socketService.emit('notifyMember', data)
+      if (!this.card?.members.length) return;
+      this.card.members.forEach((member) => {
+        const data = { fullActivity, userId: member._id };
+        if (this.loggedinUser._id !== member._id) {
+          this.$store.dispatch({ type: "updateUserNotifications", data });
+          socketService.emit("notifyMember", data);
         }
-      })
+      });
     },
     stop() {
       // Dont Delete!!
@@ -428,9 +441,9 @@ export default {
       await this.updateCard();
     },
     async setActivity(activity, comment) {
-      const {_id, fullname, imgUrl} = this.loggedinUser
+      const { _id, fullname, imgUrl } = this.loggedinUser;
       const fullActivity = {
-        byMember: {_id, fullname, imgUrl},
+        byMember: { _id, fullname, imgUrl },
         creatAt: Date.now(),
         id: utilService.makeId(),
         card: { id: this.card.id, title: this.card.title },
@@ -451,12 +464,12 @@ export default {
     async setCover(cover) {
       this.card.cover = {};
       this.card.cover = cover;
-      await this.setActivity(`Added Cover to ${this.card.title}`);
+      await this.setActivity(`added cover to ${this.card.title}`);
       this.updateCard();
     },
     async removeCover() {
       this.card.cover = null;
-      await this.setActivity(`Removed Cover from ${this.card.title}`);
+      await this.setActivity(`removed cover from ${this.card.title}`);
       this.updateCard();
     },
     setLabel(labelId) {
@@ -496,12 +509,12 @@ export default {
       if (!this.card.dueDate) this.card.dueDate = {};
       this.card.dueDate.date = date;
       if (!this.card.dueDate.isComplete) this.card.dueDate.isComplete = false;
-      await this.setActivity(`Added Date from ${this.card.title}`);
+      await this.setActivity(`added date to ${this.card.title}`);
       this.updateCard();
     },
     async removeDate() {
       this.card.dueDate = null;
-      await this.setActivity(`Remove Date from ${this.card.title}`);
+      await this.setActivity(`removed date from ${this.card.title}`);
       this.updateCard();
     },
     async linkAdded(link) {
@@ -514,14 +527,14 @@ export default {
       if (!this.card.attachments) this.card.attachments = [];
       this.card.attachments.push(newLink);
       await this.setActivity(
-        `Add attach ${newLink.name} to ${this.card.title}`
+        `add an attachment: ${newLink.name} to ${this.card.title}`
       );
       this.updateCard();
     },
     async removeLink(idx, attachment) {
       this.card.attachments.splice(idx, 1);
       await this.setActivity(
-        `Removed attach ${attachment.name} from ${this.card.title}`
+        `removed an attachment: ${attachment.name} from ${this.card.title}`
       );
       this.updateCard();
     },
@@ -539,9 +552,9 @@ export default {
         this.removeMember(member);
         return;
       }
-      if(!this.selectedBoard.members.some(m=>m._id === member._id)) return
+      if (!this.selectedBoard.members.some((m) => m._id === member._id)) return;
       this.card.members.push(member);
-      await this.setActivity(`Added ${member.fullname} to ${this.card.title}`);
+      await this.setActivity(`added ${member.fullname} to ${this.card.title}`);
       await this.updateCard();
     },
     async removeMember(member) {
@@ -550,7 +563,7 @@ export default {
       );
       this.card.members.splice(memberIdx, 1);
       await this.setActivity(
-        `Removed ${member.fullname} from ${this.card.title}`
+        `removed ${member.fullname} from ${this.card.title}`
       );
       await this.updateCard();
     },
@@ -566,7 +579,7 @@ export default {
       var newList = boardService.getEmptyList();
       newList.title = title;
       this.card.checklists.push(newList);
-      await this.setActivity(`Added Checklist to ${this.card.title}`);
+      await this.setActivity(`added a checklist to ${this.card.title}`);
       this.updateCard();
     },
     async removeList(listId) {
@@ -574,7 +587,7 @@ export default {
         (list) => list._id === listId
       );
       this.card.checklists.splice(listIdx, 1);
-      await this.setActivity(`Remove Checklist from ${this.card.title}`);
+      await this.setActivity(`remove a checklist from ${this.card.title}`);
       this.updateCard();
     },
     closeModal() {

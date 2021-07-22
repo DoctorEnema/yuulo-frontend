@@ -84,6 +84,7 @@
     }
 }
 
+
 .details-title {
     position: absolute;
     left: -30px;
@@ -177,6 +178,12 @@
     .add-attachment::before{
         font-family: fontAwesome, sans serif;
         content:'\f0c6'
+    }
+    .add-cover {
+        &::before {
+            font-family: fontAwesome, sans serif;
+            content: "\f03e";
+        }
     }
 }
 
