@@ -1,7 +1,8 @@
 export const utilService = {
     saveToStorage,
     loadFromStorage,
-    makeId
+    makeId,
+    getRandomColor
 }
 
 function saveToStorage(key, value) {
@@ -20,4 +21,15 @@ function makeId(length = 5) {
         txt += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return txt;
+}
+
+
+function getRandomColor() {
+    let color = '#'
+    for (let i = 0; i < 6; i++) {
+        const random = Math.random()
+        const bit = (random * 16) | 0
+        color += bit.toString(16)
+    }
+    return color
 }
