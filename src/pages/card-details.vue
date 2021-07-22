@@ -174,7 +174,7 @@
       </section>
     </section>
     <div v-if="isEditCard" class="card-editor">
-      <div class="right-side">
+      <div class="right-side" :style="position" style="position:absolute">
         <h5>ADD TO CARD</h5>
         <button
           class="add-member"
@@ -374,9 +374,14 @@ export default {
     },
     position() {
       const position = this.$store.getters.position;
-      console.log(position, "cardDetails");
-      return `top: ${position.posY - 1}px; left: ${position.posX - 229}px`;
+      console.log(position, 'cardDetails');
+      return `top: ${position.posY-1}px; left: ${position.posX-229}px`
     },
+    btnPosition() {
+      const position = this.$store.getters.position;
+      console.log(position, 'cardDetails');
+      return `top: ${position.posY-1}px; left: ${position.posX-229}px`
+    }
   },
   methods: {
     saveTitle(ev) {
