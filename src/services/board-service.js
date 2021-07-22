@@ -98,6 +98,7 @@ function updateGroup(board, group) {
 }
 
 function removeCard(board, group, cardId) {
+    console.log(board, 'board');
     const cardIdx = group.cards.findIndex(card => cardId === card.id)
     group.cards.splice(cardIdx, 1)
     const grIdx = board.groups.findIndex(gr => gr.id === group.id)

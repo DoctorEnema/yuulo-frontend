@@ -164,8 +164,7 @@
         </section>
     </section>
     <div v-if="isEditCard" class="card-editor">
-      <div class="right-side" :style="position" style="position:absolute">
-        <h5>ADD TO CARD</h5>
+      <div class="right-side btns" :style="btnPosition" style="position:absolute;">
         <button
           class="add-member"
           data-cmp="add-member"
@@ -185,12 +184,17 @@
         </button>
         
         <button
-          v-if="!card.cover"
           class="add-cover"
           data-cmp="add-cover"
           @click.stop="setModalType"
         >
-          Cover
+          Change cover
+        </button>
+        <button
+          class="delete-card-btn"
+          @click.stop="removeCard(group, card.id)"
+        >
+          Delete
         </button>
       </div>
        <section class="modal"  v-if="openModalType" @click.stop="stop">
@@ -367,7 +371,7 @@ export default {
     btnPosition() {
       const position = this.$store.getters.position;
       console.log(position, 'cardDetails');
-      return `top: ${position.posY-1}px; left: ${position.posX-229}px`
+      return `top: ${position.posY-1}px; left: ${position.posX + 30.4}px`
     }
   },
   methods: {
@@ -596,6 +600,19 @@ export default {
     setSearch(search) {
       this.searchBy = search.searchBy;
       this.searchType = search.type;
+    },
+    async removeCard() { 
+      try {
+        const boardId = await this.$store.dispatch({
+          type: "removeCard",
+          board: this.selectedBoard,
+          group: this.group,
+          cardId: this.cardId,
+        });
+          this.$router.push(`/board/${boardId}`);
+      } catch(err ) {
+        console.log('cannot remove card');
+      }
     },
     labelToShow() {
       if (!this.searchBy) return this.selectedBoard.labels;

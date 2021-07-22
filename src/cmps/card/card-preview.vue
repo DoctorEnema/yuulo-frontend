@@ -87,12 +87,8 @@ export default {
   destroyed() {},
   methods: {
     
-    removeCard(cardId) {
-      this.$emit("removeCard", cardId);
-    },
-    openCard(groupId, cardId,isEditCard,ev) {
-      console.log("ev", ev)
-      
+    
+    openCard(groupId, cardId,isEditCard,ev) {      
       const position = { 
         posY: this.$refs.edit.getBoundingClientRect().top + window.scrollY,
         posX: this.$refs.edit.getBoundingClientRect().left + window.scrollX
