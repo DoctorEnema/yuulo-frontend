@@ -1,0 +1,39 @@
+.member{
+    display: flex;
+    button{
+        position:relative;
+        border: none;
+        width: 32px;
+        height: 32px;
+        margin-right: 2px;
+        border-radius: 50%;
+        background-color: $clr4;
+        &:hover{
+            filter: brightness(101.5%);
+        }
+    }
+    img{
+        top: 0;
+        right: 0;
+        position: absolute;
+        border-radius: 50%;
+        width: 32px;
+    }
+    .add-new-member::before{
+        font-family: fontAwesome, sans serif;
+        content: '\f067';
+    }
+    .members{
+        position: relative;
+    }
+}
+
+.member-user{
+    right: 0;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 18px;
+    position: absolute;
+}

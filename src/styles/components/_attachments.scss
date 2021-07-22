@@ -1,0 +1,42 @@
+.attachment {
+    margin-top: 16px;
+    display: flex;
+    color: $clr2;
+    span {
+        padding: 0 4px;
+    }
+    a {
+        color: $clr2;
+        &:hover {
+            color: $clr1;
+        }
+    }
+    h3 {
+        padding-top: 4px;
+        color: black;
+        font-weight: 600;
+    }
+    img {
+        border-radius: 3px;
+        background-color: black;
+        object-fit: contain;
+        max-width: 112px;
+        min-height: 80px;
+        margin-inline-end: 12px;
+    }
+}
+.add-attachment-btn{
+    margin-top: 16px;
+}
+
+.make-cover-attachment {
+    padding-top: 8px;
+    &::before {
+        font-family: fontAwesome, sans serif;
+        content: "\f03e";
+    }
+}
+
+.attachment-controls {
+    display: flex;
+}

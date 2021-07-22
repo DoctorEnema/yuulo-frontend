@@ -1,0 +1,33 @@
+.add-member {
+    padding: 8px;
+    img {
+        width: 32px;
+        border-radius: 50%;
+        background-color: $clr3;
+    }
+
+    h3{
+        color: $clr2;
+    }
+
+    h5{
+       margin-bottom: 8px;
+    }
+}
+
+.user-member{
+    button{
+        margin: 2px auto;
+        color: $clr1;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        background-color: unset;
+        >*{
+            margin-inline-end: 6px;
+        }
+        &:hover{
+            background-color: $clr4;
+        }
+    }
+}

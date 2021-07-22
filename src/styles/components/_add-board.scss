@@ -1,0 +1,94 @@
+.add-board {
+    z-index: 2;
+    border-radius: 3px;
+    position: fixed;
+    transform: translate(-50%, 0);
+    width: 400px;
+    height: 308px;
+    left: 50%;
+    background-color: white;
+}
+
+.add-board-container{
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100vw;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    overflow-y: auto;
+}
+
+.create-board-header {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    display: flex;
+    padding-bottom: 100px;
+    background-size: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    button {
+        background-color: transparent;
+        color: white;
+        font-size: 16px;
+        margin-right: 6px;
+        padding-top: 6px;
+
+        &::before {
+            font-family: fontAwesome, sans serif;
+            content: "\f00d";
+        }
+    }
+    input[type="text"] {
+        @include trello-txt;
+        box-shadow: none;
+        font-weight: 600;
+        background-color: rgba($color: #ffffff, $alpha: 0.1);
+        transition: background-color 0.1s;
+        color: white;
+        &:hover {
+            background-color: rgba($color: #ffffff, $alpha: 0.3);
+        }
+        &:focus {
+            background-color: rgba($color: #000000, $alpha: 0.4);
+        }
+        // &::placeholder{
+        //     font-weight: 700;
+        // }
+    }
+}
+
+.add-board-covers {
+    display: grid;
+    grid-template-columns: repeat(5, 70px);
+    gap: 8px;
+    margin-inline-start: 8px;
+    margin-top: 8px;
+    img {
+        border-radius: 3px;
+        height: 70px;
+        object-fit: cover;
+    }
+    button {
+        border-radius: 3px;
+        padding: 0;
+        background-color: transparent;
+    }
+}
+
+.create-board-btn {
+    margin-top: 12px;
+    padding: 8px;
+    background-color: #0079bf;
+    color: $clr5;
+    transition: background-color 0.1s;
+}
+
+.disabled-btn {
+    background-color: $clr4;
+    color: rgb(179, 179, 179);
+    &:hover {
+        cursor: not-allowed;
+    }
+}

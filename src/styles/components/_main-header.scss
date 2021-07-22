@@ -1,0 +1,176 @@
+.main-header {
+    display: flex;
+    align-items: center;
+    background-color: rgba($color: #000000, $alpha: 0.3);
+    justify-content: space-between;
+    height: 40px; //maybe change to padding
+    color: white;
+    button {
+        min-width: 32px;
+        max-width: 32px;
+        height: 32px;
+        font-size: 17px;
+        margin-right: 4px;
+        border-radius: 3px;
+        border: none;
+        color: white;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        min-width: fit-content;
+    }
+
+    .header-left {
+        display: flex;
+        flex-basis: 100%;
+        flex-grow: 1;
+        justify-content: flex-start;
+        > * {
+            &:hover {
+                background-color: rgba($color: #000000, $alpha: 0.2);
+            }
+            margin-left: 4px;
+            border-radius: 3px;
+            background-color: rgba($color: #ffffff, $alpha: 0.3);
+            padding: 5px 6px;
+            &:last-child {
+                margin-left: 0;
+                border-radius: 0;
+                background-color: transparent;
+                padding: 0;
+            }
+        }
+        .to-boards {
+            min-width: fit-content;
+            font-weight: 600;
+            font-size: 14px;
+            margin-right: 0;
+            &::before {
+                font-family: fontAwesome, sans serif;
+                content: "\f868";
+            }
+        }
+    }
+    .header-right {
+        display: flex;
+        flex-basis: 100%;
+        flex-grow: 1;
+        justify-content: flex-end;
+        > * {
+            &:last-child {
+                border-radius: 50%;
+            }
+            &:hover {
+                background-color: rgba($color: #000000, $alpha: 0.2);
+            }
+            background-color: rgba($color: #ffffff, $alpha: 0.3);
+        }
+    }
+}
+.header-user {
+    padding: 0;
+    .to-user {
+        background-color: inherit;
+        padding-top: 7px;
+    }
+    img {
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+    }
+}
+
+.logo {
+    font-size: 22px;
+    display: flex;
+}
+
+.yuumi-header {
+    padding: 0 2rem;
+    margin-left: 30px;
+    background-image: url(../assets/img/yuumi-head3.png);
+    background-size: 55px;
+    background-repeat: no-repeat;
+    background-position: center -0.8rem;
+    &:hover {
+        background-image: url(../assets/img/yuumi-head-tilt.png);
+    }
+}
+
+.to-home::before {
+    font-family: fontAwesome, sans serif;
+    content: "\f80c";
+}
+
+.search {
+    position: relative;
+    width: fit-content;
+    .search-glass {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+    }
+}
+.search-bar {
+    display: block;
+    margin-left: 4px;
+    border-radius: 3px;
+    background-color: rgba($color: #ffffff, $alpha: 0.3);
+    padding: 5px 6px;
+    height: 100%;
+    outline: none;
+    border: none;
+    color: white;
+    width: 180px;
+
+    &:hover {
+        background-color: rgba($color: #ffffff, $alpha: 0.4);
+    }
+    &:focus {
+        background-color: white;
+        color: $clr2;
+        width: 250px;
+    }
+
+    &::placeholder {
+        opacity: 1;
+    }
+}
+
+.to-create-board::before {
+    font-family: fontAwesome, sans serif;
+    content: "\f067";
+}
+
+.to-info::before {
+    font-family: fontAwesome, sans serif;
+    content: "\f05a";
+}
+
+.to-notifications::before {
+    font-family: fontAwesome, sans serif;
+    content: "\f0f3";
+    // .active {
+    //     background-color:#b04632;
+    // }
+}
+.to-notifications {
+    transition: background-color 80ms;
+    &::before {
+        font-family: fontAwesome, sans serif;
+        content: "\f0f3";
+    }
+    &.active {
+        background-color: #eb5a46;
+        &:hover{
+            background-color: #b04632;
+        }
+    }
+}
+
+.search-glass::before {
+    font-family: fontAwesome, sans serif;
+    content: "\f002";
+}

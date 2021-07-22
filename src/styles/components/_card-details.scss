@@ -1,0 +1,244 @@
+.card-details-container{
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100vw;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    overflow-y: auto;
+}
+
+.card-details {
+    background: #f4f5f7;
+    position: relative;
+    left: 0;
+    right: 0;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    max-width: 768px;
+    min-height: 600px;
+    margin: 50px auto 80px;
+    border-radius: 3px;
+
+    h4{
+        font-weight: 600;
+        font-size: 17px;
+    }
+    .details-cover {
+        display: flex;
+        flex-direction: column;
+        background-color: lightsteelblue;
+        min-height: 116px;
+        position: relative;
+        img {
+            object-fit: contain;
+            max-height: 160px;
+        }
+        button {
+            background-color: rgba($color: #000000, $alpha: 0.1);
+            border: none;
+            padding: 8px 10px;
+            &:hover {
+                background-color: rgba($color: #000000, $alpha: 0.2);
+            }
+        }
+    }
+
+    .close-details {
+        background-color: rgba($color: #000000, $alpha: 0.1);
+        border: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin: 4px;
+        &::before {
+            font-family: fontAwesome, sans serif;
+            font-size: 20px;
+            content: "\f00d";
+        }
+        &:hover {
+            background-color: rgba($color: #000000, $alpha: 0.2);
+        }
+    }
+    .no-cover-details{
+        background-color: transparent;
+        &:hover {
+            background-color: $clr3
+        }
+    }
+    .choose-cover {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        border-radius: 3px;
+        width: fit-content;
+        margin: 8px;
+        &::before {
+            font-family: fontAwesome, sans serif;
+            content: "\f03e";
+        }
+    }
+}
+
+.details-title {
+    position: absolute;
+    left: -30px;
+    top: 21px;
+    &::before {
+        font-size: 18px;
+        font-family: fontAwesome, sans serif;
+        content: "\f37e";
+    }
+}
+
+.details-top-left {
+    margin: 12px 40px 8px;
+    display: flex;
+    flex-wrap: wrap;
+    h3 {
+        font-size: 12px;
+        color: $clr2;
+        margin-bottom: 6px;
+    }
+    > * {
+        margin: 0 8px 8px 0;
+    }
+}
+
+.details-bottom-left{
+    margin-left: 40px;
+}
+
+.details-header {
+    padding-top: 16px;
+    margin: 0 56px 8px;
+    position: relative;
+    h2{
+        font-weight: 600;
+    }
+}
+
+.details-body {
+    display: flex;
+}
+
+.left-side {
+    width: 75%;
+    padding: 0 8px 0 16px;
+}
+
+.right-side {
+    h5{
+        color: $clr2;
+    }
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    button {
+        background-color: $clr4;
+        text-align: left;
+        margin-top: 10px;
+        margin-right: 10px;
+        padding: 8px;
+        &:hover{
+            background-color: $clr3;
+        }
+    }
+
+    .member-join::before{
+        font-family: fontAwesome, sans serif;
+        content:'\f007'
+    }
+
+    .add-member::before{
+        font-family: fontAwesome, sans serif;
+        content:'\f0c0'
+    }
+    
+    .add-label::before{
+        font-family: fontAwesome, sans serif;
+        content:'\f02b'
+    }
+    
+    .add-checklist::before{
+        font-family: fontAwesome, sans serif;
+        content:'\f14a'
+    }
+    
+    .add-date::before{
+        font-family: fontAwesome, sans serif;
+        content:'\f017'
+    }
+    
+    .add-attachment::before{
+        font-family: fontAwesome, sans serif;
+        content:'\f0c6'
+    }
+}
+
+.details-desc{
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.details-attachment{
+    position: relative;
+}
+
+.details-checklist{
+    position: relative;
+}
+
+.details-activity{
+    margin-top: 32px;
+    position: relative;
+}
+
+.details-desc-icon::before{
+    position: absolute;
+    font-family: fontAwesome, sans serif;
+    content:'\f036';
+    left: -30px;
+    top: 3px;
+    height: 24px;
+    width: 24px;
+}
+
+.details-attachment-icon::before{
+    position: absolute;
+    font-family: fontAwesome, sans serif;
+    content:'\f0c6';
+    left: -30px;
+    top: 3px;
+    height: 24px;
+    width: 24px;
+}
+
+.details-checklist-icon::before{
+    position: absolute;
+    font-family: fontAwesome, sans serif;
+    content:'\f14a';
+    left: -30px;
+    top: 5px;
+    font-size: 18px;
+    height: 24px;
+    width: 24px;
+}
+
+.details-activity-icon::before{
+    position: absolute;
+    font-family: fontAwesome, sans serif;
+    content:'\f0ca';
+    left: -30px;
+    top: 3px;
+    height: 24px;
+    width: 24px;
+}
+
+
+
+

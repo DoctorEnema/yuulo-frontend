@@ -1,0 +1,38 @@
+.el-date-picker {
+    width: 300px;
+    right: 0;
+}
+
+.add-date {
+    padding: 12px;
+    // position: relative;
+}
+
+.add-to-card {
+    .el-date-editor {
+        width: 100%;
+    }
+    i {
+        display: none;
+    }
+    .date-hr {
+        margin-bottom: 5px;
+    }
+    .el-picker-panel {
+        top: 0;
+    }
+}
+
+.remove-date {
+    @include control-btn;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+button.el-button:nth-child(1) {
+    display: none;
+}
+
+.el-picker-panel__content {
+    margin: 0;
+}

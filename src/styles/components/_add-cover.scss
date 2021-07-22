@@ -1,0 +1,62 @@
+.create-cover {
+    padding: 12px;
+    ul{
+        margin: 0;
+        padding-top: 12px;
+    }
+    .card-cover-color {
+        display: inline-block;
+        height: 32px;
+        margin: 0 8px 8px 0;
+        padding: 0;
+        width: 48.5px;
+        cursor: pointer;
+        border-radius: 4px;
+        &:nth-child(5){
+            margin-right: 0;
+        }
+        &:nth-child(10){
+            margin-right: 0;
+        }
+    }
+}
+
+.cover-controls {
+        padding: 0;
+    button {
+        width: 100%;
+        padding: 12px;
+    }
+    margin-bottom: 8px;
+}
+.big-cover-controls {
+    gap: 6px;
+    display: flex;
+    margin-bottom: 6px;
+    button {
+        padding: 20px;
+    }
+}
+
+.cover-colors {
+    margin-inline-start: 6px;
+}
+
+
+
+.cover-unsplash {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    img {
+        width: 88px;
+        height: 63px;
+        object-fit: cover;
+        border-radius: 3px;
+    }
+    button {
+        width: 60px;
+        height: 60px;
+        padding: 0;
+    }
+}

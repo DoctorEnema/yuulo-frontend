@@ -1,0 +1,226 @@
+.board-container {
+
+
+    .groups {
+        // height: fit-content;
+        display: flex;
+    }
+}
+
+.groups-and-add{
+    display: flex;
+}
+
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    color: white;
+    h2 {
+        font-weight: 600;
+    }
+    button {
+        color: white;
+        background-color: rgba($color: #ffffff, $alpha: 0.3);
+        min-width: 32px;
+        height: 32px;
+        margin-inline-end: 4px;
+        padding: 0 8px;
+        &:hover {
+            background-color: rgba($color: #000000, $alpha: 0.2);
+        }
+        &:last-of-type{
+            margin: 0;
+        }
+    }
+    .board-members{
+        margin-inline-end: 8px;
+        display: flex;
+    }
+    .board-member-header {
+        color: $clr2;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        .to-user{
+            padding-top: 6px;
+            cursor: pointer;
+        }
+        img {
+            border-radius: 50%;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            object-fit: cover;
+        }
+        &:hover {
+            filter: brightness(110%);
+        }
+    }
+}
+
+.board-content {
+    white-space: nowrap;
+    margin-bottom: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 8px;
+    position: absolute;
+    top: 85px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.background{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba($color: $clr3, $alpha: 0.4);
+    border-radius: 4px;
+}
+
+.board-content {
+    display: flex;
+    overflow-x: auto;
+}
+
+
+
+.main-header-side {
+    display: flex;
+}
+
+.add-group {
+    min-width: 272px;
+    max-width: 272px;
+    padding: 6px 8px;
+    height: 40px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    margin: 6px 6px;
+    background-color: rgba($color: #ffffff, $alpha: 0.3);
+    text-align: start;
+    padding-inline-start: 16px;
+    &:hover {
+        background-color: rgba($color: #ffffff, $alpha: 0.4);
+    }
+    &::before {
+        font-family: fontAwesome, sans serif;
+        content: "\f067";
+    }
+}
+
+.adding-group {
+    min-width: 272px;
+    max-width: 272px;
+    padding: 4px 6px;
+    height: 80px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    margin: 8px;
+    background-color: #ebecf0;
+    input[type="text"] {
+        padding-inline-start: 12px;
+        width: 100%;
+        height: 36px;
+        border-radius: 3px;
+        border: none;
+        margin-bottom: 3px;
+    }
+}
+
+.add-group-controls {
+    display: flex;
+    align-items: center;
+    margin-top: 2px;
+    height: 32px;
+
+    button {
+        min-width: 32px;
+        height: 32px;
+        margin: 6px 4px;
+        border-radius: 3px;
+        border: none;
+        padding: 6px 8px;
+        &:hover {
+            background-color: rgba($color: #000000, $alpha: 0.2);
+        }
+        &:last-of-type {
+            background-color: transparent;
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: $clr2;
+            &::before {
+                font-family: fontAwesome, sans serif;
+                content: "\f00d";
+            }
+            &:hover{
+                color: black;
+                background-color:transparent
+            }
+        }
+    }
+    button:first-of-type {
+        background-color: #0079bf;
+        padding: 6px 12px;
+        color: white;
+        line-height: 20px;
+        margin: 0 6px 0 0;
+        &:hover {
+            background-color: #056ba7;
+        }
+    }
+}
+
+.favorite-board::before {
+    font-family: fontAwesome, sans serif;
+    content: "\f005";
+}
+
+.show-board-menu:before {
+    font-family: fontAwesome, sans serif;
+    content: "\f141";
+}
+
+.invite-member{
+    position: absolute;
+    z-index: 46;
+    width: 400px;
+    height: 400px;
+    background-color: rgb(140, 140, 140);
+    left: 50px;
+    top:100px
+
+   
+}
+ .img-invite{
+        width: 40px;
+    }
+
