@@ -88,14 +88,16 @@
 }
 
 .yuumi-header {
-    padding: 0 2rem;
-    margin-left: 30px;
-    background-image: url(../assets/img/yuumi-head3.png);
-    background-size: 45px;
+    // padding: 0 2rem;
+    // margin-left: 35px;
+    height: 40px;
+    width: 110px;
+    background-image: url(../assets/img/yuulo1.png);
+    background-size: 110px;
     background-repeat: no-repeat;
-    background-position: center -3px;
+    background-position: center 1px;
     &:hover {
-        background-image: url(../assets/img/yuumi-head-tilt.png);
+        background-image: url(../assets/img/yuulo2.png);
     }
 }
 
@@ -107,6 +109,7 @@
 .search {
     position: relative;
     width: fit-content;
+    margin-right: 35px;
     .search-glass {
         position: absolute;
         right: 10px;
@@ -124,7 +127,6 @@
     border: none;
     color: white;
     width: 180px;
-
     &:hover {
         background-color: rgba($color: #ffffff, $alpha: 0.4);
     }

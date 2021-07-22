@@ -19,7 +19,7 @@
       </div>
       <div class="logo">
         <div class="yuumi-header"></div>
-        <h2>Yuulo</h2>
+        <!-- <h2>Yuulo</h2> -->
       </div>
       <div class="header-right">
         <button class="to-create-board" @click="toggleCreateBoard"></button>
