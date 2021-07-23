@@ -227,8 +227,12 @@ export default {
     },
   },
   async created() {
-    this.$store.dispatch({ type: "loadBoard", boardId: this.boardId });
-    await this.$store.dispatch({ type: "loadUsers" });
+    try {
+      this.$store.dispatch({ type: "loadBoard", boardId: this.boardId });
+      await this.$store.dispatch({ type: "loadUsers" });
+    }catch (err) {
+      console.log('cannot load users', err);
+    }
     // boardService.getById(this.boardId).then((board) => {
     //   this.selectedBoard = board;
     // });
@@ -241,6 +245,7 @@ export default {
       });
     }
     window.document.title = `Yuulo`;
+    this.$store.dispatch({type:'getUnsplash', query: 'newyork'})
   },
 };
 </script>

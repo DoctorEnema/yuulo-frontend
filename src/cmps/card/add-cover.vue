@@ -1,6 +1,6 @@
 <template>
   <div class="add-to-card">
-    <div class="create-cover">
+    <div class="create-cover" v-if="!isPhotoSearch">
       <div class="add-card-header">
         <button @click="closeModal"></button>
         <h3>Cover</h3>
@@ -32,11 +32,35 @@
       <h3>Unsplash</h3>
       <div class="cover-unsplash">
         <button
-          v-for="(cover, idx) in boardCovers"
+          v-for="(photo, idx) in photos"
           :key="idx"
-          @click="setCover(cover)"
+          @click="setCover(photo.urls.regular)"
         >
-          <img class="cover-img" :src="cover.imgUrl" alt="" />
+          <img class="cover-img" :src="photo.urls.regular" alt="" />
+        </button>
+      </div>
+      <button @click="setSearch">Search for photos</button>
+    </div>
+
+    <div v-else class="photo-search">
+      <form @submit.prevent="onSearchPhotos">
+        <input
+          type="text"
+          v-model="search.query"
+          placeholder="Search Unsplash for photos"
+        />
+        <!-- {{query}} -->
+        <button>Search</button>
+      </form>
+      <h3>Unsplash</h3>
+      <div v-if="photos" class="cover-unsplash">
+        <button
+          v-for="(photo, idx) in photos"
+          :key="idx"
+          @click="setCover(photo.urls.regular)"
+        >
+          <img class="cover-img" :src="photo.urls.regular" alt="" />
+          <!-- {{photo.urls.regular}} -->
         </button>
       </div>
     </div>
@@ -47,8 +71,8 @@
 import imgUploadBasic from "./img-upload-basic.vue";
 
 export default {
-  components:{
-  imgUploadBasic
+  components: {
+    imgUploadBasic,
   },
   data() {
     return {
@@ -69,7 +93,9 @@ export default {
         color: "#344563",
       },
       isRemoved: true,
-      link: ''
+      link: "",
+      isPhotoSearch: false,
+      search: {query: ''},
     };
   },
   computed: {
@@ -77,17 +103,23 @@ export default {
       const board = this.$store.getters.selectedBoard;
       return board.covers;
     },
+    photos() {
+      return this.$store.getters.photos;
+    },
   },
   methods: {
-     saveImg(link){
-      this.link=link
-      this.setLink()
+    saveImg(link) {
+      this.link = link;
+      this.setLink();
     },
     setLink() {
-      this.$emit('linkAdded', this.link)
+      this.$emit("linkAdded", this.link);
     },
-    setCover(cover) {
+    setCover(imgUrl) {
       this.isRemoved = true;
+
+      const cover = {imgUrl}
+      console.log(cover);
       this.$emit("setCover", cover);
     },
     setCoverColor(color) {
@@ -101,6 +133,16 @@ export default {
     removeCover() {
       this.isRemoved = false;
       this.$emit("removeCover");
+    },
+    onSearchPhotos() {
+      console.log("happening");
+      const searchTerm = {...this.search};
+      // console.log(query, 'aadd');
+
+      this.$store.dispatch({ type: "getUnsplash", query: searchTerm.query });
+    },
+    setSearch() {
+      this.isPhotoSearch = !this.isPhotoSearch;
     },
   },
 };

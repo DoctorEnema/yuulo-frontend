@@ -1,5 +1,6 @@
 import { boardService } from "../../services/board-service"
 import { socketService } from '../../services/socket-service'
+import {unsplashSearch} from "@/services/unsplash-service.js"
 
 export const boardStore = {
     state: {
@@ -9,7 +10,8 @@ export const boardStore = {
         selectedCard: null,
         card: null,
         textareaOpen: false,
-        position: {posY: 136.96180725097656, posX: 242.01390075683594}
+        position: {posY: 136.96180725097656, posX: 242.01390075683594},
+        photos: []
     },
     getters: {
         boards(state) {
@@ -29,6 +31,9 @@ export const boardStore = {
         },
         position(state) {
            return state.position
+        },
+        photos(state) {
+            return state.photos
         }
     },
     mutations: {
@@ -79,6 +84,9 @@ export const boardStore = {
         setPosition(state, {position}) {
             console.log('store', position);
             state.position = position
+        },
+        setPhotos(state, {photos}) {
+            state.photos = photos
         }
     },
     actions: {
@@ -287,6 +295,16 @@ export const boardStore = {
             } catch (err) {
                 console.log('Cant add card', err);
             }
+        },
+        async getUnsplash({commit}, {query}) {
+            console.log(query, 'query');
+            try {
+                const photos = await unsplashSearch(query)
+                console.log('photos', photos);
+                commit({ type: 'setPhotos', photos })
+              } catch (err) {
+                console.log('cannot get photos', err);
+              }
         }
     }
 }
