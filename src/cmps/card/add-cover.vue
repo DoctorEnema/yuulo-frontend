@@ -29,37 +29,53 @@
       </form>
       <h3>Attachments</h3>
       <img-upload-basic @saveImg="saveImg"></img-upload-basic>
-      <h3>Unsplash</h3>
+      <h3 class="unsplash-h3">Unsplash</h3>
       <div class="cover-unsplash">
         <button
-          v-for="(photo, idx) in photos.slice(0,9)"
+          v-for="(photo, idx) in photos.slice(0, 9)"
           :key="idx"
           @click="setCover(photo.urls.regular)"
         >
           <img class="cover-img" :src="photo.urls.regular" alt="" />
         </button>
       </div>
-      <button @click="setSearch">Search for photos</button>
+      <button class="unsplash-search-btn" @click="setIsSearch">
+        Search for photos
+      </button>
     </div>
 
     <div v-else class="photo-search">
-      <form @submit.prevent="onSearchPhotos">
+      <div class="add-card-header-search">
+        <!-- <button class="cover-back-btn" v-if="isPhotoSearch" @click="setIsSearch"></button> -->
+        <span
+          class="cover-back-btn"
+          v-if="isPhotoSearch"
+          @click="setIsSearch"
+        ></span>
+        <button class="exit-btn" @click="closeModal"></button>
+        <h3>Cover</h3>
+      </div>
+      <form @input.prevent="onSearchPhotos">
         <input
           type="text"
           v-model="search.query"
           placeholder="Search Unsplash for photos"
         />
-        <button>Search</button>
       </form>
-      <h3>Unsplash</h3>
-      <div v-if="photos" class="cover-unsplash">
-        <button
-          v-for="(photo, idx) in photos.slice(0,9)"
-          :key="idx"
-          @click="setCover(photo.urls.regular)"
-        >
-          <img class="cover-img" :src="photo.urls.regular" alt="" />
-        </button>
+      <h3 class="unsplash-h3 add">Top photos</h3>
+      <div class="loader-svg" v-if="loading">
+        <img src="../../assets/img/bars.svg" />
+      </div>
+      <div v-else>
+        <div v-if="photos" class="cover-unsplash">
+          <button
+            v-for="(photo, idx) in photos.slice(0, 12)"
+            :key="idx"
+            @click="setCover(photo.urls.regular)"
+          >
+            <img class="cover-img" :src="photo.urls.regular" alt="" />
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -93,7 +109,9 @@ export default {
       isRemoved: true,
       link: "",
       isPhotoSearch: false,
-      search: {query: null},
+      search: { query: null },
+      timeoutId: null,
+      loading: false,
     };
   },
   computed: {
@@ -115,7 +133,7 @@ export default {
     },
     setCover(imgUrl) {
       this.isRemoved = true;
-      const cover = {imgUrl}
+      const cover = { imgUrl };
       this.$emit("setCover", cover);
     },
     setCoverColor(color) {
@@ -131,11 +149,25 @@ export default {
       this.$emit("removeCover");
     },
     onSearchPhotos() {
-      const searchTerm = {...this.search};
-      this.$store.dispatch({ type: "getUnsplash", query: searchTerm.query });
-      this.search.query = null
+      try {
+        console.log(this.timeoutId);
+
+        if (this.timeoutId) clearTimeout(this.timeoutId);
+        console.log(this.timeoutId);
+        this.loading = true;
+        this.timeoutId = setTimeout(() => {
+          const searchTerm = { ...this.search };
+          if (!searchTerm.query) searchTerm.query = "new york";
+          this.$store
+            .dispatch({ type: "getUnsplash", query: searchTerm.query })
+            .then(() => (this.loading = false));
+        }, 1400);
+        // this.search.query = null
+      } catch (err) {
+        console.log("cannot execute search", err);
+      }
     },
-    setSearch() {
+    setIsSearch() {
       this.isPhotoSearch = !this.isPhotoSearch;
     },
   },

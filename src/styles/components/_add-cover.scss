@@ -1,6 +1,6 @@
 .create-cover {
     padding: 12px;
-    ul{
+    ul {
         margin: 0;
         padding-top: 12px;
     }
@@ -12,17 +12,47 @@
         width: 48.5px;
         cursor: pointer;
         border-radius: 4px;
-        &:nth-child(5){
+        &:nth-child(5) {
             margin-right: 0;
         }
-        &:nth-child(10){
+        &:nth-child(10) {
             margin-right: 0;
         }
+    }
+    
+    .unsplash-search-btn {
+        -webkit-appearance: none;
+        border-radius: 3px;
+        border: none;
+        display: inline-block;
+        line-height: 20px;
+        margin-bottom: 8px;
+        padding: 6px 12px;
+        text-decoration: none;
+        position: relative;
+        margin: 4px 0 0;
+        width: 100%;
+        background-color: rgba(9, 30, 66, 0.04);
+    }
+}
+
+.unsplash-h3 {
+    color: #5e6c84;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 16px;
+    margin-top: 16px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    &.add {
+        margin-top: 0;
+        margin-bottom: 8px;
     }
 }
 
 .cover-controls {
-        padding: 0;
+    padding: 0;
     button {
         width: 100%;
         padding: 12px;
@@ -42,12 +72,11 @@
     margin-inline-start: 6px;
 }
 
-
-
 .cover-unsplash {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 8px;
+    padding: 4px 0;
     img {
         width: 88px;
         height: 63px;
@@ -59,4 +88,54 @@
         height: 60px;
         padding: 0;
     }
+}
+
+.photo-search {
+    padding: 12px;
+    .add-card-header-search {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 12px;
+        .exit-btn {
+            background-color: unset;
+            padding: 12px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: $clr2;
+            &:hover {
+                color: $clr1;
+            }
+            &::before {
+                font-family: fontAwesome, sans-serif;
+                content: "\f00d";
+            }
+        }
+    }
+    input {
+        margin: 4px 0 12px;
+        width: 100%;
+    }
+}
+
+.cover-back-btn {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    color: $clr2;
+    background-color: unset;
+    font-size: 14px;
+    &:hover {
+        color: $clr1;
+    }
+    &::before {
+        font-family: fontAwesome, sans serif;
+        content: "\f053";
+    }
+}
+
+.loader-svg {
+    width: 50px;
+    margin: 20px auto;
+    padding: 10px;
 }

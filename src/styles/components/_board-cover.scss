@@ -41,7 +41,8 @@
 .cover-unsplash {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 8px;
+    margin-bottom: 3px;
     img {
         width: 88px;
         height: 63px;
@@ -53,6 +54,7 @@
         height: 60px;
         padding: 0;
     }
+    
 }
 .board-cover{
     btn{
