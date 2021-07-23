@@ -58,6 +58,17 @@ export default {
         borderWidth: "10px",
         hoverBackgroundColor: "red",
         hoverBorderWidth: "10px",
+         plugins: {
+            legend: {
+                labels: {
+                    // This more specific font property overrides the global property
+                    font: {
+                        size: 14,
+                        color:'white'
+                    }
+                }
+            }
+        },
         scales: {
           yAxes: [
             {
@@ -95,8 +106,7 @@ return(date.getDate()+
           "/"+(date.getMonth()+1)+
           "/"+date.getFullYear()+
           " "+date.getHours()+
-          ":"+date.getMinutes()+
-          ":"+date.getSeconds());
+          ":"+date.getMinutes())
         },
     chartBarCardSum() {
       let groupTitels = [];
