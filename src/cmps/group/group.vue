@@ -2,7 +2,7 @@
   <section>
     <div class="group-header">
       <form @submit.prevent="saveTitle">
-        <textarea ref="title" @keydown.13.prevent @keyup.13="saveTitle" @blur="saveTitle">{{group.title}}</textarea>
+        <textarea ref="title" @keydown.13.prevent @keyup.13="saveTitle" @blur="saveTitle" spellcheck="false">{{group.title}}</textarea>
       </form>
       <!-- <p>{{group.title}}</p> -->
       <button @click="removeGroup(group.id)"></button>
@@ -28,9 +28,10 @@
       ></card-preview>
     </draggable>
     <section class="add-card-area" v-if="isAdding">
-      <textarea
+      <textarea @keyup.enter="addCard(group.id)"
         placeholder="Enter a title for this card..."
         v-model="emptyCard.title"
+        spellcheck="false"
       />
       <div class="add-card-controls">
         <button @click="addCard(group.id)">Add card</button>

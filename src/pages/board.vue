@@ -88,6 +88,8 @@
             v-model="emptyGroup.title"
             type="text"
             placeholder="Enter group title..."
+            @keyup.enter="addGroup(copiedGroup)"
+            spellcheck="false"
           />
           <div class="add-group-controls">
             <button @click="addGroup(copiedGroup)">Add group</button>

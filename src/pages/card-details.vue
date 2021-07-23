@@ -25,12 +25,16 @@
         <div>
           <!-- <h2>{{ card.title }}</h2> -->
           <form @submit.prevent="saveTitle">
-            <textarea
+            <p class="card-title"
+            contenteditable
               ref="title"
               @keydown.13.prevent
               @keyup.13="saveTitle"
               @blur="saveTitle"
-              >{{ card.title }}</textarea
+              @click="setTitleEdit"
+              spellcheck="false"
+              :class="titleEditMode"
+              >{{ card.title }}</p
             >
           </form>
           <!--this is a textarea in trello -->
@@ -282,6 +286,7 @@ export default {
       searchType: "",
       isEditCard: null,
       isUpdated: false,
+      isTitleEdit: false
     };
   },
   async created() {
@@ -385,18 +390,26 @@ export default {
       const position = this.$store.getters.position;
       console.log(position, 'cardDetails');
       return `top: ${position.posY-1}px; left: ${position.posX + 30.4}px`
+    },
+    titleEditMode() {
+      return {edit: this.isTitleEdit}
     }
   },
   methods: {
     saveTitle(ev) {
+      if (!this.$refs.title.innerText) return
       if (this.isUpdated) return;
       console.log(ev);
       const card = this.card;
-      card.title = this.$refs.title.value;
+      card.title = this.$refs.title.innerText;
+      this.isTitleEdit = false
       this.updateCard();
       setTimeout(() => (this.isUpdated = false), 100);
       this.isUpdated = true;
       this.$refs.title.blur();
+    },
+    setTitleEdit() {
+      this.isTitleEdit = true
     },
     editCard() {
       this.isEditCard = true;
