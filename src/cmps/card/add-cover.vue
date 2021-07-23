@@ -49,7 +49,6 @@
           v-model="search.query"
           placeholder="Search Unsplash for photos"
         />
-        <!-- {{query}} -->
         <button>Search</button>
       </form>
       <h3>Unsplash</h3>
@@ -60,7 +59,6 @@
           @click="setCover(photo.urls.regular)"
         >
           <img class="cover-img" :src="photo.urls.regular" alt="" />
-          <!-- {{photo.urls.regular}} -->
         </button>
       </div>
     </div>
@@ -95,7 +93,7 @@ export default {
       isRemoved: true,
       link: "",
       isPhotoSearch: false,
-      search: {query: ''},
+      search: {query: null},
     };
   },
   computed: {
@@ -117,9 +115,7 @@ export default {
     },
     setCover(imgUrl) {
       this.isRemoved = true;
-
       const cover = {imgUrl}
-      console.log(cover);
       this.$emit("setCover", cover);
     },
     setCoverColor(color) {
@@ -135,11 +131,9 @@ export default {
       this.$emit("removeCover");
     },
     onSearchPhotos() {
-      console.log("happening");
       const searchTerm = {...this.search};
-      // console.log(query, 'aadd');
-
       this.$store.dispatch({ type: "getUnsplash", query: searchTerm.query });
+      this.search.query = null
     },
     setSearch() {
       this.isPhotoSearch = !this.isPhotoSearch;

@@ -297,10 +297,8 @@ export const boardStore = {
             }
         },
         async getUnsplash({commit}, {query}) {
-            console.log(query, 'query');
             try {
                 const photos = await unsplashSearch(query)
-                console.log('photos', photos);
                 commit({ type: 'setPhotos', photos })
               } catch (err) {
                 console.log('cannot get photos', err);
