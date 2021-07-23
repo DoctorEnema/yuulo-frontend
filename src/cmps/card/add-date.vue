@@ -15,6 +15,7 @@
     >
       Remove Date
     </button>
+    <!-- <date-picker></date-picker> -->
       <el-date-picker
         @change="
           addDate();
@@ -32,7 +33,11 @@
 </template>
 
 <script>
+import datePicker from "../../cmps/card/date-picker.vue";
 export default {
+  components:{
+    datePicker
+  },
   props: {
     card: Object,
   },

@@ -13,7 +13,8 @@
         type="text"
         placeholder="Paste any link here..."
       />
-      <image-upload @saveImg="saveImg"></image-upload>
+      <h5>or drag and drop an image to the page</h5>
+      <!-- <image-upload @saveImg="saveImg"></image-upload> -->
       <button>Attach</button>
     </form>
   </section>

@@ -36,7 +36,7 @@ export default {
   props: {
     card: Object,
   },
-  created() {
+  mounted() {
       this.$nextTick(() => {
         this.$refs.contentTextArea.focus();
       });

@@ -124,6 +124,7 @@
 .card-preview-labels {
     display: flex;
     flex-wrap: wrap;
+    width: 220px ;
     &:hover {
         filter: brightness(90%);
     }
