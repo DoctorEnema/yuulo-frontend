@@ -13,8 +13,10 @@
     overflow-x: hidden;
     hr {
         margin: 0 auto 12px;
-        filter: brightness(250%);
+        filter: brightness(150%);
         width: 100%;
+        color: $clr3;
+
     }
     box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
 

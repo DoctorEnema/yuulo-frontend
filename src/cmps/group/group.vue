@@ -2,7 +2,20 @@
   <section>
     <div class="group-header">
       <form @submit.prevent="saveTitle">
-        <textarea ref="title" @keydown.13.prevent @keyup.13="saveTitle" @blur="saveTitle" spellcheck="false">{{group.title}}</textarea>
+        <!-- <textarea ref="title" @keydown.13.prevent @keyup.13="saveTitle" @blur="saveTitle" spellcheck="false">{{group.title}}</textarea> -->
+        <div :class="titleEditMode" class="group-title">
+          <p
+            ref="title"
+            @keydown.13.prevent
+            @keyup.13="saveTitle"
+            @blur="saveTitle"
+            :contenteditable="isTitleEdit"
+            @mouseup="startEdit"
+            spellcheck="false"
+          >
+            {{ group.title }}
+          </p>
+        </div>
       </form>
       <!-- <p>{{group.title}}</p> -->
       <button @click="removeGroup(group.id)"></button>
@@ -28,7 +41,8 @@
       ></card-preview>
     </draggable>
     <section class="add-card-area" v-if="isAdding">
-      <textarea @keyup.enter="addCard(group.id)"
+      <textarea
+        @keyup.enter="addCard(group.id)"
         placeholder="Enter a title for this card..."
         v-model="emptyCard.title"
         spellcheck="false"
@@ -39,7 +53,7 @@
       </div>
     </section>
     <div v-else class="group-footer">
-      <button @click="isAdding = true"> Add a card</button>
+      <button @click="isAdding = true">Add a card</button>
     </div>
   </section>
 </template>
@@ -59,8 +73,9 @@ export default {
         title: "",
       },
       isAdding: false,
-      hardcodedBoardId: '60f42b03d2f67fa6bfa0f528',
-      isUpdated: false
+      hardcodedBoardId: "60f42b03d2f67fa6bfa0f528",
+      isUpdated: false,
+      isTitleEdit: false,
     };
   },
   computed: {
@@ -70,17 +85,28 @@ export default {
     copiedEmptyCard() {
       return JSON.parse(JSON.stringify(this.emptyCard));
     },
+    titleEditMode() {
+      return { edit: this.isTitleEdit };
+    },
   },
   methods: {
     saveTitle(ev) {
-      if (this.isUpdated) return 
+      if (this.isUpdated) return;
+      const group = this.copiedGroup;
+      group.title = this.$refs.title.innerText;
+      this.$emit("updateGroup", group);
+      this.$nextTick(() => (this.isUpdated = false));
+      // setTimeout(() => (this.isUpdated = false), 100);
       console.log(ev);
-      const group = this.copiedGroup
-      group.title = this.$refs.title.value
-      this.$emit('updateGroup', group)
-      setTimeout(()=> this.isUpdated = false, 100)
-      this.isUpdated = true
-      this.$refs.title.blur()
+
+      this.isUpdated = true;
+      this.$refs.title.blur();
+
+      this.isTitleEdit = false;
+    },
+    startEdit() {
+      this.isTitleEdit = true;
+      this.$nextTick(() => this.$refs.title.focus());
     },
     onDragStart(ev) {
       ev.item.classList.add("dragging");

@@ -65,7 +65,7 @@
 }
 
 .board-content {
-    white-space: nowrap;
+    // white-space: nowrap;
     margin-bottom: 8px;
     overflow-x: auto;
     overflow-y: hidden;
@@ -262,8 +262,10 @@
 }
 hr {
     margin: 0 auto 12px;
-    filter: brightness(250%);
+    filter: brightness(150%);
     width: 100%;
+    color: $clr3;
+
 }
  .img-invite{
         width: 32px;
