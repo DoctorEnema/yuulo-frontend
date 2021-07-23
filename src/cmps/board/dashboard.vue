@@ -3,35 +3,36 @@
     <button class="close-dashboard"></button>
     <h1>Dashboard</h1>
     <div class="charts-container">
-        <div>
-          <h2>Board details</h2>
-          <h2>Board title: {{selectedBoard.title}}</h2>
-          <h2>Members: {{selectedBoard.members.length}}</h2>
-          <h2>Created at: {{selectedBoard.createdAt}}</h2>
+        <div class="dashboard-details">
+          <h2>Board details:</h2>
+          <h3>Board title: {{selectedBoard.title}}</h3>
+          <h3>Members: {{selectedBoard.members.length}}</h3>
+          <h3>Created at: {{showTime}}</h3>
         </div>
-      <div>
-        <h2>Chacklist Todos</h2>
+      <div class="chart-basic">
+        <h2>Checklist Todos</h2>
         <chart-pie
           class="pie-chart"
           :data="chartDataToDo"
           :options="chartOptions"
         />
       </div>
-      <div>
-      <h2>Tasks per group</h2>
-      <chart-bar
-        class="bar-chart"
-        :data="chartBarCardSum"
-        :options="chartBarOptions"
-      />
-      </div>
-      <div>
+     
+      <div class="chart-basic">
         <h2>Tasks per members</h2>
         <chart-pie
           class="doughnut-chart"
           :data="chartDataMembers"
           :options="chartOptions"
         />
+      </div>
+       <div class="chart-basic">
+      <h2>Tasks per group</h2>
+      <chart-bar
+        class="bar-chart"
+        :data="chartBarCardSum"
+        :options="chartBarOptions"
+      />
       </div>
     </div>
   </section>
@@ -86,6 +87,17 @@ export default {
     selectedBoard() {
       return JSON.parse(JSON.stringify(this.$store.getters.selectedBoard));
     },
+    showTime() {
+           var timestamp = this.selectedBoard.createdAt
+        var date = new Date(timestamp);
+
+return(date.getDate()+
+          "/"+(date.getMonth()+1)+
+          "/"+date.getFullYear()+
+          " "+date.getHours()+
+          ":"+date.getMinutes()+
+          ":"+date.getSeconds());
+        },
     chartBarCardSum() {
       let groupTitels = [];
       console.log("groupTitels", groupTitels.length)
@@ -105,7 +117,8 @@ export default {
         datasets: [
           {
             label: "",
-            backgroundColor: ["rgb(54, 162, 235)","rgb(54, 162, 235)","rgb(54, 162, 235)","rgb(54, 162, 235)","rgb(54, 162, 235)","rgb(54, 162, 235)","rgb(54, 162, 235)","rgb(54, 162, 235)","rgb(54, 162, 235)"],
+            backgroundColor:groupTitels.map(
+              (m, idx) => this.backgroundColor[idx]),
             data: groupCards,
           },
         ],
@@ -135,7 +148,7 @@ export default {
         datasets: [
           {
             label: "Checklist",
-            backgroundColor: ["green", "rgb(255, 99, 132)"],
+            backgroundColor: ["rgb(47, 145, 50)", "rgb(255, 99, 132)"],
             data: todos,
           },
         ],
