@@ -32,7 +32,7 @@
       <h3>Unsplash</h3>
       <div class="cover-unsplash">
         <button
-          v-for="(photo, idx) in photos"
+          v-for="(photo, idx) in photos.slice(0,9)"
           :key="idx"
           @click="setCover(photo.urls.regular)"
         >
@@ -54,7 +54,7 @@
       <h3>Unsplash</h3>
       <div v-if="photos" class="cover-unsplash">
         <button
-          v-for="(photo, idx) in photos"
+          v-for="(photo, idx) in photos.slice(0,9)"
           :key="idx"
           @click="setCover(photo.urls.regular)"
         >

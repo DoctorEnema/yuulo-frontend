@@ -1,6 +1,6 @@
 import { boardService } from "../../services/board-service"
 import { socketService } from '../../services/socket-service'
-import {unsplashSearch} from "@/services/unsplash-service.js"
+import { unsplashSearch } from "@/services/unsplash-service.js"
 
 export const boardStore = {
     state: {
@@ -10,8 +10,9 @@ export const boardStore = {
         selectedCard: null,
         card: null,
         textareaOpen: false,
-        position: {posY: 136.96180725097656, posX: 242.01390075683594},
-        photos: []
+        position: { posY: 136.96180725097656, posX: 242.01390075683594 },
+        photos: [],
+        isLabelOpen: false,
     },
     getters: {
         boards(state) {
@@ -30,10 +31,13 @@ export const boardStore = {
             return state.textareaOpen
         },
         position(state) {
-           return state.position
+            return state.position
         },
         photos(state) {
             return state.photos
+        },
+        isLabelOpen(state){
+            return state.isLabelOpen
         }
     },
     mutations: {
@@ -78,15 +82,18 @@ export const boardStore = {
             state.selectedCard = null
             state.selectedGroup = null
         },
-        clearBaord(state){
+        clearBaord(state) {
             state.selectedBoard = null
         },
-        setPosition(state, {position}) {
+        setPosition(state, { position }) {
             console.log('store', position);
             state.position = position
         },
-        setPhotos(state, {photos}) {
+        setPhotos(state, { photos }) {
             state.photos = photos
+        },
+        toggleLabels(state){
+            state.isLabelOpen = !state.isLabelOpen
         }
     },
     actions: {
@@ -116,7 +123,7 @@ export const boardStore = {
         },
         async addBoard(context, { board }) {
             try {
-                const newBoardId =  await boardService.saveBoard(board)
+                const newBoardId = await boardService.saveBoard(board)
                 // context.commit({ type: 'setCard', card })
                 // context.commit({ type: 'setGroup', group })
                 return newBoardId
@@ -157,7 +164,7 @@ export const boardStore = {
                     context.commit({ type: 'removeGroup', groupId })
                 })
                 socketService.off('removeCard')
-                socketService.on('removeCard', ( board ) => {
+                socketService.on('removeCard', (board) => {
                     console.log(board, 'board');
                     context.commit({ type: 'setBoard', board })
                     // context.commit({ type: 'removeCard', group, cardId })
@@ -248,11 +255,11 @@ export const boardStore = {
                 console.log('Cannot add group', err);
             }
         },
-        async updateGroup(context, {board, group }) {
+        async updateGroup(context, { board, group }) {
             try {
                 const savedBoard = await boardService.updateGroup(board, group)
                 context.commit({ type: 'setBoard', board: savedBoard })
-            }catch(err) {
+            } catch (err) {
                 console.log('cannot update group', err);
             }
         },
@@ -296,13 +303,13 @@ export const boardStore = {
                 console.log('Cant add card', err);
             }
         },
-        async getUnsplash({commit}, {query}) {
+        async getUnsplash({ commit }, { query }) {
             try {
                 const photos = await unsplashSearch(query)
                 commit({ type: 'setPhotos', photos })
-              } catch (err) {
+            } catch (err) {
                 console.log('cannot get photos', err);
-              }
+            }
         }
     }
 }

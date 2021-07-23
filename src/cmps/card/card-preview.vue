@@ -20,13 +20,11 @@
     <div class="card-preview-content">
       <div @click.stop="toggleLabels" v-if="isLabels" class="card-preview-labels">
         <div v-for="(label, idx) in cardLabels" :key="idx">
-          <transition name="label-grow">
             <div
-              :class="{ 'preview-label': isLabelGrow }"
+              :class="{ 'preview-label-grow': isLabelGrow, 'preview-label-shrink': !isLabelGrow }"
               v-if="label"
               :style="{ backgroundColor: label.color }"
-            ></div>
-          </transition>
+            >{{label.name}}</div>
         </div>
       </div>
       <p class="card-preview-title">{{ card.title }}</p>
@@ -85,7 +83,6 @@ export default {
     return {
       isEditCard: false,
       position: null,
-      isLabelGrow: false,
     };
   },
   created() {
@@ -94,7 +91,7 @@ export default {
   destroyed() {},
   methods: {
     toggleLabels(){
-      this.isLabelGrow = !this.isLabelGrow
+      this.$store.commit('toggleLabels')
     },
     openCard(groupId, cardId, isEditCard, ev) {
       const position = {
@@ -156,6 +153,9 @@ export default {
     isLabels() {
       if (!this.card.labelIds || !this.card.labelIds.length) return false;
       else return true;
+    },
+    isLabelGrow(){
+      return this.$store.getters.isLabelOpen
     },
     isChecklists() {
       if (
