@@ -13,7 +13,7 @@ export const unsplashSearch = async (value) =>{
             return savedRes
         }
         const key = 'HxJnZbbOQY-YSo6K4RNhJ9Zhw7mZgTcSmOg_1LAT51o'
-        const {data} = await axios.get(`https://api.unsplash.com/search/photos?orientation=landscape&page=1&per_page=9&query=${value}&client_id=${key}`)
+        const {data} = await axios.get(`https://api.unsplash.com/search/photos?orientation=landscape&page=1&per_page=10&query=${value}&client_id=${key}`)
         localStorage.setItem(`savedPhotos`, JSON.stringify(data))
         const res = data.results
         gPhotos[value] = res
