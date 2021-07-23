@@ -59,6 +59,7 @@ export default {
       if (ev.type === "change") file = ev.target.files[0];
       else if (ev.type === "drop") file = ev.dataTransfer.files[0];
       this.onUploadImg(file);
+      console.log("file", file)
     },
 
     async onUploadImg(file) {

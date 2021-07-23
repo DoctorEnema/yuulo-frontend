@@ -159,6 +159,7 @@ return(date.getDate()+
           {
             label: "Checklist",
             backgroundColor: ["rgb(47, 145, 50)", "rgb(255, 99, 132)"],
+            color:"white",
             data: todos,
           },
         ],

@@ -14,8 +14,9 @@ export default {
   },
   methods: {
     async onUploadImg(ev) {
+      const file = ev.target.files[0]
       this.isLoading = true
-      const res = await uploadImg(ev);
+      const res = await uploadImg(file);
       this.$emit('saveImg', res.url)
       this.isLoading = false
     },

@@ -134,8 +134,9 @@ export default {
       this.link = link;
       this.setLink();
     },
-    setLink() {
-      this.$emit("linkAdded", this.link);
+    async setLink() {
+      await this.$emit("setCover", {imgUrl:this.link});
+      this.closeModal()
     },
     setCover(imgUrl) {
       this.isRemoved = true;
