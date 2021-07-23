@@ -18,13 +18,22 @@
       <img class="card-preview-cover-img" v-else :src="card.cover.imgUrl" />
     </div>
     <div class="card-preview-content">
-      <div @click.stop="toggleLabels" v-if="isLabels" class="card-preview-labels">
+      <div
+        @click.stop="toggleLabels"
+        v-if="isLabels"
+        class="card-preview-labels"
+      >
         <div v-for="(label, idx) in cardLabels" :key="idx">
-            <div
-              :class="{ 'preview-label-grow': isLabelGrow, 'preview-label-shrink': !isLabelGrow }"
-              v-if="label"
-              :style="{ backgroundColor: label.color }"
-            >{{label.name}}</div>
+          <div
+            :class="{
+              'preview-label-grow': isLabelGrow,
+              'preview-label-shrink': !isLabelGrow,
+            }"
+            v-if="label"
+            :style="{ backgroundColor: label.color }"
+          >
+            <span>{{ label.name }}</span>
+          </div>
         </div>
       </div>
       <p class="card-preview-title">{{ card.title }}</p>
@@ -90,8 +99,8 @@ export default {
   },
   destroyed() {},
   methods: {
-    toggleLabels(){
-      this.$store.commit('toggleLabels')
+    toggleLabels() {
+      this.$store.commit("toggleLabels");
     },
     openCard(groupId, cardId, isEditCard, ev) {
       const position = {
@@ -154,8 +163,8 @@ export default {
       if (!this.card.labelIds || !this.card.labelIds.length) return false;
       else return true;
     },
-    isLabelGrow(){
-      return this.$store.getters.isLabelOpen
+    isLabelGrow() {
+      return this.$store.getters.isLabelOpen;
     },
     isChecklists() {
       if (
