@@ -3,10 +3,20 @@
     h3 {
         margin-inline-start: 8px;
     }
-    button {
-        @include control-btn;
-        margin-inline-start: 8px;
-        margin-top: 8px;
+    input[type="text"] {
+        &:focus {
+            box-shadow: inset 0 0 0 2px #0079bf;
+        }
+    }
+
+    form {
+        button {
+            margin-top: 8px;
+            padding: 8px;
+            &:hover {
+                background-color: $clr3;
+            }
+        }
     }
 
     // hr {
