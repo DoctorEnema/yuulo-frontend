@@ -14,7 +14,7 @@
       >
         <img class="upload-img"
           v-if="!isDragOver"
-          src="https://www.lifewire.com/thmb/P856-0hi4lmA2xinYWyaEpRIckw=/1920x1326/filters:no_upscale():max_bytes(150000):strip_icc()/cloud-upload-a30f385a928e44e199a62210d578375a.jpg"
+      src="../../assets/img/yuumi-sleep.png"
           alt=""
         />
 
@@ -35,7 +35,7 @@
     <img
       class="loader"
       v-else
-      src="https://i.pinimg.com/originals/65/ba/48/65ba488626025cff82f091336fbf94bb.gif"
+      src="../../assets/img/yuumi-wake.png"
       alt=""
     />
   </div>

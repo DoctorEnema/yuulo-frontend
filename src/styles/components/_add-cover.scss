@@ -1,5 +1,17 @@
 .create-cover {
     padding: 12px;
+    .add-card-header{
+        button{
+            &:hover{
+                background-color: transparent;
+            }
+        }
+    }
+    button{
+        &:hover{
+            background-color: $clr3;
+        }
+    }
     ul {
         margin: 0;
         padding-top: 12px;
@@ -17,6 +29,9 @@
         }
         &:nth-child(10) {
             margin-right: 0;
+        }
+        &:hover{
+            filter: brightness(110%);
         }
     }
     
@@ -36,6 +51,7 @@
         font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
 
     }
+
 }
 
 .unsplash-h3 {
@@ -98,6 +114,12 @@
 
 .photo-search {
     padding: 12px;
+    
+    input[type="text"] {
+        &:focus {
+            box-shadow: inset 0 0 0 2px #0079bf;
+        }
+    }
     .add-card-header-search {
         display: flex;
         justify-content: center;
