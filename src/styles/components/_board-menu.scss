@@ -88,6 +88,8 @@
         font-size: 18px;
         width: 36px;
         height: 36px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
         background-color: #b04632;
         &::before {
             font-family: fontAwesome, sans serif;

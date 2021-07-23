@@ -1,9 +1,9 @@
 <template>
-  <section @click.stop="openCard(group.id, card.id,isEditCard=false)">
+  <section @click.stop="openCard(group.id, card.id, (isEditCard = false))">
     <button
-    ref="edit"
+      ref="edit"
       class="edit-card-preview"
-      @click.stop="openCard(group.id, card.id,isEditCard=true,$event)"
+      @click.stop="openCard(group.id, card.id, (isEditCard = true), $event)"
     ></button>
     <!-- <button
       class="edit-card-preview"
@@ -18,9 +18,15 @@
       <img class="card-preview-cover-img" v-else :src="card.cover.imgUrl" />
     </div>
     <div class="card-preview-content">
-      <div v-if="isLabels" class="card-preview-labels">
+      <div @click.stop="toggleLabels" v-if="isLabels" class="card-preview-labels">
         <div v-for="(label, idx) in cardLabels" :key="idx">
-          <div v-if="label" :style="{ backgroundColor: label.color }"></div>
+          <transition name="label-grow">
+            <div
+              :class="{ 'preview-label': isLabelGrow }"
+              v-if="label"
+              :style="{ backgroundColor: label.color }"
+            ></div>
+          </transition>
         </div>
       </div>
       <p class="card-preview-title">{{ card.title }}</p>
@@ -56,7 +62,9 @@
             :key="member._id"
           >
             <img v-if="member.imgUrl" :src="member.imgUrl" />
-            <span class="to-user" v-else-if="member.fullname">{{ member.fullname.charAt(0) }}</span>
+            <span class="to-user" v-else-if="member.fullname">{{
+              member.fullname.charAt(0)
+            }}</span>
             <span v-else>?</span>
           </button>
         </div>
@@ -66,36 +74,36 @@
 </template>
 
 <script>
-
 export default {
-  components:{
-  },
+  components: {},
   props: {
     card: Object,
     group: Object,
     hardcodedBoardId: String,
   },
-  data(){
-    return{
-      isEditCard:false,
-      position: null
-    }
+  data() {
+    return {
+      isEditCard: false,
+      position: null,
+      isLabelGrow: false,
+    };
   },
   created() {
     // socketService.on()
   },
   destroyed() {},
   methods: {
-    
-    
-    openCard(groupId, cardId,isEditCard,ev) {      
-      const position = { 
+    toggleLabels(){
+      this.isLabelGrow = !this.isLabelGrow
+    },
+    openCard(groupId, cardId, isEditCard, ev) {
+      const position = {
         posY: this.$refs.edit.getBoundingClientRect().top + window.scrollY,
-        posX: this.$refs.edit.getBoundingClientRect().left + window.scrollX
-      }
+        posX: this.$refs.edit.getBoundingClientRect().left + window.scrollX,
+      };
       // this.$refs.edit.style.top =`${position.posY}`
       // this.$refs.edit.style.left =`${position.posX}`
-      this.$store.commit({type: 'setPosition', position}) 
+      this.$store.commit({ type: "setPosition", position });
       this.$router.push(
         `/board/${this.selectedBoard._id}/${groupId}/${cardId}/${isEditCard}`
       );

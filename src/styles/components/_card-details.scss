@@ -84,6 +84,7 @@
     }
 }
 
+
 .details-title {
     position: absolute;
     left: -30px;
@@ -220,6 +221,12 @@
         }
         .delete-card-btn {
             width: fit-content;
+        }
+    }
+    .add-cover {
+        &::before {
+            font-family: fontAwesome, sans serif;
+            content: "\f03e";
         }
     }
 }

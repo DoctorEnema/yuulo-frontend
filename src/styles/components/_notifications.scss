@@ -6,17 +6,47 @@
     padding: 12px;
     width: 432px;
     min-height: 500px;
-    max-height: 80vh;
+    max-height: 100%;
     background-color: #fff;
-    overflow: hidden;
-    overflow-y: auto;
     border-radius: 3px;
+    overflow-y: auto;
+    overflow-x: hidden;
     hr {
         margin: 0 auto 12px;
         filter: brightness(250%);
         width: 100%;
     }
     box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
+
+    .activities{
+        button{
+            color: $clr2;
+            background-color: transparent;
+            text-decoration:underline;
+
+            &:hover{
+                color: $clr1;
+            }
+        }
+    }
+    .activity{
+        padding-left: 40px;
+        img{
+            left: 12px;
+        }
+        .to-user{
+            position: absolute;
+            left: 12px;
+            width: 36px;
+            height: 36px;
+        }
+    }
+}
+
+.notif-btns{
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 12px;
 }
 
 .close-notifications {
@@ -41,13 +71,14 @@
     justify-content: center;
     h4 {
         position: absolute;
-        bottom: -25px;
+        bottom: 0px;
     }
 }
 .yuumi-sleep {
     position: absolute;
     width: 170px;
     height: 170px;
+    overflow: hidden;
     border-radius: 50%;
     background-color: #e9e9f7;
     img {
@@ -57,10 +88,10 @@
     }
 }
 
-.cutter {
-    position: absolute;
-    background-color: $clr5;
-    bottom: -55px;
-    width: 100%;
-    height: 50px;
-}
+// .cutter {
+//     position: absolute;
+//     background-color: $clr5;
+//     bottom: -55px;
+//     width: 100%;
+//     height: 50px;
+// }

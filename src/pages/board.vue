@@ -33,7 +33,11 @@
         </div>
         <button @click="memberModal">Invite</button>
         <div v-if="isMember" class="invite-member">
-          <button @click="memberModal">X</button>
+          <header class="add-card-header">
+            <h4>Invite to board</h4>
+            <button @click="memberModal"></button>
+          </header>
+          <hr />
           <section v-if="users">
             <button
               v-for="user in users"
@@ -46,7 +50,7 @@
           </section>
         </div>
       </div>
-      <button class="show-board-menu" @click="toggleMenu"> Show menu</button>
+      <button class="show-board-menu" @click="toggleMenu">Show menu</button>
       <transition name="go-side">
         <side-menu
           @boardCoverColor="boardCoverColor"

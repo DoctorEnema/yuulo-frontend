@@ -211,16 +211,16 @@
 
 .invite-member{
     position: absolute;
-    z-index: 46;
-    width: 400px;
-    height: 400px;
-    background-color: rgb(140, 140, 140);
+    z-index: 2;
+    width: 304px;
+    min-height: 412px;
+    background-color: $clr5;
+    color: $clr2;
     left: 50px;
     top:100px
-
-   
 }
  .img-invite{
-        width: 40px;
+        width: 32px;
+        height: 32px;
     }
 

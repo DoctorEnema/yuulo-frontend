@@ -21,7 +21,10 @@
               v-if="activity.byMember.imgUrl"
               :src="activity.byMember.imgUrl"
             />
-            <div v-else-if="activity.byMember.fullname" class="to-user activity-user">
+            <div
+              v-else-if="activity.byMember.fullname"
+              class="to-user activity-user"
+            >
               {{ activity.byMember.fullname.charAt(0) }}
             </div>
             <div v-else>?</div>
@@ -52,6 +55,9 @@ export default {
     selectedBoard() {
       return this.$store.getters.selectedBoard;
     },
+    group() {
+      return this.$store.getters.selectedGroup;
+    },
     card() {
       return this.$store.getters.selectedCard;
     },
@@ -62,7 +68,7 @@ export default {
   methods: {
     setActivity() {
       this.isActive = false;
-      const newActivity = "commented: " + `'${this.activity}'`;
+      const newActivity = `commented: '${this.activity}' on ${this.card.title}`;
       this.$emit("setActivity", newActivity, this.activity);
       this.activity = "";
     },

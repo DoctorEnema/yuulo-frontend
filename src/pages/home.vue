@@ -2,8 +2,8 @@
   <section class="home">
     <header class="home-header">
       <div class="home-logo">
-        <img src="@/assets/img/yuumi-head3.png" />
-        <h1>Yuulo</h1>
+        <img src="@/assets/img/yuulo1.png" />
+        <!-- <h1>Yuulo</h1> -->
       </div>
       <div class="home-header-user" v-if="loggedinUser">
         <h3>Hello, {{ loggedinUser.fullname }}</h3>

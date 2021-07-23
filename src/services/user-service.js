@@ -146,7 +146,7 @@ async function updateUserNotifications(data) {
 async function clearNotifications(userId) {
     try {
         const user = await getById(userId)
-        console.log(user);
+        // console.log(user);
         user.notifications = []
         const savedUser = await update(user)
         return savedUser
@@ -158,7 +158,7 @@ async function markRead(userId) {
     try {
         const user = await getById(userId)
         user.notifications.forEach(n => n.isRead = true)
-        console.log('notifications',user.notifications);
+        // console.log('notifications',user.notifications);
         const savedUser = await update(user)
         return savedUser
     } catch (err) {
