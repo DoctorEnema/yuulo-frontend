@@ -38,7 +38,8 @@
             <button @click="memberModal"></button>
           </header>
           <hr />
-          <section v-if="users">
+          <div class="invite-members-content" v-if="users">
+            <input type="text" placeholder="Person to invite">
             <button
               v-for="user in users"
               :key="user._id"
@@ -47,7 +48,7 @@
               <img class="img-invite" :src="user.imgUrl" alt="" />
               {{ user.fullname }}
             </button>
-          </section>
+          </div>
         </div>
       </div>
       <button class="show-board-menu" @click="toggleMenu">Show menu</button>

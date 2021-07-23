@@ -23,7 +23,7 @@
       </div>
       <div class="header-right">
         <button class="to-create-board" @click="toggleCreateBoard"></button>
-        <button class="to-info"></button>
+        <!-- <button class="to-info"></button> -->
         <button
           @click="toggleNotifModal(), markRead()"
           class="to-notifications"

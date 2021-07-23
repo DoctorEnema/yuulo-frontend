@@ -90,10 +90,13 @@
         height: 36px;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-        background-color: #b04632;
+        background-color: $clr3;
+        // background-color: #b04632;
         &::before {
             font-family: fontAwesome, sans serif;
-            content: "\f00d";
+            color: $clr2;
+            // color: #b04632;
+            content: "\f1f8";
         }
     }
 }

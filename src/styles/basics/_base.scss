@@ -1,16 +1,18 @@
 * {
     box-sizing: border-box;
 }
-
+html {
+    overflow: hidden;
+}
 body {
+    // position: relative;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
         sans-serif;
     font-size: 14px;
     color: $clr1;
     // background-color: cornflowerblue;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 h1,
@@ -45,18 +47,18 @@ button {
     }
 }
 
-textarea{
+textarea {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
-    sans-serif;
+        sans-serif;
     border: none;
     color: $clr1;
 }
 
-.control-btn{
-    @include control-btn
+.control-btn {
+    @include control-btn;
 }
 
-.to-user{
+.to-user {
     text-align: center;
     background-color: $clr3;
     border-radius: 50%;
@@ -69,4 +71,3 @@ textarea{
     font-size: 16px;
     cursor: default;
 }
-
