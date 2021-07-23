@@ -1,15 +1,19 @@
 <template>
-  <section class="add-to-card">
+  <section class="add-to-card add-attachments">
     <header class="add-card-header">
-      <span class="add-label-title">Add attachment</span>
+      <h3>Add attachment</h3>
       <button @click="closeModal"></button>
     </header>
     <hr />
-    <form class="add-attachments" @submit.prevent="setLink(), closeModal()">
+    <form @submit.prevent="setLink(), closeModal()">
       <!-- <label for="attachment">Attach a link</label> -->
-      <h3>Attach a link</h3>
-      <image-upload @saveImg="saveImg" ></image-upload>
-      <input ref="attach" v-model="link" type="text" placeholder="Paste any link here..." />
+      <input
+        ref="attach"
+        v-model="link"
+        type="text"
+        placeholder="Paste any link here..."
+      />
+      <image-upload @saveImg="saveImg"></image-upload>
       <button>Attach</button>
     </form>
   </section>
@@ -18,28 +22,28 @@
 <script>
 import imageUpload from "./img-upload.vue";
 export default {
-  components:{
-    imageUpload
+  components: {
+    imageUpload,
   },
   mounted() {
     this.$refs.attach.focus();
   },
   data() {
     return {
-      link: ''
+      link: "",
     };
   },
   methods: {
     resetModals() {
       this.$emit("closeModals");
     },
-    saveImg(link){
-      this.link=link
-      this.setLink()
+    saveImg(link) {
+      this.link = link;
+      this.setLink();
     },
     setLink() {
       // console.log(this.link);
-      this.$emit('linkAdded', this.link)
+      this.$emit("linkAdded", this.link);
     },
     closeModal() {
       this.$emit("closeModal");

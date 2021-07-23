@@ -9,6 +9,31 @@
     overflow-y: auto;
 }
 
+.details-drag {
+    z-index: 5;
+    position: absolute;
+    background-color: rgba($color: #ffffff, $alpha: 0.7);
+    width: 768px;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 300px;
+    font-size: 36px;
+    &::before{
+        text-align: center;
+        content: 'Drop images to upload';
+    }
+}
+
+.clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
 .card-details {
     background: #f4f5f7;
     position: relative;
@@ -29,8 +54,9 @@
         font-size: 14px;
         line-height: 20px;
         font-weight: 400;
-        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
-    font-size: 14px;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
+            sans-serif;
+        font-size: 14px;
         color: #5e6c84;
     }
     .details-cover {

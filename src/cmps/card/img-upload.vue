@@ -1,6 +1,6 @@
 <template>
   <div class="img-upload-container">
-    <h1>Let's Upload Some Images!</h1>
+    <h3>or drop an image here</h3>
 
     <template v-if="!isLoading">
 

@@ -1,11 +1,18 @@
-.add-attachments{
-    padding: 0 8px 8px 8px;
-    h3{
+.add-attachments {
+    padding: 8px;
+    h3 {
         margin-inline-start: 8px;
     }
-    button{
+    button {
         @include control-btn;
         margin-inline-start: 8px;
         margin-top: 8px;
     }
+
+    // hr {
+    //     margin: 0 auto 12px;
+    //     filter: brightness(150%);
+    //     width: 100%;
+    //     color: $clr3;
+    // }
 }

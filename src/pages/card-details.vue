@@ -1,6 +1,15 @@
 <template>
-  <div v-if="card" @click="closeCard" class="card-details-container">
-    <section v-if="!isEditCard" class="card-details" @click.stop="closeModal">
+  <div v-if="card" @click="closeCard"  class="card-details-container">
+    <section
+      @drop.prevent="handleFile"
+      @dragover.prevent="isDragOver = true"
+      @dragleave="isDragOver = false"
+      v-if="!isEditCard"
+      class="card-details clearfix"
+      @click.stop="closeModal"
+    >
+    <div :class="{ 'details-drag': isDragOver }">
+    </div>
       <div
         v-if="card.cover"
         class="details-cover"
@@ -25,8 +34,9 @@
         <div>
           <!-- <h2>{{ card.title }}</h2> -->
           <form @submit.prevent="saveTitle">
-            <p class="card-title"
-            contenteditable
+            <p
+              class="card-title"
+              contenteditable
               ref="title"
               @keydown.13.prevent
               @keyup.13="saveTitle"
@@ -34,8 +44,9 @@
               @click="setTitleEdit"
               spellcheck="false"
               :class="titleEditMode"
-              >{{ card.title }}</p
             >
+              {{ card.title }}
+            </p>
           </form>
           <!--this is a textarea in trello -->
           <h5>in list {{ group.title }}</h5>
@@ -157,7 +168,11 @@
           </button>
         </div>
       </div>
-      <section class="modal" v-if="openModalType" @click.stop="stop">
+      <section
+        class="modal add-to-card-modal"
+        v-if="openModalType"
+        @click.stop="stop"
+      >
         <component
           :is="openModalType"
           @closeModal="closeModal"
@@ -178,7 +193,11 @@
       </section>
     </section>
     <div v-if="isEditCard" class="card-editor">
-      <div class="right-side btns" :style="btnPosition" style="position:absolute;">
+      <div
+        class="right-side btns"
+        :style="btnPosition"
+        style="position: absolute"
+      >
         <button
           class="add-member"
           data-cmp="add-member"
@@ -255,6 +274,7 @@ import attachment from "../cmps/card/attachment.vue";
 import activities from "../cmps/card/activities.vue";
 import description from "../cmps/card/description.vue";
 import showTime from "../cmps/card/show-time.vue";
+import { uploadImg } from "@/services/img-upload.service.js";
 import { boardService } from "../services/board-service";
 import { userService } from "../services/user-service";
 import { utilService } from "../services/util-service";
@@ -286,7 +306,10 @@ export default {
       searchType: "",
       isEditCard: null,
       isUpdated: false,
-      isTitleEdit: false
+      isTitleEdit: false,
+      isLoading: false,
+      isDragOver: false,
+      link: "",
     };
   },
   async created() {
@@ -383,33 +406,52 @@ export default {
     },
     position() {
       const position = this.$store.getters.position;
-      console.log(position, 'cardDetails');
-      return `top: ${position.posY-2}px; left: ${position.posX-230}px`
+      console.log(position, "cardDetails");
+      return `top: ${position.posY - 2}px; left: ${position.posX - 230}px`;
     },
     btnPosition() {
       const position = this.$store.getters.position;
-      console.log(position, 'cardDetails');
-      return `top: ${position.posY-1}px; left: ${position.posX + 30.4}px`
+      console.log(position, "cardDetails");
+      return `top: ${position.posY - 1}px; left: ${position.posX + 30.4}px`;
     },
     titleEditMode() {
-      return {edit: this.isTitleEdit}
-    }
+      return { edit: this.isTitleEdit };
+    },
   },
   methods: {
+    saveImg(link) {
+      this.link = link;
+      this.linkAdded(link);
+    },
+    handleFile(ev) {
+      let file;
+      if (ev.type === "change") file = ev.target.files[0];
+      else if (ev.type === "drop") file = ev.dataTransfer.files[0];
+      this.onUploadImg(file);
+    },
+    async onUploadImg(file) {
+      this.isLoading = true;
+      this.isDragOver = false;
+      const res = await uploadImg(file);
+      console.log("res", res.url);
+      this.$emit("saveImg", res.url);
+      this.isLoading = false;
+      this.saveImg(res.url)
+    },
     saveTitle(ev) {
-      if (!this.$refs.title.innerText) return
+      if (!this.$refs.title.innerText) return;
       if (this.isUpdated) return;
       console.log(ev);
       const card = this.card;
       card.title = this.$refs.title.innerText;
-      this.isTitleEdit = false
+      this.isTitleEdit = false;
       this.updateCard();
       setTimeout(() => (this.isUpdated = false), 100);
       this.isUpdated = true;
       this.$refs.title.blur();
     },
     setTitleEdit() {
-      this.isTitleEdit = true
+      this.isTitleEdit = true;
     },
     editCard() {
       this.isEditCard = true;
@@ -627,7 +669,7 @@ export default {
       this.searchBy = search.searchBy;
       this.searchType = search.type;
     },
-    async removeCard() { 
+    async removeCard() {
       try {
         const boardId = await this.$store.dispatch({
           type: "removeCard",
@@ -635,9 +677,9 @@ export default {
           group: this.group,
           cardId: this.cardId,
         });
-          this.$router.push(`/board/${boardId}`);
-      } catch(err ) {
-        console.log('cannot remove card');
+        this.$router.push(`/board/${boardId}`);
+      } catch (err) {
+        console.log("cannot remove card");
       }
     },
     labelToShow() {
