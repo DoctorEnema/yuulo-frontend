@@ -33,6 +33,8 @@
         margin: 4px 0 0;
         width: 100%;
         background-color: rgba(9, 30, 66, 0.04);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+
     }
 }
 
@@ -44,7 +46,11 @@
     line-height: 16px;
     margin-top: 16px;
     text-transform: uppercase;
-    margin-bottom: 4px;
+    margin-bottom: 0px;
+    &.att { 
+        margin-top: 8px;
+        margin-bottom: 4px;
+    }
     &.add {
         margin-top: 0;
         margin-bottom: 8px;
@@ -141,6 +147,33 @@
     padding: 10px;
 }
 
-.upload-btn-cover {
-    display: none;
+.upload-input-cover {
+
+    button {
+        // margin: 0;
+        width: 100%;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        border-radius: 3px;
+        border: none;
+        display: inline-block;
+        line-height: 20px;
+        margin-top: 8px;
+        padding: 6px 12px;
+        text-decoration: none;
+        position: relative;
+        text-align: center;
+    }
+    ::before {
+        content: "Upload a cover image";
+        color: $clr1;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+    }
+}
+
+.drag-tip{
+    color: #5E6C84;
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 12px;
 }
