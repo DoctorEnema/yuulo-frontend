@@ -21,7 +21,7 @@
             class="card-label"
             v-for="(label, idx) in labels"
             :key="idx"
-            :style="'background-color:' + label.color"
+            :style="{ 'background-color': label.color, 'box-shadow': '-8px 0 '+label.color + '90' }"
             @click="setLabel(label.id)"
           >
             <div class="label-colors">
@@ -32,13 +32,9 @@
           </div>
         </div>
       </div>
-        <button
-          class="create-label-btn"
-          @click.stop="createLabel"
-          type="button"
-        >
-          Create new label
-        </button>
+      <button class="create-label-btn" @click.stop="createLabel" type="button">
+        Create new label
+      </button>
       <div v-if="isCreate" class="create-label">
         <form @submit.prevent="createLabel()">
           <div v-if="!isEdit">

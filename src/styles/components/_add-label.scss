@@ -19,8 +19,10 @@
     border-radius: 3px;
     transition: 85ms;
     &:hover {
-        box-shadow: -8px 0 rgba(104, 104, 110, 0.397);
-        padding-left: 10px;
+        // box-shadow: -8px 0 rgba(104, 104, 110, 0.397);
+        box-shadow: -8px 0 ;
+        // width: 50px;
+        padding-left: 12px;
     }
 }
 .create-label {
@@ -68,6 +70,7 @@
     height: 30px;
     margin-bottom: 4px;
     border-radius: 3px;
+    transition: 85ms;
 
     a {
         position: absolute;
@@ -87,6 +90,12 @@
             font-family: fontAwesome, sans serif;
             content: "\f304";
         }
+    }
+    &:hover {
+        // box-shadow: -8px 0 rgba(104, 104, 110, 0.397);
+        // box-shadow: -8px 0 ;
+        // width: 50px;
+        // margin-left: 8px;
     }
 }
 
