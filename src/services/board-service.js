@@ -59,7 +59,6 @@ async function query() {
 //     return storageService.remove(BOARD_KEY, boardId)
 // }
 function remove(boardId) {
-    console.log("boardId", boardId)
     return httpService.delete(`board/${boardId}`)
 }
 
@@ -98,7 +97,6 @@ function updateGroup(board, group) {
 }
 
 function removeCard(board, group, cardId) {
-    console.log(board, 'board');
     const cardIdx = group.cards.findIndex(card => cardId === card.id)
     group.cards.splice(cardIdx, 1)
     const grIdx = board.groups.findIndex(gr => gr.id === group.id)

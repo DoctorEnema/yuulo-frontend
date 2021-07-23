@@ -406,12 +406,10 @@ export default {
     },
     position() {
       const position = this.$store.getters.position;
-      console.log(position, "cardDetails");
       return `top: ${position.posY - 2}px; left: ${position.posX - 230}px`;
     },
     btnPosition() {
       const position = this.$store.getters.position;
-      console.log(position, "cardDetails");
       return `top: ${position.posY - 1}px; left: ${position.posX + 30.4}px`;
     },
     titleEditMode() {
@@ -675,7 +673,7 @@ export default {
           type: "removeCard",
           board: this.selectedBoard,
           group: this.group,
-          cardId: this.cardId,
+          cardId: this.card.id,
         });
         this.$router.push(`/board/${boardId}`);
       } catch (err) {

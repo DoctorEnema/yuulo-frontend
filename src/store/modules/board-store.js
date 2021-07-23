@@ -86,7 +86,6 @@ export const boardStore = {
             state.selectedBoard = null
         },
         setPosition(state, { position }) {
-            console.log('store', position);
             state.position = position
         },
         setPhotos(state, { photos }) {
@@ -267,7 +266,6 @@ export const boardStore = {
             console.log(group, 'group');
             try {
                 const savedBoard = await boardService.removeCard(board, group, cardId)
-                console.log(board, 'board');
                 // context.commit({ type: 'removeCard', group, cardId })
                 context.commit({ type: 'setBoard', board: savedBoard })
                 const data = savedBoard
