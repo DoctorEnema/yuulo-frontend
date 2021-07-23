@@ -115,7 +115,7 @@ export default {
       const board = {
         title: title,
         createdAt: Date.now(),
-        createdBy: this.loggedInUser,
+        createdBy: this.loggedinUser,
         style: { backgroundImg: imgUrl },
         covers: [
           {
@@ -193,7 +193,7 @@ export default {
             isPicked: true,
           },
         ],
-        members: [this.loggedInUser],
+        members: [this.loggedinUser],
         groups: [],
         activities: [],
       };
