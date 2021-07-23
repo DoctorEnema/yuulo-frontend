@@ -40,42 +40,77 @@
 }
 
 .group-header {
+    position: relative;
     font-weight: 600;
     min-height: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 6px;
-    padding-left: 16px;
-    textarea {
-        background: transparent;
-        border-radius: 3px;
-        box-shadow: none;
-        font-weight: 600;
-        margin: -4px 0;
-        height: 20px;
-        min-height: 20px;
-        // padding: 4px 8px;
-        resize: none;
-        max-height: 256px;
-        overflow: hidden;
-        overflow-wrap: break-word;
-        height: 28px;
-        padding-top: 6px;
-        width: 209px;
-    }
+    padding: 6px 0;
+    // padding-left: 16px;
+    // textarea {
+    //     background: transparent;
+    //     border-radius: 3px;
+    //     box-shadow: none;
+    //     font-weight: 600;
+    //     margin: 0;
+    //     height: 20px;
+    //     padding-left: 10px;
+    //     min-height: 20px;
+    //     // padding: 4px 8px;
+    //     resize: none;
+    //     max-height: 256px;
+    //     overflow: hidden;
+    //     overflow-wrap: break-word;
+    //     height: 28px;
+    //     padding-top: 6px;
+    //     width: 209px;
+    // }
     button {
         width: 32px;
         height: 32px;
+        position: absolute;
+        top: 4px;
+        right: 0;
         &::before {
             font-family: fontAwesome, sans serif;
-            content: "\f141";
+            content: "\f1f8";
         }
         &:hover {
             background-color: $clr3;
         }
     }
 }
+
+.group-title {
+    white-space: normal;
+    width: 228px;
+    background: transparent;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 600;
+    // line-height: 24px;
+    min-height: 28px;
+    max-height: 256px;
+    padding: 4px 8px;
+    margin-top: 2px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    cursor: pointer;
+    [contenteditable]{
+        outline: 0px solid transparent;
+    }
+    p{
+        width: 100%;
+    }
+}
+.edit {
+    background-color: #fff;
+    box-shadow: inset 0 0 0 2px #0079bf;
+    cursor:text;
+}
+
+
 
 .group-content {
     max-height: 78vh;
@@ -115,7 +150,7 @@
         button:first-of-type {
             background-color: #0079bf;
             padding: 6px 12px;
-            color: white;
+            color: $clr5;
             line-height: 20px;
             margin: 0 6px 0 0;
             &:hover {

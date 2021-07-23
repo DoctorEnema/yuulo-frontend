@@ -21,7 +21,7 @@
             class="card-label"
             v-for="(label, idx) in labels"
             :key="idx"
-            :style="{ 'background-color': label.color, 'box-shadow': '-8px 0 '+label.color + '90' }"
+            :style="{ 'background-color': label.color }"
             @click="setLabel(label.id)"
           >
             <div class="label-colors">

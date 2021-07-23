@@ -15,15 +15,8 @@
     font-size: 16px;
     font-weight: 600;
     height: 100%;
-    padding: 6px;
+    padding: 12px;
     border-radius: 3px;
-    transition: 85ms;
-    &:hover {
-        // box-shadow: -8px 0 rgba(104, 104, 110, 0.397);
-        box-shadow: -8px 0 ;
-        // width: 50px;
-        padding-left: 12px;
-    }
 }
 .create-label {
     .add-label-btns {
@@ -70,7 +63,7 @@
     height: 30px;
     margin-bottom: 4px;
     border-radius: 3px;
-    transition: 85ms;
+    transition: 80ms;
 
     a {
         position: absolute;
@@ -92,10 +85,10 @@
         }
     }
     &:hover {
-        // box-shadow: -8px 0 rgba(104, 104, 110, 0.397);
+        box-shadow: -8px 0 rgba(104, 104, 110, 0.397);
         // box-shadow: -8px 0 ;
         // width: 50px;
-        // margin-left: 8px;
+        margin-left: 4px;
     }
 }
 
