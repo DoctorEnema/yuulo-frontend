@@ -28,7 +28,8 @@
         </ul>
       </form>
       <h3 class="unsplash-h3">Attachments</h3>
-      <img-upload-basic @saveImg="saveImg"></img-upload-basic>
+
+      <img-upload-basic class="upload-btn-cover" @saveImg="saveImg"></img-upload-basic>
       <h3 class="unsplash-h3">Unsplash</h3>
       <div class="cover-unsplash">
         <button
