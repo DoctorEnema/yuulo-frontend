@@ -125,8 +125,14 @@
     height: 100%;
     outline: none;
     border: none;
-    color: white;
-    width: 180px;
+    width: 32px;
+    color: transparent;
+    @include for-normal-layout {
+        @media (min-width: 720px) {
+            width: 180px;
+            color: $clr5;
+        }
+      }
     &:hover {
         background-color: rgba($color: #ffffff, $alpha: 0.4);
     }
@@ -139,6 +145,8 @@
     &::placeholder {
         opacity: 1;
     }
+
+ 
 }
 
 .to-create-board::before {

@@ -216,8 +216,54 @@
     min-height: 412px;
     background-color: $clr5;
     color: $clr2;
-    left: 50px;
-    top:100px
+    left: 317px;
+    top:85px;
+    padding:8px;
+    border-radius: 3px;
+    box-shadow: 0 8px 16px -4px rgba(9,30,66,.25),0 0 0 1px rgba(9,30,66,.08);
+    .add-card-header{
+        button{
+            padding: 8px;
+            font-size: 16px;
+            &:hover{
+                background-color: transparent;
+                color: $clr1;
+            }
+        }
+    }
+}
+
+.invite-members-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    input[type="text"]{
+        @include trello-txt;
+        margin:0;
+        margin-bottom: 12px;
+        width: 100%;
+    }
+    button{
+        padding: 0;
+        width: 100%;
+        display: flex;
+        color: $clr1;
+        height: 40px;
+        align-items: center;
+        &:hover{
+            background-color: $clr4;
+        }
+    }
+    img{
+        border-radius: 50%;
+        background-color: $clr3;
+        margin: 4px;
+    }
+}
+hr {
+    margin: 0 auto 12px;
+    filter: brightness(250%);
+    width: 100%;
 }
  .img-invite{
         width: 32px;
