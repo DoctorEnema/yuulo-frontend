@@ -19,6 +19,10 @@
             margin-bottom: 40px;
           }
     }
+    h2{
+        font-size: 2.5rem;
+        color: white;
+    }
     .close-dashboard {
             background-color: transparent;
             position: absolute;
@@ -43,10 +47,13 @@
             margin-bottom: 50px;
         }
     }
-    .bar-chart {
-        width: 500px;
-    }
     .doughnut-chart {
-        width: 500px;
+        width: 300px;
+    }
+    .bar-chart {
+        width: 300px;
+    }
+    .pie-chart{
+        width: 300px;
     }
 }
