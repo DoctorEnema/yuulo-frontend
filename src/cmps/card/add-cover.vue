@@ -14,7 +14,7 @@
       </div>
       <form @submit.prevent="setCoverColor()">
         <!-- <label for="name">colors</label> -->
-        <h3>Colors</h3>
+        <h3 class="unsplash-h3">Colors</h3>
         <ul class="cover-colors">
           <li
             class="card-cover-color"
@@ -27,7 +27,7 @@
           </li>
         </ul>
       </form>
-      <h3>Attachments</h3>
+      <h3 class="unsplash-h3">Attachments</h3>
       <img-upload-basic @saveImg="saveImg"></img-upload-basic>
       <h3 class="unsplash-h3">Unsplash</h3>
       <div class="cover-unsplash">
@@ -62,11 +62,12 @@
           placeholder="Search Unsplash for photos"
         />
       </form>
-      <h3 class="unsplash-h3 add">Top photos</h3>
       <div class="loader-svg" v-if="loading">
         <img src="../../assets/img/bars.svg" />
       </div>
       <div v-else>
+      <h3 v-if="isSearched" class="unsplash-h3 add">Results</h3>
+      <h3 v-else class="unsplash-h3 add">Top photos</h3>
         <div v-if="photos" class="cover-unsplash">
           <button
             v-for="(photo, idx) in photos.slice(0, 12)"
@@ -112,6 +113,7 @@ export default {
       search: { query: null },
       timeoutId: null,
       loading: false,
+      isSearched: false,
     };
   },
   computed: {
@@ -150,11 +152,12 @@ export default {
     },
     onSearchPhotos() {
       try {
-        console.log(this.timeoutId);
-
-        if (this.timeoutId) clearTimeout(this.timeoutId);
-        console.log(this.timeoutId);
+        if (this.timeoutId) {
+          clearTimeout(this.timeoutId);
+          this.timeoutId = null
+        }
         this.loading = true;
+        this.isSearched = true
         this.timeoutId = setTimeout(() => {
           const searchTerm = { ...this.search };
           if (!searchTerm.query) searchTerm.query = "new york";

@@ -384,7 +384,7 @@ export default {
     position() {
       const position = this.$store.getters.position;
       console.log(position, 'cardDetails');
-      return `top: ${position.posY-1}px; left: ${position.posX-229}px`
+      return `top: ${position.posY-2}px; left: ${position.posX-230}px`
     },
     btnPosition() {
       const position = this.$store.getters.position;
