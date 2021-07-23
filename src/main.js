@@ -7,6 +7,14 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import './styles/styles.scss'
+import VueDatePicker from '@mathieustan/vue-datepicker';
+import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css';
+
+Vue.use(VueDatePicker);
+
+Vue.use(VueDatePicker, {
+  lang: 'fr'
+});
 
 Vue.use(ElementUI, { locale })
 
