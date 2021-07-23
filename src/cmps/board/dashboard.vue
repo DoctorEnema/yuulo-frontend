@@ -7,7 +7,7 @@
           <h2>Board details</h2>
           <h2>Board title: {{selectedBoard.title}}</h2>
           <h2>Members: {{selectedBoard.members.length}}</h2>
-          <h2>Creat at: {{selectedBoard.createdAt}}</h2>
+          <h2>Created at: {{selectedBoard.createdAt}}</h2>
         </div>
       <div>
         <h2>Chacklist Todos</h2>
@@ -104,7 +104,7 @@ export default {
         labels: groupTitels,
         datasets: [
           {
-            label: "Cards per group",
+            label: "",
             backgroundColor: ["rgb(54, 162, 235)","rgb(54, 162, 235)","rgb(54, 162, 235)","rgb(54, 162, 235)","rgb(54, 162, 235)","rgb(54, 162, 235)","rgb(54, 162, 235)","rgb(54, 162, 235)","rgb(54, 162, 235)"],
             data: groupCards,
           },
@@ -131,7 +131,7 @@ export default {
       todos.push(DoneToDo);
       todos.push(undoneToDo);
       return {
-        labels: ["Done todo", "undone todo"],
+        labels: ["Finished todos", "Unfinished todo"],
         datasets: [
           {
             label: "Checklist",
