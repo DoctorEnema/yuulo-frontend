@@ -5,12 +5,12 @@
         <!-- <textarea ref="title" @keydown.13.prevent @keyup.13="saveTitle" @blur="saveTitle" spellcheck="false">{{group.title}}</textarea> -->
         <div :class="titleEditMode" class="group-title">
           <p
-            contenteditable="true"
             ref="title"
             @keydown.13.prevent
             @keyup.13="saveTitle"
             @blur="saveTitle"
-            @mouseup="isTitleEdit = true"
+            :contenteditable="isTitleEdit"
+            @mouseup="startEdit"
             spellcheck="false"
           >
             {{ group.title }}
@@ -92,14 +92,21 @@ export default {
   methods: {
     saveTitle(ev) {
       if (this.isUpdated) return;
-      console.log(ev);
       const group = this.copiedGroup;
       group.title = this.$refs.title.innerText;
       this.$emit("updateGroup", group);
-      setTimeout(() => (this.isUpdated = false), 100);
+      this.$nextTick(() => (this.isUpdated = false));
+      // setTimeout(() => (this.isUpdated = false), 100);
+      console.log(ev);
+
       this.isUpdated = true;
       this.$refs.title.blur();
+
       this.isTitleEdit = false;
+    },
+    startEdit() {
+      this.isTitleEdit = true;
+      this.$nextTick(() => this.$refs.title.focus());
     },
     onDragStart(ev) {
       ev.item.classList.add("dragging");
