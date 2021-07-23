@@ -1,6 +1,7 @@
 <template>
   <section >
-      <input @change="onUploadImg" type="file" id="imgUpload"  />
+    <button @click="uploadImage"></button>
+      <input @change="onUploadImg" type="file" id="imgUpload"  style="display:none;"/>
   </section>
 </template>
 
@@ -13,11 +14,17 @@ export default {
   },
   methods: {
     async onUploadImg(ev) {
+      const file = ev.target.files[0]
       this.isLoading = true
-      const res = await uploadImg(ev);
+      const res = await uploadImg(file);
       this.$emit('saveImg', res.url)
       this.isLoading = false
     },
+    uploadImage() {
+      const elInput = document.querySelector('#imgUpload').click()
+      console.log(elInput);
+      
+    }
   },
 };
 </script>

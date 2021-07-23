@@ -27,9 +27,12 @@
           </li>
         </ul>
       </form>
-      <h3 class="unsplash-h3">Attachments</h3>
-
-      <img-upload-basic class="upload-btn-cover" @saveImg="saveImg"></img-upload-basic>
+      <h3 class="unsplash-h3 att">Attachments</h3>
+      <!-- <button class="upload-btn-cover" @click="openFileUpload">Upload a cover image</button> -->
+      <div class>
+      <img-upload-basic ref="file" class="upload-input-cover" @saveImg="saveImg"></img-upload-basic>
+      </div>
+      <div class="drag-tip">Tip: Drag an image on to the card to upload it.</div>
       <h3 class="unsplash-h3">Unsplash</h3>
       <div class="cover-unsplash">
         <button
@@ -131,8 +134,9 @@ export default {
       this.link = link;
       this.setLink();
     },
-    setLink() {
-      this.$emit("linkAdded", this.link);
+    async setLink() {
+      await this.$emit("setCover", {imgUrl:this.link});
+      this.closeModal()
     },
     setCover(imgUrl) {
       this.isRemoved = true;
@@ -174,6 +178,11 @@ export default {
     setIsSearch() {
       this.isPhotoSearch = !this.isPhotoSearch;
     },
+    openFileUpload() {
+      this.saveImg()
+      // this.$refs.file.saveImg()
+      // console.log('asdas');
+    }
   },
 };
 </script>

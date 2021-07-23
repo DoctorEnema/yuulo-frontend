@@ -4,6 +4,7 @@ import axios from 'axios';
 
 // AXIOS
 export const uploadImg = async (file) =>{
+    console.log(file);
     // Defining our variables
     const UPLOAD_PRESET = 'davidyan777' // Insert yours
     const CLOUD_NAME = 'davidyan7' // Insert yours

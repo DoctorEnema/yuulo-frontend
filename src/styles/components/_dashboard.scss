@@ -13,11 +13,10 @@
     padding-top: 20px;
     h1 {
         font-size: 3rem;
+        // padding-top: 20px;
         color: white;
         margin-bottom: 7px;
-        @media (max-width: 995px) {
-            margin-bottom: 40px;
-          }
+      
     }
     h2{
         font-size: 1.8rem;
@@ -42,11 +41,15 @@
     .charts-container {
         display: grid;
         grid-template-columns:1fr 1fr;
-        height: 100%;
+        height: 91vh;
         justify-items:center;
         >* {
             margin-bottom: 50px;
         }
+        @media (max-width: 750px) {
+            grid-template-columns:1fr;
+            // margin-bottom: 40px;
+          }
     }
     .doughnut-chart {
         width: 90%;
@@ -84,7 +87,15 @@
         }
     }
     .chart-basic{
-        // width: 100%;
-        margin-bottom: 10px;
+        width: 100%;
+        max-width: 400px;
+        margin-bottom: 5px;
+
+        @media (max-width: 750px) {
+             margin-bottom: 27px;
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: center;
+          }
     }
 }
