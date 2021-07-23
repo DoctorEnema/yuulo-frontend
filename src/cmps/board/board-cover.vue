@@ -21,13 +21,21 @@
     </form>
     <div v-if="isPhotos">
       <h3>Unsplash</h3>
-      <div class="side-menu-imgs">
+       <form @submit.prevent="onSearchPhotos">
+        <input
+          type="text"
+          v-model="search.query"
+          placeholder="Search Unsplash for photos"
+        />
+        <button>Search</button>
+      </form>
+      <div v-if="photos" class="side-menu-imgs">
         <button
-          v-for="(cover, idx) in boardCovers"
+          v-for="(photo, idx) in photos"
           :key="idx"
-          @click="boardCoverImage(cover)"
+          @click="boardCoverImage(photo.urls.regular)"
         >
-          <img class="cover-img" :src="cover.imgUrl" alt="" />
+          <img class="cover-img" :src="photo.urls.regular" alt="" />
         </button>
       </div>
     </div>
@@ -58,12 +66,18 @@ export default {
       isModalOpen: true,
       isColors: false,
       isPhotos: false,
+      link: "",
+      isPhotoSearch: false,
+      search: {query: null},
     };
   },
   computed: {
     boardCovers() {
       const board = this.$store.getters.selectedBoard;
       return board.covers;
+    },
+     photos() {
+      return this.$store.getters.photos;
     },
   },
   methods: {
@@ -88,6 +102,14 @@ export default {
     photoModal() {
       this.isPhotos = true;
       this.isColors = false;
+    },
+      onSearchPhotos() {
+      const searchTerm = {...this.search};
+      this.$store.dispatch({ type: "getUnsplash", query: searchTerm.query });
+      this.search.query = null
+    },
+    setSearch() {
+      this.isPhotoSearch = !this.isPhotoSearch;
     },
     // backModal() {
     //   this.isPhotos = false;

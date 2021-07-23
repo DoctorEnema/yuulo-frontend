@@ -211,7 +211,7 @@ export default {
     },
     boardCoverImage(img) {
       const board = this.board;
-      board.style.backgroundImg = img.imgUrl;
+      board.style.backgroundImg = img;
       board.style.backgroundColor = null;
       this.$store.dispatch({ type: "updateBoard", board });
     },

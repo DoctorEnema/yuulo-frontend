@@ -22,7 +22,7 @@
       <chart-bar
         class="bar-chart"
         :data="chartBarCardSum"
-        :options="chartOptions"
+        :options="chartBarOptions"
       />
       </div>
       <div>
@@ -48,7 +48,12 @@ import { utilService } from "../../services/util-service.js";
 export default {
   data() {
     return {
-      chartOptions: {
+       chartOptions: {
+        borderWidth: "10px",
+        hoverBackgroundColor: "red",
+        hoverBorderWidth: "10px",
+       },
+      chartBarOptions: {
         borderWidth: "10px",
         hoverBackgroundColor: "red",
         hoverBorderWidth: "10px",
