@@ -35,17 +35,17 @@ export default {
       this.setTime();
     },
     upMin() {
-      this.min++;
-      if (this.min === 60) {
+      this.min= this.min+5;
+      if (this.min > 59) {
         this.min = 0;
-        this.hour++;
+         this.hour++;
       }
       this.setTime();
     },
     downMin() {
-      this.min--;
+     this.min=  this.min-5;
       if (this.min < 0) {
-        this.min = 59;
+        this.min = 55;
         this.hour--;
       }
       this.setTime();
