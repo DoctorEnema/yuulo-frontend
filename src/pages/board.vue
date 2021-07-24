@@ -16,8 +16,14 @@
     />
     <div class="board-header">
       <div class="main-header-side">
-        <button @click="openDashboard"><h2>Electricity~</h2></button>
-        <button class="favorite-board"></button>
+        <button @click="openDashboard">
+          <h2>{{ board.title }}</h2>
+        </button>
+        <button
+          @click="toggleFavBoard(boardId)"
+          class="favorite-board"
+          :style="{color:isFavoritedBoard}"
+        ></button>
         <div class="board-members">
           <button
             class="board-member-header"
@@ -39,7 +45,7 @@
           </header>
           <hr />
           <div class="invite-members-content" v-if="users">
-            <input type="text" placeholder="Person to invite">
+            <input type="text" placeholder="Person to invite" />
             <button
               v-for="user in users"
               :key="user._id"
@@ -125,12 +131,12 @@ export default {
     draggable,
     yuumi,
   },
-    async created() {
+  async created() {
     try {
       this.$store.dispatch({ type: "loadBoard", boardId: this.boardId });
       await this.$store.dispatch({ type: "loadUsers" });
-    }catch (err) {
-      console.log('cannot load users', err);
+    } catch (err) {
+      console.log("cannot load users", err);
     }
     this.setUpdatedLoggedInUser();
     socketService.emit("board topic", this.boardId);
@@ -141,7 +147,7 @@ export default {
       });
     }
     window.document.title = `Yuulo`;
-    this.$store.dispatch({type:'getUnsplash', query: 'newyork'})
+    this.$store.dispatch({ type: "getUnsplash", query: "newyork" });
     // addEventListener('touchstart', ()=>{
     //   this.isShortTap =true
     // })
@@ -157,7 +163,7 @@ export default {
       },
       isSideMenu: false,
       isMember: false,
-      isShortTap: false
+      isShortTap: false,
     };
   },
   computed: {
@@ -175,6 +181,10 @@ export default {
     },
     users() {
       return this.$store.getters.users;
+    },
+    isFavoritedBoard(){
+      if (this.loggedinUser.favBoardIds?.some(bId => bId === this.boardId)) return 'gold'
+      else return 'white'
     },
   },
   methods: {
@@ -196,7 +206,7 @@ export default {
       this.isMember = !this.isMember;
     },
     onDragStart() {
-      console.log('start');
+      console.log("start");
     },
     onDragEnd() {
       const board = this.board;
@@ -258,26 +268,21 @@ export default {
         console.log("cannot get user", err);
       }
     },
-  // handleTap() {
-  //   console.log('tap');
-  // },
-  // handleTouchStart(ev) {
-  //   // this.isShortTap = true
-  //   // console.log('touchStart', ev);
-  // },
-  // handleTouchEnd() {
-
-  // },
-  // handleLongTap() {
-  //   // this.isShortTap = false
-  //   console.log('longTap');
-  // },
-  // log(ev)  {
-  //   console.log(ev);
-  // }
-  // handleSwipe() {
-  //   this.isShortTap = true
-  // },
+    toggleFavBoard(boardId) {
+      const copiedUser = JSON.parse(JSON.stringify(this.loggedinUser));
+      const idx = this.loggedinUser.favBoardIds?.findIndex(
+        (bId) => bId === boardId
+      );
+      if (!this.loggedinUser.favBoardIds || idx === -1) {
+        copiedUser.favBoardIds
+          ? copiedUser.favBoardIds.push(boardId)
+          : (copiedUser.favBoardIds = [boardId]);
+        this.$store.dispatch({ type: "updateUser", user: copiedUser });
+      } else {
+        copiedUser.favBoardIds.splice(idx, 1);
+        this.$store.dispatch({ type: "updateUser", user: copiedUser });
+      }
+    },
   },
 };
 </script>
