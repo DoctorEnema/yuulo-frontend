@@ -13,7 +13,7 @@ import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css';
 Vue.use(VueDatePicker);
 
 Vue.use(VueDatePicker, {
-  lang: 'fr'
+  lang: 'en'
 });
 
 Vue.use(ElementUI, { locale })

@@ -2,17 +2,22 @@
   <VueDatePicker
     v-model="date"
     inline
-    @input="addDate"
+     :locale="locale"
+    @input="setDate"
   />
 </template>
 <script>
 export default {
   data: () => ({
     date: new Date(),
+      locale: { lang: 'en'}
   }),
+  created(){
+//   this.$emit('setDate',this.date)
+  },
   methods:{
-      addDate(){
-          console.log(this.date);
+      setDate(){
+          this.$emit('setDate',this.date);
       }
   }
 };
