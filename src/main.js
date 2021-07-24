@@ -16,7 +16,7 @@ Vue.use(Vue2TouchEvents)
 Vue.use(VueDatePicker);
 
 Vue.use(VueDatePicker, {
-  lang: 'fr'
+  lang: 'en'
 });
 
 Vue.use(ElementUI, { locale })
