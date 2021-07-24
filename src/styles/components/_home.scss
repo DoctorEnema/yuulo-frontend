@@ -1,9 +1,9 @@
 .home {
     // width: 100vw;
     button {
-        padding: 14px;
+        padding: 14px 36px;
         background-color: #0065ff;
-        color: $clr4;
+        color: $clr5;
         font-size: 18px;
     }
     .background {
@@ -11,9 +11,9 @@
             180deg,
             rgba(#0065ff, 0.3) 0%,
             rgba(0, 101, 255, 0.2) 10%,
-            rgba(0, 101, 255, 0.1) 20%,
-            rgba(0, 101, 255, 0) 30%,
-            rgba(255, 255, 255, 1) 60%
+            rgba(0, 101, 255, 0.1) 30%,
+            rgba(0, 101, 255, 0) 50%,
+            rgba(255, 255, 255, 1) 80%
         );
         // background-size: cover;
         // background-position-x: 40%;
@@ -91,27 +91,64 @@
 }
 
 .hero {
+    position: relative;
+    padding:20px;
+    // width: 1300px;
     h2 {
-        font-weight: 600;
-        font-size: 32px;
+        font-weight:700;
+        font-size: 40px;
         padding-bottom: 46px;
+        max-width: 24ch
     }
     h3 {
-        font-size: 26px;
+        font-size: 20px;
         padding-bottom: 24px;
+        width: 400px;
+        max-width: 40ch
     }
-
-    margin: 150px auto;
+    img {
+        position: absolute;
+        
+        border-radius: 3px;
+        top: 70px;
+        right: 0px;
+        display: none
+    }
+    margin: 100px auto 200px;
 
     @include for-narrow-layout {
         max-width: $break-narrow;
+        img {
+        }
     }
 
     @include for-normal-layout {
         max-width: $break-normal;
+        img {
+            width: 400px;
+            top: 110px;
+            display: inline
+        }
+        h2 {
+            font-size: 50px;
+        }
+        h3 {
+            font-size: 20px;
+            max-width: 15ch
+        }
     }
     @include for-wide-layout {
-        max-width: $break-wide;
+        max-width: 1150px;
+        img {
+            width: 580px;
+        }
+        h2 {
+            font-size: 70px;
+        }
+        h3 {
+            font-size: 27px;
+            max-width: 27ch
+        }
     }
 }
 

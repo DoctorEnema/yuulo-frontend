@@ -19,9 +19,11 @@
       <yuumi></yuumi>
     </div>
     <div v-if="userOrModal" class="hero">
-      <h2>Yuulo helps you stay organized and be productive.</h2>
-      <h3>"You and me? We got this!"</h3>
+      <!-- <h2>Yuulo helps you stay organized and be productive.</h2> -->
+      <h2>Everything your team needs, all in one place.</h2>
+      <h3>Yuulo is more than a way to stay organized - it's a smart workplace where teams, tools and productivity come together.</h3>
       <button @click="loginAsGuest">Try it as a guest</button>
+      <img src="@/assets/img/main.png" alt="">
     </div>
     <login-user
       @closeModal="displayModal = false"
