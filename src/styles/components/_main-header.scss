@@ -114,8 +114,13 @@
         position: absolute;
         right: 10px;
         top: 5px;
+        &:hover > .search-bar {
+            background-color: red;
+            // background-color: rgba($color: #ffffff, $alpha: 0.4);
+        }
     }
 }
+
 .search-bar {
     display: block;
     margin-left: 4px;
@@ -127,12 +132,20 @@
     border: none;
     width: 32px;
     color: transparent;
+    &::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        color: transparent;
+    }
     @include for-normal-layout {
         @media (min-width: 720px) {
             width: 180px;
             color: $clr5;
+            &::-webkit-input-placeholder {
+                /* Chrome/Opera/Safari */
+                color: $clr5;
+            }
         }
-      }
+    }
     &:hover {
         background-color: rgba($color: #ffffff, $alpha: 0.4);
     }
@@ -145,8 +158,6 @@
     &::placeholder {
         opacity: 1;
     }
-
- 
 }
 
 .to-create-board::before {
@@ -159,13 +170,6 @@
     content: "\f05a";
 }
 
-.to-notifications::before {
-    font-family: fontAwesome, sans serif;
-    content: "\f0f3";
-    // .active {
-    //     background-color:#b04632;
-    // }
-}
 .to-notifications {
     transition: background-color 80ms;
     &::before {
@@ -174,7 +178,7 @@
     }
     &.active {
         background-color: #eb5a46;
-        &:hover{
+        &:hover {
             background-color: #b04632;
         }
     }

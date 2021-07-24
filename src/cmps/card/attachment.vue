@@ -11,11 +11,11 @@
         <div class="attachment-controls">
           <p>Added</p>
           <span></span><show-time :time="attachment.time"></show-time>
-          <span>-</span>
+          <span></span>
           <a href="#">Comment</a>
-          <span>-</span>
+          <span></span>
           <a href="#" @click="removeAttachment(idx, attachment)">Delete</a>
-          <span>-</span>
+          <span></span>
           <a href="#">Edit</a>
         </div>
         <div class="make-cover-attachment">
