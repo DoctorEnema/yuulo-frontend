@@ -1,5 +1,5 @@
 <template>
-  <section v-if="board" class="board-container">
+  <section v-touch:longtap="handleLongTap" v-if="board" class="board-container">
     <div
       v-if="this.board.style.backgroundImg"
       class="background"
@@ -71,6 +71,14 @@
           :animation="200"
           ghostClass="moving-group"
           chosenClass="group-moving"
+          v-touch:tap="handleTap" 
+          v-touch:start="handleTouchStart"
+          v-touch:end="handleTouchEnd"
+          v-touch:longtap="handleLongTap"
+          :disabled="isShortTap"
+          @click="log"
+          :delay="400"
+          :delayOnTouchOnly="true"
         >
           <group
             @removeCard="removeCard"
@@ -123,6 +131,27 @@ export default {
     draggable,
     yuumi,
   },
+    async created() {
+    try {
+      this.$store.dispatch({ type: "loadBoard", boardId: this.boardId });
+      await this.$store.dispatch({ type: "loadUsers" });
+    }catch (err) {
+      console.log('cannot load users', err);
+    }
+    this.setUpdatedLoggedInUser();
+    socketService.emit("board topic", this.boardId);
+    if (this.loggedinUser) {
+      this.$store.dispatch({
+        type: "loadUserCardWatch",
+        userId: this.loggedinUser._id,
+      });
+    }
+    window.document.title = `Yuulo`;
+    this.$store.dispatch({type:'getUnsplash', query: 'newyork'})
+    // addEventListener('touchstart', ()=>{
+    //   this.isShortTap =true
+    // })
+  },
   data() {
     return {
       // selectedBoard: null,
@@ -134,6 +163,7 @@ export default {
       },
       isSideMenu: false,
       isMember: false,
+      isShortTap: false
     };
   },
   computed: {
@@ -171,7 +201,9 @@ export default {
     memberModal() {
       this.isMember = !this.isMember;
     },
-    onDragStart() {},
+    onDragStart() {
+      console.log('start');
+    },
     onDragEnd() {
       const board = this.board;
       this.$store.commit({ type: "setBoard", board });
@@ -232,27 +264,26 @@ export default {
         console.log("cannot get user", err);
       }
     },
+  handleTap() {
+    console.log('tap');
   },
-  async created() {
-    try {
-      this.$store.dispatch({ type: "loadBoard", boardId: this.boardId });
-      await this.$store.dispatch({ type: "loadUsers" });
-    }catch (err) {
-      console.log('cannot load users', err);
-    }
-    // boardService.getById(this.boardId).then((board) => {
-    //   this.selectedBoard = board;
-    // });
-    this.setUpdatedLoggedInUser();
-    socketService.emit("board topic", this.boardId);
-    if (this.loggedinUser) {
-      this.$store.dispatch({
-        type: "loadUserCardWatch",
-        userId: this.loggedinUser._id,
-      });
-    }
-    window.document.title = `Yuulo`;
-    this.$store.dispatch({type:'getUnsplash', query: 'newyork'})
+  handleTouchStart(ev) {
+    // this.isShortTap = true
+    // console.log('touchStart', ev);
+  },
+  handleTouchEnd() {
+
+  },
+  handleLongTap() {
+    // this.isShortTap = false
+    console.log('longTap');
+  },
+  log(ev)  {
+    console.log(ev);
+  }
+  // handleSwipe() {
+  //   this.isShortTap = true
+  // },
   },
 };
 </script>
