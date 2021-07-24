@@ -263,7 +263,6 @@ export const boardStore = {
             }
         },
         async removeCard(context, { board, group, cardId }) {
-            console.log(group, 'group');
             try {
                 const savedBoard = await boardService.removeCard(board, group, cardId)
                 // context.commit({ type: 'removeCard', group, cardId })

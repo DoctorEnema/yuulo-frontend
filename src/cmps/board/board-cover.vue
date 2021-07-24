@@ -20,22 +20,28 @@
       </ul>
     </form>
     <div class="side-menu-unsplash" v-if="isPhotos">
-      <h3 >Unsplash</h3>
-       <form @submit.prevent="onSearchPhotos">
+      <!-- <h3 v-if="isSearched" class="unsplash-h3 add">Results</h3> -->
+      <h3 class="unsplash-h3 add">Unsplash</h3>
+      <form @input.prevent="onSearchPhotos">
         <input
           type="text"
           v-model="search.query"
           placeholder="Search Unsplash for photos"
         />
       </form>
-      <div v-if="photos" class="side-menu-imgs">
-        <button
-          v-for="(photo, idx) in photos"
-          :key="idx"
-          @click="boardCoverImage(photo.urls.regular)"
-        >
-          <img class="cover-img" :src="photo.urls.regular" alt="" />
-        </button>
+      <div class="loader-svg" v-if="loading">
+        <img src="../../assets/img/bars.svg" />
+      </div>
+      <div v-else>
+        <div v-if="photos" class="side-menu-imgs">
+          <button
+            v-for="(photo, idx) in photos"
+            :key="idx"
+            @click="boardCoverImage(photo.urls.regular)"
+          >
+            <img class="cover-img" :src="photo.urls.thumb" alt="" />
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -67,7 +73,10 @@ export default {
       isPhotos: false,
       link: "",
       isPhotoSearch: false,
-      search: {query: null},
+      search: { query: null },
+      timeoutId: null,
+      loading: false,
+      isSearched: false,
     };
   },
   computed: {
@@ -75,7 +84,7 @@ export default {
       const board = this.$store.getters.selectedBoard;
       return board.covers;
     },
-     photos() {
+    photos() {
       return this.$store.getters.photos;
     },
   },
@@ -102,13 +111,34 @@ export default {
       this.isPhotos = true;
       this.isColors = false;
     },
-      onSearchPhotos() {
-      const searchTerm = {...this.search};
-      this.$store.dispatch({ type: "getUnsplash", query: searchTerm.query });
-      this.search.query = null
-    },
+    //   onSearchPhotos() {
+    //   const searchTerm = {...this.search};
+    //   this.$store.dispatch({ type: "getUnsplash", query: searchTerm.query });
+    //   this.search.query = null
+    // },
     setSearch() {
       this.isPhotoSearch = !this.isPhotoSearch;
+    },
+
+    onSearchPhotos() {
+      try {
+        if (this.timeoutId) {
+          clearTimeout(this.timeoutId);
+          this.timeoutId = null;
+        }
+        this.loading = true;
+        this.isSearched = true;
+        this.timeoutId = setTimeout(() => {
+          const searchTerm = { ...this.search };
+          if (!searchTerm.query) searchTerm.query = "new york";
+          this.$store
+            .dispatch({ type: "getUnsplash", query: searchTerm.query })
+            .then(() => (this.loading = false));
+        }, 1400);
+        // this.search.query = null
+      } catch (err) {
+        console.log("cannot execute search", err);
+      }
     },
     // backModal() {
     //   this.isPhotos = false;
