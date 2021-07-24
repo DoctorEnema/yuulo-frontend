@@ -9,7 +9,6 @@ export const unsplashSearch = async (value) =>{
     try {
         if (gPhotos[value]) {
             const savedRes = gPhotos[value]
-            console.log('loading from cache');
             return savedRes
         }
         const key = 'HxJnZbbOQY-YSo6K4RNhJ9Zhw7mZgTcSmOg_1LAT51o'

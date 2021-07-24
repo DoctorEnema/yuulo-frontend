@@ -9,7 +9,7 @@
           <h3>Members: {{selectedBoard.members.length}}</h3>
           <h3>Created at: {{showTime}}</h3>
         </div>
-      <div class="chart-basic">
+      <div v-if="chartDataToDo.data === [0,0]" class="chart-basic">
         <h2>Checklist Todos</h2>
         <chart-pie
           class="pie-chart"
@@ -18,7 +18,7 @@
         />
       </div>
      
-      <div class="chart-basic">
+      <div v-if="chartDataMembers.data === [0,0]" class="chart-basic">
         <h2>Tasks per members</h2>
         <chart-pie
           class="doughnut-chart"
@@ -26,7 +26,7 @@
           :options="chartOptions"
         />
       </div>
-       <div class="chart-basic">
+       <div v-if="chartBarCardSum.data === [0,0]" class="chart-basic">
       <h2>Tasks per group</h2>
       <chart-bar
         class="bar-chart"
@@ -35,6 +35,7 @@
       />
       </div>
     </div>
+    {{chartBarCardSum.data}}
   </section>
 </template>
 
@@ -110,7 +111,6 @@ return(date.getDate()+
         },
     chartBarCardSum() {
       let groupTitels = [];
-      console.log("groupTitels", groupTitels.length)
       let groupCards = [];
       
       this.selectedBoard.groups.forEach((group,groupIdx) => {
