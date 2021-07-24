@@ -3,7 +3,7 @@
     v-model="date"
     inline
      :locale="locale"
-    @input="addDate"
+    @input="setDate"
   />
 </template>
 <script>
@@ -12,9 +12,12 @@ export default {
     date: new Date(),
       locale: { lang: 'en'}
   }),
+  created(){
+//   this.$emit('setDate',this.date)
+  },
   methods:{
-      addDate(){
-          console.log(this.date);
+      setDate(){
+          this.$emit('setDate',this.date);
       }
   }
 };

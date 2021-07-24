@@ -15,7 +15,9 @@
     >
       Remove Date
     </button>
-    <date-picker></date-picker>
+    <date-picker @setDate="setDate"></date-picker>
+    <time-picker @setTime="setTime"></time-picker>
+    <button @click="addDate">Ok</button>
       <!-- <el-date-picker
         @change="
           addDate();
@@ -34,9 +36,11 @@
 
 <script>
 import datePicker from "../../cmps/card/date-picker.vue";
+import timePicker from "../../cmps/card/time-picker.vue";
 export default {
   components:{
-    datePicker
+    datePicker,
+    timePicker
   },
   props: {
     card: Object,
@@ -69,8 +73,8 @@ export default {
           },
         ],
       },
-      date: "",
-    
+      date: null,
+      time:"T12:00:00"
     };
   },
 
@@ -81,8 +85,25 @@ export default {
     closeModal() {
       this.$emit("closeModal");
     },
+    setTime(time){
+      this.time=time
+    // console.log("time", time)
+
+    },
+    setDate(date){
+      console.log("date", date)
+      this.date = date
+    // console.log("date", date)
+    },
     addDate() {
-      this.$emit("addDate", this.date);
+      if(!this.date) {
+        this.$emit("addDate", (Date.now()+24*60*60*1000))
+        return
+        }
+      const newTime= this.date+this.time
+      const time = Date.parse(newTime)
+      this.$emit("addDate", time);
+      this.closeModal()
     },
     removeDate() {
       this.$emit("removeDate");

@@ -1,0 +1,12 @@
+.time-picker{
+    display: flex;
+height: 60px;
+    .hours{
+        display: flex;
+        flex-direction: column;
+    }
+    .min{
+        display: flex;
+        flex-direction: column;
+    }
+}
