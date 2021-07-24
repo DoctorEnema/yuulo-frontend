@@ -16,8 +16,8 @@
     />
     <div class="board-header">
       <div class="main-header-side">
-        <button @click="openDashboard">
-          <h2>{{ board.title }}</h2>
+        <button class="dashboard-icon" @click="openDashboard">
+          <!-- <h2>{{ board.title }}</h2> -->
         </button>
         <button
           @click="toggleFavBoard(boardId)"
@@ -37,7 +37,7 @@
             <div v-else class="to-user">?</div>
           </button>
         </div>
-        <button @click="memberModal">Invite</button>
+        <button class="members-btn" @click="memberModal"></button>
         <div v-if="isMember" class="invite-member">
           <header class="add-card-header">
             <h4>Invite to board</h4>
@@ -57,7 +57,7 @@
           </div>
         </div>
       </div>
-      <button class="show-board-menu" @click="toggleMenu">Show menu</button>
+      <button class="show-board-menu" @click="toggleMenu"> Show menu</button>
       <transition name="go-side">
         <side-menu
           @boardCoverColor="boardCoverColor"
