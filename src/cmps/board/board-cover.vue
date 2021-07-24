@@ -19,15 +19,14 @@
         </li>
       </ul>
     </form>
-    <div v-if="isPhotos">
-      <h3>Unsplash</h3>
+    <div class="side-menu-unsplash" v-if="isPhotos">
+      <h3 >Unsplash</h3>
        <form @submit.prevent="onSearchPhotos">
         <input
           type="text"
           v-model="search.query"
           placeholder="Search Unsplash for photos"
         />
-        <button>Search</button>
       </form>
       <div v-if="photos" class="side-menu-imgs">
         <button
