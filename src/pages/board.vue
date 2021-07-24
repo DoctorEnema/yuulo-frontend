@@ -1,5 +1,5 @@
 <template>
-  <section v-touch:longtap="handleLongTap" v-if="board" class="board-container">
+  <section v-if="board" class="board-container">
     <div
       v-if="this.board.style.backgroundImg"
       class="background"
@@ -71,12 +71,6 @@
           :animation="200"
           ghostClass="moving-group"
           chosenClass="group-moving"
-          v-touch:tap="handleTap" 
-          v-touch:start="handleTouchStart"
-          v-touch:end="handleTouchEnd"
-          v-touch:longtap="handleLongTap"
-          :disabled="isShortTap"
-          @click="log"
           :delay="400"
           :delayOnTouchOnly="true"
         >
@@ -264,23 +258,23 @@ export default {
         console.log("cannot get user", err);
       }
     },
-  handleTap() {
-    console.log('tap');
-  },
-  handleTouchStart(ev) {
-    // this.isShortTap = true
-    // console.log('touchStart', ev);
-  },
-  handleTouchEnd() {
+  // handleTap() {
+  //   console.log('tap');
+  // },
+  // handleTouchStart(ev) {
+  //   // this.isShortTap = true
+  //   // console.log('touchStart', ev);
+  // },
+  // handleTouchEnd() {
 
-  },
-  handleLongTap() {
-    // this.isShortTap = false
-    console.log('longTap');
-  },
-  log(ev)  {
-    console.log(ev);
-  }
+  // },
+  // handleLongTap() {
+  //   // this.isShortTap = false
+  //   console.log('longTap');
+  // },
+  // log(ev)  {
+  //   console.log(ev);
+  // }
   // handleSwipe() {
   //   this.isShortTap = true
   // },
