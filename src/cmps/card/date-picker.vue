@@ -2,6 +2,7 @@
   <VueDatePicker
     v-model="date"
     inline
+     :locale="locale"
     @input="addDate"
   />
 </template>
@@ -9,6 +10,7 @@
 export default {
   data: () => ({
     date: new Date(),
+      locale: { lang: 'en'}
   }),
   methods:{
       addDate(){

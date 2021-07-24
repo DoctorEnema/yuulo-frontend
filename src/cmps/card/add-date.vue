@@ -15,8 +15,8 @@
     >
       Remove Date
     </button>
-    <!-- <date-picker></date-picker> -->
-      <el-date-picker
+    <date-picker></date-picker>
+      <!-- <el-date-picker
         @change="
           addDate();
           closeModal();
@@ -28,7 +28,7 @@
         value-format="timestamp"
         default-time="12:00:00"
       >
-      </el-date-picker>
+      </el-date-picker> -->
   </section>
 </template>
 
@@ -70,11 +70,12 @@ export default {
         ],
       },
       date: "",
+    
     };
   },
 
   mounted() {
-    this.$refs.dateInput.focus();
+    // this.$refs.dateInput.focus();
   },
   methods: {
     closeModal() {
