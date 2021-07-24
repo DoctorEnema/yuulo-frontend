@@ -9,9 +9,6 @@ import store from './store'
 import './styles/styles.scss'
 import VueDatePicker from '@mathieustan/vue-datepicker';
 import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css';
-import Vue2TouchEvents from 'vue2-touch-events'
-
-Vue.use(Vue2TouchEvents)
 
 Vue.use(VueDatePicker);
 
