@@ -30,6 +30,25 @@
     ></login-user>
     <div class="home-boards" v-if="loggedinUser">
       <h2>Starred boards</h2>
+      <div v-if="boards" class="board-display">
+        <button
+          class="board-btn"
+          @click="selectBoard(board._id)"
+          v-for="board in favBoards"
+          :key="board._id"
+        >
+          <h2>{{ board.title }}</h2>
+          <img
+            v-if="board.style.backgroundImg"
+            :src="board.style.backgroundImg"
+          />
+          <div
+            v-else
+            :style="{ backgroundColor: board.style.backgroundColor }"
+          ></div>
+        </button>
+      </div>
+      <h2>All boards</h2>
       <div class="board-display">
         <button
           class="board-btn"
@@ -48,7 +67,6 @@
           ></div>
         </button>
       </div>
-      <h2>All boards</h2>
     </div>
     <div v-if="loggedinUser" class="yuumi-container">
       <yuumi></yuumi>
@@ -60,6 +78,7 @@
 // @ is an alias to /src
 import loginUser from "../cmps/login-user.vue";
 import yuumi from "../cmps/yuumi.vue";
+import { userService } from "../services/user-service.js";
 export default {
   name: "home",
   components: {
@@ -82,6 +101,15 @@ export default {
     },
     boards() {
       return this.$store.getters.boards;
+    },
+    favBoards() {
+      const favoritedBoards = [];
+      this.loggedinUser.favBoardIds?.forEach((boardId) =>
+        favoritedBoards.push(
+          ...this.boards.filter((board) => board._id === boardId)
+        )
+      );
+      return favoritedBoards;
     },
   },
   methods: {
@@ -111,10 +139,19 @@ export default {
       const board = await this.$store.dispatch({ type: "loadBoard", boardId });
       this.$router.push("/board/" + boardId);
     },
+    async setUpdatedLoggedInUser() {
+      try {
+        const user = await userService.getById(this.loggedinUser._id);
+        this.$store.commit({ type: "setLoggedinUser", user });
+      } catch (err) {
+        console.log("cannot get user", err);
+      }
+    },
   },
   created() {
     this.$store.commit({ type: "clearBaord" });
     this.$store.dispatch("loadBoards");
+    this.setUpdatedLoggedInUser();
   },
   mounted() {
     document.title = `Yuulo - Home`;

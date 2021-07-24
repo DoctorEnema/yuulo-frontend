@@ -22,6 +22,7 @@
         <button
           @click="toggleFavBoard(boardId)"
           class="favorite-board"
+          :style="{color:isFavoritedBoard}"
         ></button>
         <div class="board-members">
           <button
@@ -181,6 +182,10 @@ export default {
     users() {
       return this.$store.getters.users;
     },
+    isFavoritedBoard(){
+      if (this.loggedinUser.favBoardIds?.some(bId => bId === this.boardId)) return 'gold'
+      else return 'white'
+    },
   },
   methods: {
     openDashboard() {
@@ -265,11 +270,18 @@ export default {
     },
     toggleFavBoard(boardId) {
       const copiedUser = JSON.parse(JSON.stringify(this.loggedinUser));
-        this.loggedinUser.favBoardIds?.findIndex(bId => bId === boardId)
-      copiedUser.favBoardIds
-        ? copiedUser.favBoardIds.push(boardId)
-        : (copiedUser.favBoardIds = [boardId]);
-      this.$store.dispatch({ type: "updateUser", user:copiedUser });
+      const idx = this.loggedinUser.favBoardIds?.findIndex(
+        (bId) => bId === boardId
+      );
+      if (!this.loggedinUser.favBoardIds || idx === -1) {
+        copiedUser.favBoardIds
+          ? copiedUser.favBoardIds.push(boardId)
+          : (copiedUser.favBoardIds = [boardId]);
+        this.$store.dispatch({ type: "updateUser", user: copiedUser });
+      } else {
+        copiedUser.favBoardIds.splice(idx, 1);
+        this.$store.dispatch({ type: "updateUser", user: copiedUser });
+      }
     },
   },
 };

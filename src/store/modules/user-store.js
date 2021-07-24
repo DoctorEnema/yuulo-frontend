@@ -123,7 +123,6 @@ export const userStore = {
         async updateUser({ commit }, { user }) {
             try {
                 const updatedUser = await userService.update(user);
-                console.log('updatedUser',updatedUser);
                 commit({ type: 'setLoggedinUser', user:updatedUser })
                 
             } catch (err) {
