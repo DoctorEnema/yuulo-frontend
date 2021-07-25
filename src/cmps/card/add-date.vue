@@ -5,6 +5,9 @@
       <h3>Dates</h3>
     </div>
     <hr class="date-hr" />
+    <date-picker @setDate="setDate"></date-picker>
+    <time-picker @setTime="setTime"></time-picker>
+    <button class="save-date-btn" @click="addDate">Save</button>
     <button
       class="remove-date"
       v-if="card.dueDate"
@@ -13,12 +16,9 @@
         closeModal();
       "
     >
-      Remove Date
+      Remove
     </button>
-    <date-picker @setDate="setDate"></date-picker>
-    <time-picker @setTime="setTime"></time-picker>
-    <button @click="addDate">Ok</button>
-      <!-- <el-date-picker
+    <!-- <el-date-picker
         @change="
           addDate();
           closeModal();
@@ -38,9 +38,9 @@
 import datePicker from "../../cmps/card/date-picker.vue";
 import timePicker from "../../cmps/card/time-picker.vue";
 export default {
-  components:{
+  components: {
     datePicker,
-    timePicker
+    timePicker,
   },
   props: {
     card: Object,
@@ -74,7 +74,7 @@ export default {
         ],
       },
       date: null,
-      time:"T12:00:00"
+      time: "T12:00:00",
     };
   },
 
@@ -85,25 +85,24 @@ export default {
     closeModal() {
       this.$emit("closeModal");
     },
-    setTime(time){
-      this.time=time
-    // console.log("time", time)
-
+    setTime(time) {
+      this.time = time;
+      // console.log("time", time)
     },
-    setDate(date){
-      console.log("date", date)
-      this.date = date
-    // console.log("date", date)
+    setDate(date) {
+      console.log("date", date);
+      this.date = date;
+      // console.log("date", date)
     },
     addDate() {
-      if(!this.date) {
-        this.$emit("addDate", (Date.now()+24*60*60*1000))
-        return
-        }
-      const newTime= this.date+this.time
-      const time = Date.parse(newTime)
+      if (!this.date) {
+        this.$emit("addDate", Date.now() + 24 * 60 * 60 * 1000);
+        return;
+      }
+      const newTime = this.date + this.time;
+      const time = Date.parse(newTime);
       this.$emit("addDate", time);
-      this.closeModal()
+      this.closeModal();
     },
     removeDate() {
       this.$emit("removeDate");

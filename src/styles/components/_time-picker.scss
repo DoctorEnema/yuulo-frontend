@@ -1,12 +1,30 @@
-.time-picker{
+.time-picker {
     display: flex;
-height: 60px;
-    .hours{
+    // height: 60px;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    button{
+        padding: 8px;
+        margin: 2px;
+        width: 32px;
+        height: 32px;
+        font-weight: 900;
+    }
+    p{
+        margin-top: 8px;
+    }
+    .time-btns{
         display: flex;
         flex-direction: column;
     }
-    .min{
+    .hours {
         display: flex;
-        flex-direction: column;
+        // flex-direction: column;
+    }
+    .min {
+        display: flex;
+        // flex-direction: column;
     }
 }

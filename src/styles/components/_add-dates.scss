@@ -15,11 +15,21 @@
             color: $clr1!important;
         }
     }
+    .vd-picker__table{
+        height: 250px
+    }
+}
 
+.save-date-btn{
+    @include control-btn;
+    width: 100%;
+    margin: 8px 0;
+    background-color: #0079bf;
+    color: $clr5
 }
 
 .remove-date {
     @include control-btn;
     width: 100%;
-    margin-bottom: 8px;
 }
+
