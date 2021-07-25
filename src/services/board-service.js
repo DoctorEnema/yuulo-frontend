@@ -33,7 +33,8 @@ export const boardService = {
     getEmptyTodo,
     getEmptyList,
     updateLabel,
-    updateGroup
+    updateGroup,
+    removeMember
 };
 
 
@@ -152,6 +153,22 @@ function updateLabel(board, action, pickedLabel) {
         const labelIdx = board.labels.findIndex(label => label.id === pickedLabel.id)
         if (labelIdx !== -1) board.labels.splice(labelIdx, 1, pickedLabel)
     }
+    return saveBoard(board)
+}
+
+function removeMember(board,memberId){
+    const memberIdx = board.members.findIndex(m => m._id === memberId)
+    board.members.splice(memberIdx,1)
+    board.groups.forEach(group => {
+        group.cards.forEach(card => {
+            if (card.members) {
+                const idIdx = card.members.findIndex(member => member._id === memberId)
+                if (idIdx !== -1) {
+                    card.members.splice(idIdx, 1)
+                }
+            }
+        })
+    })
     return saveBoard(board)
 }
 

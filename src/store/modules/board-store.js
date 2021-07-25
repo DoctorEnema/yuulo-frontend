@@ -223,6 +223,18 @@ export const boardStore = {
                 console.log('cannot update board', err);
             }
         },
+        async removeMember(context, { memberId }) {
+            try {           
+                const board = JSON.parse(JSON.stringify(context.getters.selectedBoard))     
+                await boardService.removeMember(board,memberId)
+                context.commit({ type: 'setBoard', board })
+                const savedBoard = board
+                socketService.emit('boardUpdated', savedBoard)
+                return board
+            } catch (err) {
+                console.log('cannot update board', err);
+            }
+        },
         async updateLabel(context, { boardId, pickedLabel, action }) {
             try {
                 const board = JSON.parse(JSON.stringify(context.getters.selectedBoard))
