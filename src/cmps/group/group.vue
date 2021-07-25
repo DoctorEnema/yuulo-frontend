@@ -55,7 +55,7 @@
       </div>
     </section>
     <div v-else class="group-footer">
-      <button @click="isAdding = true">Add a card</button>
+      <button @click="isAdding = true"> Add a card</button>
     </div>
   </section>
 </template>
