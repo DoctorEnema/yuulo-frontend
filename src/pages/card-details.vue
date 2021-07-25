@@ -166,6 +166,12 @@
           >
             Cover
           </button>
+           <button
+          class="delete-card-btn"
+          @click.stop="removeCard(group, card.id)"
+        >
+          Delete card
+        </button>
         </div>
       </div>
       <section
