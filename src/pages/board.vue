@@ -30,7 +30,7 @@
             v-for="member in board.members"
             :key="member._id"
           >
-            <div v-if="member.imgUrl"><img :src="member.imgUrl" /></div>
+            <div  v-if="member.imgUrl"><img :src="member.imgUrl" /></div>
             <div v-else-if="member.fullname" class="to-user">
               {{ member.fullname.charAt(0) }}
             </div>
@@ -53,6 +53,7 @@
             >
               <img class="img-invite" :src="user.imgUrl" alt="" />
               {{ user.fullname }}
+              <span v-if="isMemberPicked(user)" class="icon"> ✔</span>
             </button>
           </div>
         </div>
@@ -187,12 +188,28 @@ export default {
       if (this.loggedinUser.favBoardIds?.some(bId => bId === this.boardId)) return 'gold'
       else return 'white'
     },
+    
   },
   methods: {
+     isMemberPicked(member) {
+      if (!this.board.members) return;
+      return this.board.members.some((m) => m._id === member._id);
+    },
     openDashboard() {
       this.$router.push(`/board/${this.board._id}/dashboard`);
     },
+    async removeMember(memberId){
+    console.log("memberId", memberId)
+ await this.$store.dispatch({
+        type: "removeMember",
+        memberId: memberId,
+      });
+    },
     async addMember(user) {
+         if (this.board.members.some((m) => m._id === user._id)) {
+        this.removeMember(user._id);
+        return;
+      }
       const member = {
         fullname: user.fullname,
         _id: user._id,

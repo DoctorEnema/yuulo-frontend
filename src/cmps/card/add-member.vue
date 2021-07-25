@@ -26,8 +26,8 @@
               {{ user.fullname.charAt(0) }}
             </div>
             <div class="to-user" v-else>?</div>
-            {{ user.fullname }}({{ user.username }})
-            <span v-if="isMemberPicked(user)" class="icon">✔</span>
+            {{ user.fullname }}
+            <span v-if="isMemberPicked(user)" class="icon"> ✔</span>
           </button>
         </li>
       </ul>
