@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="main-header">
+    <div v-if="loggedinUser" class="main-header">
       <div class="header-left">
         <router-link class="to-home" to="/"></router-link>
         <!-- <router-link class="to-boards" :to="'/board/'+currBoard"> Boards</router-link> -->
