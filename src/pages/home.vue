@@ -153,7 +153,7 @@ export default {
   created() {
     this.$store.commit({ type: "clearBaord" });
     this.$store.dispatch("loadBoards");
-    this.setUpdatedLoggedInUser();
+    if(this.loggedinUser) this.setUpdatedLoggedInUser();
   },
   mounted() {
     document.title = `Yuulo - Home`;

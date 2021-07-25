@@ -22,6 +22,26 @@
         min-width: fit-content;
     }
 
+    .logout-modal{
+        position: absolute;
+        top: 40px;
+        width: 300px;
+        height: fit-content;
+        background-color: white;
+        z-index: 1;
+        right: 5px;
+        color: $clr2;
+
+        h3{
+            color: $clr2;
+        }
+        .logout-btn{
+            color: $clr2;
+            background: none;
+            width: fit-content;
+        }
+    }
+
     .header-left {
         display: flex;
         flex-basis: 100%;

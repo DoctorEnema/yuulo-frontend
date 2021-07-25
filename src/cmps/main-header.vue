@@ -29,13 +29,32 @@
           class="to-notifications"
           :class="isNewNotifications"
         ></button>
-        <button class="header-user">
+        <button @click="logoutModal" class="header-user">
           <div v-if="!loggedinUser">?</div>
           <img v-else-if="loggedinUser.imgUrl" :src="loggedinUser.imgUrl" />
           <div v-else-if="loggedinUser.fullname" class="to-user">
             {{ loggedinUser.fullname.charAt(0) }}
           </div>
         </button>
+      </div>
+      <div v-if="loggedinUser">
+        <div v-if="modalLogout" class="logout-modal">
+        <header class="add-card-header">
+      <h3>Account</h3>
+        <button @click="logoutModal"></button>
+      </header>
+      <hr />
+           <button class="header-user">
+          <div v-if="!loggedinUser">?</div>
+          <img v-else-if="loggedinUser.imgUrl" :src="loggedinUser.imgUrl" />
+          <div v-else-if="loggedinUser.fullname" class="to-user">
+            {{ loggedinUser.fullname.charAt(0) }}
+          </div>
+        </button>
+        {{loggedinUser.fullname}}
+         <hr />
+        <button class="logout-btn" @click="logout">Logout</button>
+        </div>
       </div>
     </div>
     <notifications
@@ -74,6 +93,7 @@ export default {
       currBoard: "",
       isNotifOpen: false,
       isCreate: false,
+      modalLogout:false
     };
   },
   computed: {
@@ -89,6 +109,14 @@ export default {
     },
   },
   methods: {
+    logoutModal(){
+      this.modalLogout=!this.modalLogout
+    },
+     async logout() {
+       await this.$store.dispatch({ type: "logout" });
+       this.$router.push("/");
+      this.logoutModal()
+    },
     toggleMenu() {
       this.isBoardMenu = !this.isBoardMenu;
     },

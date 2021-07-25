@@ -19,7 +19,7 @@
         <button class="dashboard-icon" @click="openDashboard">
           <!-- <h2>{{ board.title }}</h2> -->
         </button>
-        <button
+        <button v-if="loggedinUser"
           @click="toggleFavBoard(boardId)"
           class="favorite-board"
           :style="{color:isFavoritedBoard}"
