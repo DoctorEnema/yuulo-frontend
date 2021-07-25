@@ -4,10 +4,22 @@
     <h1>Dashboard</h1>
     <div class="charts-container">
       <div class="dashboard-details">
-        <h2>Board details:</h2>
-        <h3>Board title: {{ selectedBoard.title }}</h3>
-        <h3>Members: {{ selectedBoard.members.length }}</h3>
-        <h3>Created at: {{ showTime }}</h3>
+        <div>
+          <h4>{{ selectedBoard.members.length }}</h4>
+          <h3 class="dash-members"> Members</h3>
+        </div>
+        <div>
+          <h4>{{ sumAllTasks }}</h4>
+          <h3 class="dash-tasks"> Total Tasks</h3>
+        </div>
+        <div>
+          <h4>{{ tasksAssigned }}</h4>
+          <h3 class="dash-assigned-tasks"> Assigned tasks</h3>
+        </div>
+        <div>
+          <h4>{{ showDate }}</h4>
+          <h3 class="dash-date"> Creation date</h3>
+        </div>
       </div>
       <div class="chart-basic">
         <h2>Checklist Todos</h2>
@@ -82,12 +94,12 @@ export default {
         },
       },
       backgroundColor: [
-        "rgb(255, 99, 132)",
-        "rgb(54, 162, 235)",
-        "rgb(255, 205, 86)",
-        "rgb(47, 145, 50)",
-        "rgb(205, 96, 0)",
-        "rgb(171, 0, 205)",
+        "#ff78cb",
+        "#00c2e0",
+        "#eb5a46",
+        "#61bd4f",
+        "#ff9f1a",
+        "#0079bf",
       ],
     };
   },
@@ -100,21 +112,34 @@ export default {
     selectedBoard() {
       return JSON.parse(JSON.stringify(this.$store.getters.selectedBoard));
     },
-    showTime() {
+    showDate() {
       var timestamp = this.selectedBoard.createdAt;
       var date = new Date(timestamp);
 
       return (
-        date.getDate() +
-        "/" +
-        (date.getMonth() + 1) +
-        "/" +
-        date.getFullYear() +
-        " " +
-        date.getHours() +
-        ":" +
-        date.getMinutes()
+        date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
       );
+    },
+    showHours() {
+      var timestamp = this.selectedBoard.createdAt;
+      var date = new Date(timestamp);
+      return date.getHours() + ":" + date.getMinutes();
+    },
+    sumAllTasks() {
+      let sum = 0;
+      this.selectedBoard.groups?.forEach((group) => {
+        sum += group.cards?.length;
+      });
+      return sum;
+    },
+    tasksAssigned() {
+      let sum = 0;
+      this.selectedBoard.groups?.forEach((group) => {
+        group.cards.forEach((card) => {
+          sum += card.members?.length;
+        });
+      });
+      return sum;
     },
     chartBarCardSum() {
       let groupTitels = [];
@@ -166,7 +191,7 @@ export default {
         datasets: [
           {
             label: "Checklist",
-            backgroundColor: ["rgb(47, 145, 50)", "rgb(255, 99, 132)"],
+            backgroundColor: ["#61bd4f", "#ff9f1a"],
             color: "white",
             data: todos,
           },
