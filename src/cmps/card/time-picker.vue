@@ -1,14 +1,18 @@
 <template>
   <section class="time-picker">
     <div class="hours">
-      <button @click="upHour">+</button>
-      <p><span v-if="hour < 10">0</span>{{ hour }}</p>
-      <button @click="downHour">-</button>
+      <div class="time-btns">
+        <button @click="upHour">+</button>
+        <button @click="downHour">-</button>
+      </div>
+      <p><span v-if="hour < 10">0</span>{{ hour }}:</p>
     </div>
     <div class="min">
-      <button @click="upMin">+</button>
       <p><span v-if="min < 10">0</span>{{ min }}</p>
-      <button @click="downMin">-</button>
+      <div class="time-btns">
+        <button @click="upMin">+</button>
+        <button @click="downMin">-</button>
+      </div>
     </div>
   </section>
 </template>
@@ -21,8 +25,7 @@ export default {
       min: 0,
     };
   },
-  created(){
-  },
+  created() {},
   methods: {
     upHour() {
       this.hour++;
@@ -35,15 +38,15 @@ export default {
       this.setTime();
     },
     upMin() {
-      this.min= this.min+5;
+      this.min = this.min + 5;
       if (this.min > 59) {
         this.min = 0;
-         this.hour++;
+        this.hour++;
       }
       this.setTime();
     },
     downMin() {
-     this.min=  this.min-5;
+      this.min = this.min - 5;
       if (this.min < 0) {
         this.min = 55;
         this.hour--;
@@ -51,13 +54,13 @@ export default {
       this.setTime();
     },
     setTime() {
-      let strHour = this.hour+'';
-      let strMin = this.min+'';
-      const newMin= strMin.padStart(2, '0')
-      const newHour= strHour.padStart(2, '0')
-      
+      let strHour = this.hour + "";
+      let strMin = this.min + "";
+      const newMin = strMin.padStart(2, "0");
+      const newHour = strHour.padStart(2, "0");
+
       let time = `T${newHour}:${newMin}:00`;
-      this.$emit('setTime',time)
+      this.$emit("setTime", time);
     },
   },
 };

@@ -54,7 +54,6 @@
             </button>
             {{ loggedinUser.fullname }}
           </div>
-          <hr />
           <button class="logout-btn" @click="logout">Logout</button>
         </div>
       </div>
@@ -236,9 +235,9 @@ export default {
       this.$store.dispatch({ type: "loadBoards" });
       this.$store.dispatch({ type: "loadBoard", boardId: newBoardId });
     },
+  },
     directives: {
       clickOutside: vClickOutside.directive
     },
-  },
 };
 </script>

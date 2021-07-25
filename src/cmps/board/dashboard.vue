@@ -169,7 +169,7 @@ return(date.getDate()+
       let membersCount = {};
       this.selectedBoard.groups.forEach((group) => {
         group.cards.forEach((card) => {
-          card.members.forEach((member) => {
+          card.members?.forEach((member) => {
             if (membersCount[member.fullname]) {
               membersCount[member.fullname] += 1;
             } else {

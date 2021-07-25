@@ -1,38 +1,35 @@
-.el-date-picker {
-    width: 300px;
-    right: 0;
-}
 
 .add-date {
-    padding: 12px;
+    padding: 8px;
     // position: relative;
 }
 
 .add-to-card {
-    .el-date-editor {
-        width: 100%;
+    .vd-wrapper{
+        box-shadow: unset
     }
-    i {
-        display: none;
+    .vd-picker{
+        box-shadow: unset;
+        .vd-picker-header{
+            background-color: $clr5!important;
+            color: $clr1!important;
+        }
     }
-    .date-hr {
-        margin-bottom: 5px;
+    .vd-picker__table{
+        height: 250px
     }
-    .el-picker-panel {
-        top: 0;
-    }
+}
+
+.save-date-btn{
+    @include control-btn;
+    width: 100%;
+    margin: 8px 0;
+    background-color: #0079bf;
+    color: $clr5
 }
 
 .remove-date {
     @include control-btn;
     width: 100%;
-    margin-bottom: 8px;
 }
 
-button.el-button:nth-child(1) {
-    display: none;
-}
-
-.el-picker-panel__content {
-    margin: 0;
-}
