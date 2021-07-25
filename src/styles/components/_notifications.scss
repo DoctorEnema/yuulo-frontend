@@ -16,36 +16,45 @@
         filter: brightness(150%);
         width: 100%;
         color: $clr3;
-
     }
     box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
 
-    .activities{
-        button{
+    .activities {
+        button {
             color: $clr2;
             background-color: transparent;
-            text-decoration:underline;
+            text-decoration: underline;
 
-            &:hover{
+            &:hover {
                 color: $clr1;
             }
         }
     }
-    .activity{
+    .activity {
         padding-left: 40px;
-        img{
+        img {
             left: 12px;
         }
-        .to-user{
+        .to-user {
             position: absolute;
             left: 12px;
             width: 36px;
             height: 36px;
         }
     }
+    .notif-txt {
+        cursor: pointer;
+        &:hover {
+            color: purple;
+        }
+    }
+    .go-to-card {
+        font-size: 12px;
+        text-decoration: underline;
+    }
 }
 
-.notif-btns{
+.notif-btns {
     display: flex;
     justify-content: flex-end;
     padding-bottom: 12px;

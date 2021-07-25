@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section >
     <div @click="toggleCreateBoard" class="add-board-container"></div>
     <div class="add-board">
       <div
@@ -78,6 +78,7 @@ export default {
   },
   methods: {
     toggleCreateBoard() {
+      console.log('sada');
       this.$emit("toggleCreateBoard");
     },
     createBoard() {

@@ -130,14 +130,16 @@
     position: relative;
     width: fit-content;
     margin-right: 35px;
-    .search-glass {
-        position: absolute;
-        right: 10px;
-        top: 5px;
-        &:hover > .search-bar {
-            background-color: red;
-            // background-color: rgba($color: #ffffff, $alpha: 0.4);
-        }
+
+}
+
+.search-glass {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    &:hover > .search-bar {
+        background-color: red;
+        // background-color: rgba($color: #ffffff, $alpha: 0.4);
     }
 }
 

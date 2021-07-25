@@ -509,9 +509,12 @@ export default {
         creatAt: Date.now(),
         id: utilService.makeId(),
         card: { id: this.card.id, title: this.card.title },
+        groupId: this.group.id,
+        boardId: this.selectedBoard._id,
         txt: activity,
         isRead: false,
       };
+      console.log(this.card);
       this.setComment(comment);
       await this.$store.dispatch({
         type: "updateActivities",

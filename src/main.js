@@ -9,7 +9,9 @@ import store from './store'
 import './styles/styles.scss'
 import VueDatePicker from '@mathieustan/vue-datepicker';
 import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css';
-
+import vClickOutside from 'v-click-outside'
+ 
+Vue.use(vClickOutside)
 Vue.use(VueDatePicker);
 
 Vue.use(VueDatePicker, {

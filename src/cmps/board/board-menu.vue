@@ -1,6 +1,6 @@
 
 <template>
-  <section class="board-menu">
+  <section v-click-outside="toggleMenu" class="board-menu">
     <div class="board-menu-header">
       <input type="text" placeholder="Find boards by name..." />
       <button @click="toggleMenu"></button>
@@ -46,7 +46,7 @@
 
 <script>
 import addBoard from "../board/add-board.vue";
-
+import vClickOutside from 'v-click-outside';
 export default {
   data() {
     return {
@@ -202,6 +202,9 @@ export default {
       this.$store.dispatch({ type: "loadBoard", boardId: newBoardId });
     },
   },
+  directives: {
+      clickOutside: vClickOutside.directive
+    },
 };
 </script>
 

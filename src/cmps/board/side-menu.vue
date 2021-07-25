@@ -1,5 +1,5 @@
 <template>
-  <section class="side-menu">
+  <section v-click-outside="toggleMenu" class="side-menu">
     <div class="add-card-header side-menu-header">
       <h3 v-if="!isActivityModal">Menu</h3>
       <h3 v-else>Change background</h3>
@@ -55,7 +55,7 @@
 <script>
 import showTime from "../card/show-time.vue";
 import boardCover from "./board-cover.vue";
-
+import vClickOutside from 'v-click-outside';
 export default {
   data() {
     return {
@@ -90,6 +90,9 @@ export default {
       this.$emit("boardCoverColor", color);
     },
   },
+    directives: {
+      clickOutside: vClickOutside.directive
+    },
 };
 </script>
 

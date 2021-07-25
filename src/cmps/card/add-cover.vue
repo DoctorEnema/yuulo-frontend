@@ -67,7 +67,7 @@
         />
       </form>
       <div class="loader-svg" v-if="loading">
-        <img src="../../assets/img/bars.svg" />
+        <img src="../../assets/img/yuumi-load.svg" />
       </div>
       <div v-else>
       <h3 v-if="isSearched" class="unsplash-h3 add">Results</h3>
@@ -78,7 +78,8 @@
             :key="idx"
             @click="setCover(photo.urls.regular)"
           >
-            <img class="cover-img" :src="photo.urls.regular" alt="" />
+            <img class="cover-img" :src="photo.urls.thumb" alt="" />
+          <!-- {{photo.urls}} -->
           </button>
         </div>
       </div>
@@ -126,6 +127,7 @@ export default {
       return board.covers;
     },
     photos() {
+      console.log(this.$store.getters.photos);
       return this.$store.getters.photos;
     },
   },
