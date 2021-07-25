@@ -65,6 +65,8 @@
           </label>
         </div>
         <button>Login</button>
+        <div class="g-signin2" data-onsuccess="onSignIn">Sign in</div>
+        <a href="#" @click="signOut;">Sign out</a>
       </form>
     </div>
     <!-- <div class="yuumi-container">
@@ -72,15 +74,15 @@
     </div> -->
   </section>
 </template>
-
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
 // @ is an alias to /src
 import { socketService } from "../services/socket-service";
 import { userService } from "../services/user-service";
-import yuumi from '../cmps/yuumi.vue'
+import yuumi from "../cmps/yuumi.vue";
 
 export default {
-  components:{
+  components: {
     yuumi,
   },
   props: { isSignup: Boolean },
@@ -118,6 +120,19 @@ export default {
     },
   },
   methods: {
+    onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log("Name: " + profile.getName());
+      console.log("Image URL: " + profile.getImageUrl());
+      console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+    },
+    signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log("User signed out.");
+      });
+    },
     closeModal() {
       this.$emit("closeModal");
     },
