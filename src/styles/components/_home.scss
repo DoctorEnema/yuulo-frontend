@@ -27,7 +27,17 @@
         position: absolute;
         right: -40px;
         transform: rotate(-0.1turn);
+        @include for-mobile-layout {
+            top: 400px;
+        }
+        @include for-narrow-layout {
+            top: 400px;
+        }
+        @include for-normal-layout {
+            top: 30px;
+        }
     }
+
 
     .yuumi-container {
         animation: yuumiMove ease normal forwards 1000ms;
