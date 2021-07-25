@@ -3,12 +3,12 @@
     <button class="close-dashboard"></button>
     <h1>Dashboard</h1>
     <div class="charts-container">
-        <div class="dashboard-details">
-          <h2>Board details:</h2>
-          <h3>Board title: {{selectedBoard.title}}</h3>
-          <h3>Members: {{selectedBoard.members.length}}</h3>
-          <h3>Created at: {{showTime}}</h3>
-        </div>
+      <div class="dashboard-details">
+        <h2>Board details:</h2>
+        <h3>Board title: {{ selectedBoard.title }}</h3>
+        <h3>Members: {{ selectedBoard.members.length }}</h3>
+        <h3>Created at: {{ showTime }}</h3>
+      </div>
       <div class="chart-basic">
         <h2>Checklist Todos</h2>
         <chart-pie
@@ -17,7 +17,7 @@
           :options="chartOptions"
         />
       </div>
-     
+
       <div class="chart-basic">
         <h2>Tasks per members</h2>
         <chart-pie
@@ -26,16 +26,15 @@
           :options="chartOptions"
         />
       </div>
-       <div class="chart-basic">
-      <h2>Tasks per group</h2>
-      <chart-bar
-        class="bar-chart"
-        :data="chartBarCardSum"
-        :options="chartBarOptions"
-      />
+      <div class="chart-basic">
+        <h2>Tasks per group</h2>
+        <chart-bar
+          class="bar-chart"
+          :data="chartBarCardSum"
+          :options="chartBarOptions"
+        />
       </div>
     </div>
-  
   </section>
 </template>
 
@@ -50,26 +49,28 @@ import { utilService } from "../../services/util-service.js";
 export default {
   data() {
     return {
-       chartOptions: {
+      chartOptions: {
         borderWidth: "10px",
         hoverBackgroundColor: "red",
         hoverBorderWidth: "10px",
-       },
+        legend: {
+          display: false,
+          labels: {
+            fontSize: 0,
+          },
+        },
+      },
       chartBarOptions: {
         borderWidth: "10px",
         hoverBackgroundColor: "red",
         hoverBorderWidth: "10px",
-         plugins: {
-            legend: {
-                labels: {
-                    // This more specific font property overrides the global property
-                    font: {
-                        size: 14,
-                        color:'white'
-                    }
-                }
-            }
+        legend: {
+          display: false,
+          labels: {
+            fontSize: 0,
+          },
         },
+        plugins: {},
         scales: {
           yAxes: [
             {
@@ -100,35 +101,42 @@ export default {
       return JSON.parse(JSON.stringify(this.$store.getters.selectedBoard));
     },
     showTime() {
-           var timestamp = this.selectedBoard.createdAt
-        var date = new Date(timestamp);
+      var timestamp = this.selectedBoard.createdAt;
+      var date = new Date(timestamp);
 
-return(date.getDate()+
-          "/"+(date.getMonth()+1)+
-          "/"+date.getFullYear()+
-          " "+date.getHours()+
-          ":"+date.getMinutes())
-        },
+      return (
+        date.getDate() +
+        "/" +
+        (date.getMonth() + 1) +
+        "/" +
+        date.getFullYear() +
+        " " +
+        date.getHours() +
+        ":" +
+        date.getMinutes()
+      );
+    },
     chartBarCardSum() {
       let groupTitels = [];
       let groupCards = [];
-      
-      this.selectedBoard.groups.forEach((group,groupIdx) => {
-        let sum = 0
+
+      this.selectedBoard.groups.forEach((group, groupIdx) => {
+        let sum = 0;
         groupTitels.push(group.title);
-        groupCards.push(sum)
+        groupCards.push(sum);
         group.cards.forEach((card, idx) => {
-          sum++
-           groupCards[groupIdx] = sum
+          sum++;
+          groupCards[groupIdx] = sum;
         });
       });
-       return {
+      return {
         labels: groupTitels,
         datasets: [
           {
             label: "",
-            backgroundColor:groupTitels.map(
-              (m, idx) => this.backgroundColor[idx]),
+            backgroundColor: groupTitels.map(
+              (m, idx) => this.backgroundColor[idx]
+            ),
             data: groupCards,
           },
         ],
@@ -159,7 +167,7 @@ return(date.getDate()+
           {
             label: "Checklist",
             backgroundColor: ["rgb(47, 145, 50)", "rgb(255, 99, 132)"],
-            color:"white",
+            color: "white",
             data: todos,
           },
         ],
