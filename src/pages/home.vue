@@ -1,6 +1,6 @@
 <template>
   <section class="home">
-    <header class="home-header">
+    <header v-if="!loggedinUser" class="home-header">
       <div class="home-logo">
         <img src="@/assets/img/yuulo1.png" />
       </div>

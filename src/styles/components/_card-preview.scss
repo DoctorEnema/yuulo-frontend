@@ -121,6 +121,7 @@
         span {
             text-align: left;
             padding: 0 6px;
+            max-height: 14px;
         }
         div {
             display: flex;
@@ -178,11 +179,13 @@
 
     .preview-label-grow {
         // font-size: 12px;
-        animation: label-grow ease normal forwards 1000ms;
+        animation: label-grow cubic-bezier(.88, .74, .15, 1.53) normal forwards 1000ms;
+        // transition-timing-function: cubic-bezier(.88, .74, .15, 1.53);
+
     }
     .preview-label-shrink {
         // font-size: 12px;
-        animation: label-shrink ease normal forwards 1000ms;
+        animation: label-shrink cubic-bezier(.88, .74, .15, 1.53) normal forwards 1000ms;
     }
 }
 
