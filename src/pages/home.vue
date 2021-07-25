@@ -1,9 +1,8 @@
 <template>
   <section class="home">
-    <header class="home-header">
+    <!-- <header class="home-header">
       <div class="home-logo">
         <img src="@/assets/img/yuulo1.png" />
-        <!-- <h1>Yuulo</h1> -->
       </div>
       <div class="home-header-user" v-if="loggedinUser">
         <h3>Hello, {{ loggedinUser.fullname }}</h3>
@@ -13,7 +12,7 @@
         <button @click="loginPage">Log in</button>
         <button @click="signupPage">Sign up</button>
       </div>
-    </header>
+    </header> -->
     <div class="background"></div>
     <div v-if="userOrModal" class="yuumi-container">
       <yuumi></yuumi>
@@ -25,7 +24,8 @@
         Yuulo is more than a way to stay organized - it's a smart workplace
         where teams, tools and productivity come together.
       </h3>
-      <button @click="loginAsGuest">Try it as a guest</button>
+      <!-- <button @click="loginAsGuest">Try it as a guest</button> -->
+      <button @click="loginAsGuest">To your boards</button>
       <img src="@/assets/img/main.png" alt="" />
     </div>
     <login-user
@@ -141,7 +141,8 @@ export default {
       try {
         const user = await this.$store.dispatch({
           type: "login",
-          userCred: { username: "Guest", password: "1234" },
+          // userCred: { username: "Guest", password: "1234" },
+          userCred: { username: "sahar", password: "1234" },
         });
         this.$store.dispatch({ type: "loadUserCardWatch", userId: user._id });
       } catch (err) {
