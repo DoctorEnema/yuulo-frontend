@@ -34,11 +34,25 @@
 
         h3{
             color: $clr2;
+            padding-top: 10px;
         }
         .logout-btn{
             color: $clr2;
             background: none;
             width: fit-content;
+            padding-left: 10px;
+            padding-bottom: 12px;
+            
+        }
+
+        .main-logout{
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: row;
+            align-items: center;
+            align-content: center;
+            padding-bottom: 10px;
+            padding-left: 6px;
         }
     }
 

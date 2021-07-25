@@ -44,6 +44,8 @@
         <button @click="logoutModal"></button>
       </header>
       <hr />
+        <div class="main-logout">
+
            <button class="header-user">
           <div v-if="!loggedinUser">?</div>
           <img v-else-if="loggedinUser.imgUrl" :src="loggedinUser.imgUrl" />
@@ -52,6 +54,7 @@
           </div>
         </button>
         {{loggedinUser.fullname}}
+        </div>
          <hr />
         <button class="logout-btn" @click="logout">Logout</button>
         </div>
