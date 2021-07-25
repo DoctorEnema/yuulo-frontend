@@ -21,53 +21,67 @@
     <div v-if="userOrModal" class="hero">
       <!-- <h2>Yuulo helps you stay organized and be productive.</h2> -->
       <h2>Everything your team needs, all in one place.</h2>
-      <h3>Yuulo is more than a way to stay organized - it's a smart workplace where teams, tools and productivity come together.</h3>
+      <h3>
+        Yuulo is more than a way to stay organized - it's a smart workplace
+        where teams, tools and productivity come together.
+      </h3>
       <button @click="loginAsGuest">Try it as a guest</button>
-      <img src="@/assets/img/main.png" alt="">
+      <img src="@/assets/img/main.png" alt="" />
     </div>
     <login-user
       @closeModal="displayModal = false"
       v-if="displayModal"
       :isSignup="isSignup"
     ></login-user>
-    <div class="home-boards" v-if="loggedinUser">
-      <h2>Starred boards</h2>
-      <div v-if="boards" class="board-display">
-        <button
-          class="board-btn"
-          @click="selectBoard(board._id)"
-          v-for="board in favBoards"
-          :key="board._id"
-        >
-          <h2>{{ board.title }}</h2>
-          <img
-            v-if="board.style.backgroundImg"
-            :src="board.style.backgroundImg"
-          />
-          <div
-            v-else
-            :style="{ backgroundColor: board.style.backgroundColor }"
-          ></div>
-        </button>
-      </div>
-      <h2>All boards</h2>
-      <div class="board-display">
-        <button
-          class="board-btn"
-          @click="selectBoard(board._id)"
-          v-for="board in boards"
-          :key="board._id"
-        >
-          <h2>{{ board.title }}</h2>
-          <img
-            v-if="board.style.backgroundImg"
-            :src="board.style.backgroundImg"
-          />
-          <div
-            v-else
-            :style="{ backgroundColor: board.style.backgroundColor }"
-          ></div>
-        </button>
+    <div v-if="boards">
+      <div class="home-boards" v-if="loggedinUser">
+        <div class="boards-username">
+          <img v-if="loggedinUser.imgUrl" :src="loggedinUser.imgUrl" />
+          <div class="to-user" v-else-if="loggedinUser.fullname">
+            {{ loggedinUser.fullname.charAt(0) }}
+          </div>
+          <h2>{{ loggedinUser.fullname.split(" ")[0] }}'s boards</h2>
+        </div>
+        <div v-if="favBoards.length">
+        <h2 class="boards-headline">Starred boards</h2>
+          <div v-if="boards" class="board-display starred">
+            <button
+              class="board-btn"
+              @click="selectBoard(board._id)"
+              v-for="board in favBoards"
+              :key="board._id"
+            >
+              <h2>{{ board.title }}</h2>
+              <img
+                v-if="board.style.backgroundImg"
+                :src="board.style.backgroundImg"
+              />
+              <div
+                v-else
+                :style="{ backgroundColor: board.style.backgroundColor }"
+              ></div>
+            </button>
+          </div>
+        </div>
+        <h2 class="boards-headline">My boards</h2>
+        <div class="board-display all-boards">
+          <button
+            class="board-btn"
+            @click="selectBoard(board._id)"
+            v-for="board in boards"
+            :key="board._id"
+          >
+            <h2>{{ board.title }}</h2>
+            <img
+              v-if="board.style.backgroundImg"
+              :src="board.style.backgroundImg"
+            />
+            <div
+              v-else
+              :style="{ backgroundColor: board.style.backgroundColor }"
+            ></div>
+          </button>
+        </div>
       </div>
     </div>
     <div v-if="loggedinUser" class="yuumi-container">
@@ -106,7 +120,7 @@ export default {
     },
     favBoards() {
       const favoritedBoards = [];
-      this.loggedinUser.favBoardIds?.forEach((boardId) =>
+      this.loggedinUser?.favBoardIds?.forEach((boardId) =>
         favoritedBoards.push(
           ...this.boards.filter((board) => board._id === boardId)
         )
