@@ -164,9 +164,18 @@
 }
 
 .loader-svg {
-    width: 50px;
-    margin: 20px auto;
-    padding: 10px;
+    // width: 150px;
+    // height: 2px;
+    // padding: 10px;
+    // width: 400px;
+    img {
+        display:inline-block;
+        height: 250px;
+        width: 200px;
+        margin: 20px auto;
+        // margin-right: 200px
+        // padding: 150px;
+    }
 }
 
 .upload-input-cover {

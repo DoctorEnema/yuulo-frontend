@@ -67,7 +67,7 @@
         />
       </form>
       <div class="loader-svg" v-if="loading">
-        <img src="../../assets/img/bars.svg" />
+        <img src="../../assets/img/yuumi-load.svg" />
       </div>
       <div v-else>
       <h3 v-if="isSearched" class="unsplash-h3 add">Results</h3>

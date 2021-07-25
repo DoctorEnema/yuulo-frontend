@@ -1,18 +1,18 @@
 
 <template>
-  <section class="notifications">
+  <section v-click-outside="onClickOutside" class="notifications">
     <section v-if="loggedinUser">
       <header class="add-card-header">
         <h4>Notifications</h4>
         <button class="close-notifications" @click="toggleNotifModal"></button>
       </header>
       <hr />
-      <section  class="yuumi-section" v-if="!loggedinUser.notifications.length">
+      <section class="yuumi-section" v-if="!loggedinUser.notifications.length">
         <div @click="clickedYuumi" class="yuumi-sleep">
           <img v-if="isYuumiClicked" src="../assets/img/yuumi-sleep.png" />
           <img v-else src="../assets/img/yuumi-wake.png" />
         </div>
-          <h4>No notifications to show</h4>
+        <h4>No notifications to show</h4>
       </section>
       <section v-else class="activities">
         <div class="notif-btns">
@@ -38,10 +38,18 @@
                 {{ notification.byMember.fullname }}
               </div> -->
               </div>
-              <span class="member-name">{{
-                notification.byMember.fullname
-              }}</span>
-              <span><span> </span> {{ notification.txt }}</span>
+                <span class="member-name">{{
+                  notification.byMember.fullname
+                }}</span>
+                <span><span> </span> {{ notification.txt }}</span>
+                <br>
+              <span
+                class="notif-txt"
+                title="Go to card"
+                @click="goToCard(notification)"
+              >
+                <span class="go-to-card"> go to card</span>
+              </span>
               <show-time
                 v-if="notification"
                 class="activity-time"
@@ -55,10 +63,9 @@
     <section v-else>Sign in to see notifications</section>
   </section>
 </template>
-
 <script>
 import showTime from "./card/show-time.vue";
-
+import vClickOutside from 'v-click-outside'
 export default {
   components: {
     showTime,
@@ -77,9 +84,6 @@ export default {
     loggedinUser() {
       return this.$store.getters.loggedinUser;
     },
-    // user() {
-    //   return this.$store.getters.user;
-    // },
   },
   methods: {
     clearNotifications() {
@@ -88,10 +92,20 @@ export default {
     toggleNotifModal() {
       this.$emit("toggleNotifModal");
     },
-    clickedYuumi(){
-      this.isYuumiClicked = !this.isYuumiClicked
-    }
+    clickedYuumi() {
+      this.isYuumiClicked = !this.isYuumiClicked;
+    },
+    goToCard({ boardId, groupId, card }) {
+      console.log("boardId", boardId, "groupId", groupId, "card.id", card.id);
+      this.$router.push(`/board/${boardId}/${groupId}/${card.id}/false`);
+    },
+      onClickOutside () {
+        this.$emit('toggleNotifModal')
+      }
   },
+    directives: {
+      clickOutside: vClickOutside.directive
+    },
 };
 </script>
 

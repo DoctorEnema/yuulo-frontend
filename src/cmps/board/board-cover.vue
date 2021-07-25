@@ -30,7 +30,7 @@
         />
       </form>
       <div class="loader-svg" v-if="loading">
-        <img src="../../assets/img/bars.svg" />
+        <img src="../../assets/img/yuumi-load.svg" />
       </div>
       <div v-else>
         <div v-if="photos" class="side-menu-imgs">

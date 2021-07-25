@@ -37,11 +37,11 @@
             <div v-else class="to-user">?</div>
           </button>
         </div>
-        <button class="members-btn" @click="memberModal"></button>
-        <div v-if="isMember" class="invite-member">
+        <button class="members-btn" @click="toggleMemberModal"></button>
+        <div   v-click-outside="toggleMemberModal" v-if="isMember" class="invite-member">
           <header class="add-card-header">
             <h4>Invite to board</h4>
-            <button @click="memberModal"></button>
+            <button @click="toggleMemberModal"></button>
           </header>
           <hr />
           <div class="invite-members-content" v-if="users">
@@ -123,6 +123,7 @@ import activities from "../cmps/card/activities.vue";
 import sideMenu from "../cmps/board/side-menu.vue";
 import { userService } from "../services/user-service.js";
 import yuumi from "../cmps/yuumi.vue";
+import vClickOutside from 'v-click-outside';
 export default {
   components: {
     group,
@@ -202,7 +203,7 @@ export default {
         member: member,
       });
     },
-    memberModal() {
+    toggleMemberModal() {
       this.isMember = !this.isMember;
     },
     onDragStart() {
@@ -284,5 +285,8 @@ export default {
       }
     },
   },
+  directives: {
+      clickOutside: vClickOutside.directive
+    },
 };
 </script>
