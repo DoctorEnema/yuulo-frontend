@@ -38,25 +38,24 @@
         </button>
       </div>
       <div v-if="loggedinUser">
-        <div v-if="modalLogout" class="logout-modal">
-        <header class="add-card-header">
-      <h3>Account</h3>
-        <button @click="logoutModal"></button>
-      </header>
-      <hr />
-        <div class="main-logout">
-
-           <button class="header-user">
-          <div v-if="!loggedinUser">?</div>
-          <img v-else-if="loggedinUser.imgUrl" :src="loggedinUser.imgUrl" />
-          <div v-else-if="loggedinUser.fullname" class="to-user">
-            {{ loggedinUser.fullname.charAt(0) }}
+        <div v-click-outside="logoutModal" v-if="modalLogout" class="logout-modal">
+          <header class="add-card-header">
+            <h3>Account</h3>
+            <button @click="logoutModal"></button>
+          </header>
+          <hr />
+          <div class="main-logout">
+            <button class="header-user">
+              <div v-if="!loggedinUser">?</div>
+              <img v-else-if="loggedinUser.imgUrl" :src="loggedinUser.imgUrl" />
+              <div v-else-if="loggedinUser.fullname" class="to-user">
+                {{ loggedinUser.fullname.charAt(0) }}
+              </div>
+            </button>
+            {{ loggedinUser.fullname }}
           </div>
-        </button>
-        {{loggedinUser.fullname}}
-        </div>
-         <hr />
-        <button class="logout-btn" @click="logout">Logout</button>
+          <hr />
+          <button class="logout-btn" @click="logout">Logout</button>
         </div>
       </div>
     </div>
@@ -83,6 +82,7 @@
 import boardMenu from "../cmps/board/board-menu.vue";
 import notifications from "./notifications.vue";
 import addBoard from "./board/add-board.vue";
+import vClickOutside from 'v-click-outside';
 export default {
   components: {
     boardMenu,
@@ -96,7 +96,7 @@ export default {
       currBoard: "",
       isNotifOpen: false,
       isCreate: false,
-      modalLogout:false
+      modalLogout: false,
     };
   },
   computed: {
@@ -112,13 +112,13 @@ export default {
     },
   },
   methods: {
-    logoutModal(){
-      this.modalLogout=!this.modalLogout
+    logoutModal() {
+      this.modalLogout = !this.modalLogout;
     },
-     async logout() {
-       await this.$store.dispatch({ type: "logout" });
-       this.$router.push("/");
-      this.logoutModal()
+    async logout() {
+      await this.$store.dispatch({ type: "logout" });
+      this.$router.push("/");
+      this.logoutModal();
     },
     toggleMenu() {
       this.isBoardMenu = !this.isBoardMenu;
@@ -235,6 +235,9 @@ export default {
       this.$router.push("/board/" + newBoardId);
       this.$store.dispatch({ type: "loadBoards" });
       this.$store.dispatch({ type: "loadBoard", boardId: newBoardId });
+    },
+    directives: {
+      clickOutside: vClickOutside.directive
     },
   },
 };

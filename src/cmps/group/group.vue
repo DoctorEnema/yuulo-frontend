@@ -28,7 +28,7 @@
       @end="onDragEnd"
       :animation="200"
       ghostClass="moving-card"
-      :delay="400"
+      :delay="170"
       :delayOnTouchOnly="true"
     >
       <card-preview

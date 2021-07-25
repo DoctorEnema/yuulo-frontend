@@ -592,7 +592,7 @@ export default {
       if (!this.card.attachments) this.card.attachments = [];
       this.card.attachments.push(newLink);
       await this.setActivity(
-        `add an attachment: ${newLink.name} to ${this.card.title}`
+        `added an attachment to ${this.card.title}`
       );
       this.updateCard();
     },

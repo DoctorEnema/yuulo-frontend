@@ -77,7 +77,7 @@
           :animation="200"
           ghostClass="moving-group"
           chosenClass="group-moving"
-          :delay="400"
+          :delay="170"
           :delayOnTouchOnly="true"
         >
           <group
