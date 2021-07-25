@@ -1,6 +1,6 @@
 <template>
   <section class="home">
-    <!-- <header class="home-header">
+    <header class="home-header">
       <div class="home-logo">
         <img src="@/assets/img/yuulo1.png" />
       </div>
@@ -12,7 +12,7 @@
         <button @click="loginPage">Log in</button>
         <button @click="signupPage">Sign up</button>
       </div>
-    </header> -->
+    </header>
     <div class="background"></div>
     <div v-if="userOrModal" class="yuumi-container">
       <yuumi></yuumi>
@@ -142,7 +142,7 @@ export default {
         const user = await this.$store.dispatch({
           type: "login",
           // userCred: { username: "Guest", password: "1234" },
-          userCred: { username: "sahar", password: "1234" },
+          userCred: { username: "liran", password: "1234" },
         });
         this.$store.dispatch({ type: "loadUserCardWatch", userId: user._id });
       } catch (err) {
