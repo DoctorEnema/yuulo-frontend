@@ -218,18 +218,18 @@
         <button
           class="add-label"
           data-cmp="add-label"
-          @click.stop="setModalType"
+          @click.stop="setModalType($event), setCoords($event)"
         >
           Labels
         </button>
-        <button class="add-date" data-cmp="add-date" @click.stop="setModalType">
+        <button class="add-date" data-cmp="add-date" @click.stop="setModalType($event), setCoords($event)">
           Dates
         </button>
 
         <button
           class="add-cover"
           data-cmp="add-cover"
-          @click.stop="setModalType"
+          @click.stop="setModalType($event), setCoords($event)"
         >
           Change cover
         </button>
@@ -243,6 +243,7 @@
       <section class="modal" v-if="openModalType" @click.stop="stop">
         <component
           :is="openModalType"
+          ref="dynamic"
           @closeModal="closeModal"
           @addUser="addMember"
           @linkAdded="linkAdded"
@@ -257,7 +258,7 @@
           :card="card"
           :labels="labelsToShow"
           :users="usersToShow"
-          :style="'left:'+coords.x+'px;'+'top:'+ coords.y+'px;'"
+          :style="modalPosition"
         ></component>
       </section>
       <card-edit-preview
@@ -434,20 +435,53 @@ export default {
     isPageLoading(){
       console.log(this.$store.getters.isLoading);
       return this.$store.getters.isLoading
-    }
+    },
+    modalPosition() {
+      if (this.coords.viewport.w - this.coords.btnPos.x < 300) {
+      this.coords.btnPos.x -= 300 - this.coords.viewport.w - this.coords.btnPos.x
+      }
+      // this.coords.x = btnPos.x
+      // this.coords.y = btnPos.y
+      // this.$refs.dynamic.clientHeight
+      // console.log('modalHeight', this.$refs.dynamic);
+      // console.log('btn',this.coords.btnPos)
+      return `top: ${this.coords.btnPos.y}px; left: ${this.coords.btnPos.x}px`;
+    },
+
   },
   methods: {
     setCoords(ev) {
-      const btnPos = ev.getBoundingClientRect()
+      const btnH = ev.target.clientHeight;
+      const btnPos = {
+        x: ev.target.getBoundingClientRect().left + window.scrollX,
+        y: ev.target.getBoundingClientRect().top + window.scrollY + btnH ,
+      };
       const viewport = this.getViewportSize()
       const mouseLoc = {x: ev.clientX, y: ev.clientY}
+      this.coords = {btnH, btnPos, viewport, mouseLoc}
       console.log('btnPos', btnPos);
-      if (viewport.w - mouseLoc.x < 300) mouseLoc.x -= 300 - viewport.w - mouseLoc.x
+      console.log('btnH', btnH);
+      // if (viewport.w - btnPos.x < 300) btnPos.x -= 300 - viewport.w - btnPos.x
       console.log('viewport', viewport);
       console.log('mouseLoc', mouseLoc);
-      this.coords.x = mouseLoc.x
-      this.coords.y = mouseLoc.y
     },
+    // setCoords(ev) {
+    //   const btnH = ev.target.clientHeight;
+    //   const btnPos = {
+    //     x: ev.target.getBoundingClientRect().left + window.scrollX,
+    //     y: ev.target.getBoundingClientRect().top + window.scrollY + btnH ,
+    //   };
+    //   const viewport = this.getViewportSize()
+    //   const mouseLoc = {x: ev.clientX, y: ev.clientY}
+    //   this.coords = {btnH, btnPos, viewport, mouseLoc}
+    //   console.log('btnPos', btnPos);
+    //   console.log('btnH', btnH);
+    //   if (viewport.w - btnPos.x < 300) btnPos.x -= 300 - viewport.w - btnPos.x
+    //   console.log('viewport', viewport);
+    //   console.log('mouseLoc', mouseLoc);
+    //   this.coords.x = btnPos.x
+    //   this.coords.y = btnPos.y
+    // },
     getViewportSize(w) {
 
     // Use the specified window or the current window if no argument
@@ -708,6 +742,7 @@ export default {
     closeModal() {
       if (!this.openModalType) return;
       this.openModalType = null;
+      this.coords= null
     },
     setModalType(ev) {
       var value = ev.target.dataset.cmp;
