@@ -65,16 +65,34 @@
           </label>
         </div>
         <button>Login</button>
-        <div class="g-signin2" data-onsuccess="onSignIn">Sign in</div>
-        <a href="#" @click="signOut;">Sign out</a>
+
       </form>
+        <!-- <div>
+          <button @click="handleClickGetAuth" :disabled="!isInit">
+            get auth code
+          </button>
+          <button
+            @click="handleClickSignIn"
+            v-if="!isSignIn"
+            :disabled="!isInit"
+          >
+            signIn
+          </button>
+          <button
+            @click="handleClickSignOut"
+            v-if="isSignIn"
+            :disabled="!isInit"
+          >
+            sign out
+          </button>
+        </div> -->
     </div>
     <!-- <div class="yuumi-container">
       <yuumi></yuumi>
     </div> -->
   </section>
 </template>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 <script>
 // @ is an alias to /src
 import { socketService } from "../services/socket-service";
@@ -85,6 +103,7 @@ export default {
   components: {
     yuumi,
   },
+  name: "login-user",
   props: { isSignup: Boolean },
   data() {
     return {
@@ -98,7 +117,8 @@ export default {
         fullname: "James Smith",
         email: "shimi@yuulo.com",
       },
-      // loggedInUser: this.$store.getters.loggedinUser
+      // isInit: false,
+      // isSignIn: false,
     };
   },
   async created() {
@@ -120,19 +140,6 @@ export default {
     },
   },
   methods: {
-    onSignIn(googleUser) {
-      var profile = googleUser.getBasicProfile();
-      console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
-      console.log("Name: " + profile.getName());
-      console.log("Image URL: " + profile.getImageUrl());
-      console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
-    },
-    signOut() {
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-        console.log("User signed out.");
-      });
-    },
     closeModal() {
       this.$emit("closeModal");
     },
@@ -164,6 +171,46 @@ export default {
     logout() {
       this.$store.dispatch({ type: "logout" });
     },
+    async handleClickGetAuth() {
+      try {
+        const authCode = await this.$gAuth.getAuthCode();
+        const response = await this.$http.post(
+          "auth/",
+          { code: authCode, redirect_uri: "postmessage" }
+        );
+      } catch (error) {
+        // On fail do something
+      }
+    },
+
+    async handleClickSignIn() {
+      try {
+        const googleUser = await this.$gAuth.signIn();
+        console.log("user", googleUser);
+        this.isSignIn = this.$gAuth.isAuthorized;
+      } catch (error) {
+        // On fail do something
+        console.error(error);
+        return null;
+      }
+    },
+
+    async handleClickSignOut() {
+      try {
+        await this.$gAuth.signOut();
+        this.isSignIn = this.$gAuth.isAuthorized;
+      } catch (error) {
+        // On fail do something
+      }
+    },
+  },
+  mounted() {
+    let that = this;
+    let checkGauthLoad = setInterval(function () {
+      that.isInit = that.$gAuth.isInit;
+      that.isSignIn = that.$gAuth.isAuthorized;
+      if (that.isInit) clearInterval(checkGauthLoad);
+    }, 1000);
   },
 };
 </script>

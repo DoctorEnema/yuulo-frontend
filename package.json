@@ -24,6 +24,7 @@
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.1",
     "vue-datetime": "^1.0.0-beta.14",
+    "vue-google-oauth2": "^1.5.8",
     "vue-router": "^3.2.0",
     "vue-weblineindia-time-picker": "^1.0.0",
     "vuedraggable": "^2.24.3",
