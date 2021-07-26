@@ -13,6 +13,7 @@ export const boardStore = {
         position: { posY: 136.96180725097656, posX: 242.01390075683594 },
         photos: [],
         isLabelOpen: false,
+        isLoading:false,
     },
     getters: {
         boards(state) {
@@ -38,6 +39,9 @@ export const boardStore = {
         },
         isLabelOpen(state){
             return state.isLabelOpen
+        },
+        isLoading(state){
+            return state.isLoading
         }
     },
     mutations: {
@@ -93,6 +97,9 @@ export const boardStore = {
         },
         toggleLabels(state){
             state.isLabelOpen = !state.isLabelOpen
+        },
+        setLoading(state, {isLoading}){
+            state.isLoading = isLoading
         }
     },
     actions: {

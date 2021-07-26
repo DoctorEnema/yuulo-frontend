@@ -15,7 +15,7 @@
     </header>
     <div class="background"></div>
     <div v-if="userOrModal" class="yuumi-container">
-      <yuumi></yuumi>
+      <img src="@/assets/img/yuumi-mation.svg" class="yuumi">
     </div>
     <div v-if="userOrModal" class="hero">
       <!-- <h2>Yuulo helps you stay organized and be productive.</h2> -->
@@ -25,7 +25,7 @@
         where teams, tools and productivity come together.
       </h3>
       <!-- <button @click="loginAsGuest">Try it as a guest</button> -->
-      <button @click="loginAsGuest">To your boards</button>
+      <button @click="loginAsGuest">To your board</button>
       <img src="@/assets/img/main.png" alt="" />
     </div>
     <login-user
@@ -155,6 +155,7 @@ export default {
           userCred: { username: "liran", password: "1234" },
         });
         this.$store.dispatch({ type: "loadUserCardWatch", userId: user._id });
+        this.$router.push("/board/60fa7a223d6d273440477d69");
       } catch (err) {
         console.log("cannot login", err);
       }

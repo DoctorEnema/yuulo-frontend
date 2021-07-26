@@ -1,24 +1,29 @@
 <template>
-  <section class="dashboard" @click="closeDashboard">
+  <div class="card-details-container">
+  <section
+    v-click-outside="closeDashboard"
+    class="dashboard"
+    @click="closeDashboard"
+  >
     <button class="close-dashboard"></button>
     <h1>Dashboard</h1>
     <div class="charts-container">
       <div class="dashboard-details">
         <div>
           <h4>{{ selectedBoard.members.length }}</h4>
-          <h3 class="dash-members"> Members</h3>
+          <h3 class="dash-members">Members</h3>
         </div>
         <div>
           <h4>{{ sumAllTasks }}</h4>
-          <h3 class="dash-tasks"> Total Tasks</h3>
+          <h3 class="dash-tasks">Total Tasks</h3>
         </div>
         <div>
           <h4>{{ tasksAssigned }}</h4>
-          <h3 class="dash-assigned-tasks"> Assigned tasks</h3>
+          <h3 class="dash-assigned-tasks">Assigned tasks</h3>
         </div>
         <div>
           <h4>{{ showDate }}</h4>
-          <h3 class="dash-date"> Creation date</h3>
+          <h3 class="dash-date">Creation date</h3>
         </div>
       </div>
       <div class="chart-basic">
@@ -48,6 +53,7 @@
       </div>
     </div>
   </section>
+  </div>
 </template>
 
 <script>
@@ -57,6 +63,7 @@ import chartBar from "./chart-bar.vue";
 import chartDoughnut from "./chart-doughnut.vue";
 import chartPie from "./chart-pie.vue";
 import { utilService } from "../../services/util-service.js";
+import vClickOutside from "v-click-outside";
 
 export default {
   data() {
@@ -242,6 +249,9 @@ export default {
     closeDashboard() {
       this.$router.push(`/board/${this.selectedBoard._id}`);
     },
+  },
+  directives: {
+    clickOutside: vClickOutside.directive,
   },
 };
 </script>

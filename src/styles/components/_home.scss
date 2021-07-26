@@ -22,10 +22,10 @@
 
     .yuumi {
         top: 30px;
-        width: 200px;
-        height: 200px;
+        width: 270px;
+        height: 270px;
         position: absolute;
-        right: -40px;
+        right: -90px;
         transform: rotate(-0.1turn);
         @include for-mobile-layout {
             top: 400px;

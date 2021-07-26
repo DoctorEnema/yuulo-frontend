@@ -48,26 +48,7 @@
     align-items: center;
     padding: 6px 0;
     padding-inline-start: 4px;
-    // padding-left: 16px;
-    // textarea {
-    //     background: transparent;
-    //     border-radius: 3px;
-    //     box-shadow: none;
-    //     font-weight: 600;
-    //     margin: 0;
-    //     height: 20px;
-    //     padding-left: 10px;
-    //     min-height: 20px;
-    //     // padding: 4px 8px;
-    //     resize: none;
-    //     max-height: 256px;
-    //     overflow: hidden;
-    //     overflow-wrap: break-word;
-    //     height: 28px;
-    //     padding-top: 6px;
-    //     width: 209px;
-    // }
-    button {
+    .group-context {
         width: 32px;
         height: 32px;
         position: absolute;
@@ -75,13 +56,36 @@
         right: 0;
         &::before {
             font-family: fontAwesome, sans serif;
-            content: "\f1f8";
+            content: "\f141";
         }
         &:hover {
             background-color: $clr3;
         }
     }
+    .group-context-modal{
+        position: absolute;
+        border-radius: 3px;
+        z-index: 1;
+        width: 115.5px;
+        right: -84px;
+        top: 36px;
+        background-color: $clr5;
+        box-shadow: 0 8px 16px -4px rgba(9,30,66,.25),0 0 0 1px rgba(9,30,66,.08);
+    }
+    .delete-group-btn{
+        margin: 0;
+        height: 36px;
+        &::before {
+            font-family: fontAwesome, sans serif;
+            content: "\f1f8";
+        }
+        &:hover {
+            background-color: $clr4;
+        }
+    }
 }
+
+
 
 .group-title {
     white-space: normal;
