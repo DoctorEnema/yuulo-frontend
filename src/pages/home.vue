@@ -43,7 +43,7 @@
           <h2>{{ loggedinUser.fullname.split(" ")[0] }}'s boards</h2>
         </div>
         <div v-if="favBoards.length">
-        <h2 class="boards-headline">Starred boards</h2>
+          <h2 class="boards-headline">Starred boards</h2>
           <div v-if="boards" class="board-display starred">
             <button
               class="board-btn"
@@ -97,6 +97,16 @@ import yuumi from "../cmps/yuumi.vue";
 import { userService } from "../services/user-service.js";
 export default {
   name: "home",
+  // metaInfo() {
+  //   return {
+  //   meta: [
+  //     {
+  //       name: 'google-signin-client_id',
+  //       content: '77664739327-oa9va2n4jgbeho5h4gvl2i0pp45hqhnu.apps.googleusercontent.com'
+  //     }
+  //   ]
+  //   }
+  // },
   components: {
     loginUser,
     yuumi,
@@ -168,7 +178,14 @@ export default {
   created() {
     this.$store.commit({ type: "clearBaord" });
     this.$store.dispatch("loadBoards");
-    if(this.loggedinUser) this.setUpdatedLoggedInUser();
+    if (this.loggedinUser) this.setUpdatedLoggedInUser();
+    var meta = document.createElement("meta");
+    meta.name = "google-signin-client_id";
+    meta.setAttribute(
+      "content",
+      "77664739327-oa9va2n4jgbeho5h4gvl2i0pp45hqhnu.apps.googleusercontent.com"
+    );
+    document.getElementsByTagName("head")[0].appendChild(meta);
   },
   mounted() {
     document.title = `Yuulo - Home`;
