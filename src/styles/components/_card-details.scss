@@ -21,9 +21,9 @@
     justify-content: center;
     padding-top: 300px;
     font-size: 36px;
-    &::before{
+    &::before {
         text-align: center;
-        content: 'Drop images to upload';
+        content: "Drop images to upload";
     }
 }
 
@@ -240,6 +240,11 @@
     .add-cover::before {
         font-family: fontAwesome, sans serif;
         content: "\f03e";
+    }
+
+    .delete-card-btn::before {
+        font-family: fontAwesome, sans serif;
+        content: "\f1f8";
     }
 
     &.btns {
