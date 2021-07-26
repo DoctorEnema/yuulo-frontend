@@ -18,7 +18,11 @@
         </div>
       </form>
       <!-- <p>{{group.title}}</p> -->
-      <button @click="removeGroup(group.id)"></button>
+      <button @click="toggleDelete" class="group-context">
+        <div v-if="isDeleteOpen" class="group-context-modal">
+          <button  class="delete-group-btn" @click="removeGroup(group.id)"><pre> </pre> Delete group</button>
+        </div>
+      </button>
     </div>
     <draggable
       class="group-content"
@@ -78,6 +82,7 @@ export default {
       hardcodedBoardId: "60f42b03d2f67fa6bfa0f528",
       isUpdated: false,
       isTitleEdit: false,
+      isDeleteOpen: false,
     };
   },
   computed: {
@@ -132,6 +137,9 @@ export default {
     changeComplete(isComplete) {
       this.$emit("changeComplete", isComplete);
     },
+    toggleDelete(){
+      this.isDeleteOpen = !this.isDeleteOpen
+    }
   },
 };
 </script>

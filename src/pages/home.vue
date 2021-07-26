@@ -15,7 +15,7 @@
     </header>
     <div class="background"></div>
     <div v-if="userOrModal" class="yuumi-container">
-      <yuumi></yuumi>
+      <img src="@/assets/img/yuumi-mation.svg" class="yuumi">
     </div>
     <div v-if="userOrModal" class="hero">
       <!-- <h2>Yuulo helps you stay organized and be productive.</h2> -->

@@ -274,6 +274,15 @@
         background-color: $clr3;
         margin: 4px;
     }
+    .to-user{
+        margin: 4px;
+        padding-top: 7px;
+        cursor: pointer;
+    }
+    .icon{
+        position: absolute;
+        right: 16px;
+    }
 }
 hr {
     margin: 0 auto 12px;

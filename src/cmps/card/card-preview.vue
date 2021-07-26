@@ -103,6 +103,8 @@ export default {
       this.$store.commit("toggleLabels");
     },
     openCard(groupId, cardId, isEditCard, ev) {
+          this.$store.commit({type:'setLoading', isLoading: true})
+
       const position = {
         posY: this.$refs.edit.getBoundingClientRect().top + window.scrollY,
         posX: this.$refs.edit.getBoundingClientRect().left + window.scrollX,

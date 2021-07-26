@@ -51,7 +51,9 @@
               :key="user._id"
               @click="addMember(user)"
             >
-              <img class="img-invite" :src="user.imgUrl" alt="" />
+              <img v-if="user.imgUrl" class="img-invite" :src="user.imgUrl" alt="" />
+              <div v-else-if="user.fullname" class="to-user">{{user.fullname.charAt(0)}}</div>
+              <div v-else>G</div>
               {{ user.fullname }}
               <span v-if="isMemberPicked(user)" class="icon"> ✔</span>
             </button>

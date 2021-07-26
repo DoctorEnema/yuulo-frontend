@@ -1,5 +1,9 @@
 <template>
-  <div v-if="card" @click="closeCard"  class="card-details-container">
+  <div @click="closeCard"  class="card-details-container">
+        <div v-if="isPageLoading" class="loader-svg-global">
+      <img src="../assets/img/yuumi-load.svg" />
+    </div>
+    <div  v-if="card">
     <section
       @drop.prevent="handleFile"
       @dragover.prevent="isDragOver = true"
@@ -261,6 +265,7 @@
         :card="card"
       ></card-edit-preview>
     </div>
+    </div>
   </div>
 </template>
 
@@ -335,6 +340,9 @@ export default {
       // this.isUserAssignedToCard()
     } catch (err) {
       "cannot load card", err;
+    }
+    finally{
+      this.$store.commit({type:'setLoading', isLoading: false})
     }
     // if (this.loggedinUser) this.$store.dispatch({ type: 'turnCardWatchOn'})
   },
@@ -421,6 +429,10 @@ export default {
     titleEditMode() {
       return { edit: this.isTitleEdit };
     },
+    isPageLoading(){
+      console.log(this.$store.getters.isLoading);
+      return this.$store.getters.isLoading
+    }
   },
   methods: {
     saveImg(link) {
