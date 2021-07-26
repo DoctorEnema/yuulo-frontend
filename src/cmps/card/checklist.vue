@@ -9,7 +9,7 @@
     <div class="completion">
       <span class="completion-percent">{{ complete }}</span>
       <div class="progress-bar">
-        <div class="bar" :style="'width:' + complete">
+        <div class="bar" :style="'width:' + complete" :class="isComplete">
           <div class="precentage"></div>
         </div>
       </div>
@@ -104,6 +104,11 @@ export default {
       if (!complete.length) return "0%";
       return parseInt((complete.length / todosLength) * 100) + "%";
     },
+    isComplete(){
+       var todosLength = this.checklist.todos.length;
+      var complete = this.checklist.todos.filter((todo) => todo.isDone)
+      if(todosLength === complete.length) return 'full-progress'
+    }
   },
 };
 </script>
