@@ -197,12 +197,15 @@
     overflow: hidden;
     margin-bottom: 6px;
     .bar {
-        transition: width 0.5s;
+        transition: 0.5s;
         height: 100%;
         background-color: #5ba4cf;
         border-radius: 10px;
         display: flex;
         align-items: center;
+    }
+    .full-progress{
+        background-color: #61bd4f;
     }
     .precentage {
         position: absolute;
@@ -218,3 +221,4 @@
     left: -35px;
     font-size: 12px;
 }
+

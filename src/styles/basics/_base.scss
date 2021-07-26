@@ -71,3 +71,23 @@ textarea {
     font-size: 16px;
     cursor: default;
 }
+
+.loader-svg {
+    img {
+        height: 250px;
+        width: 300px;
+    }
+}
+
+.loader-svg-global {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    img {
+        height: 250px;
+        width: 300px;
+    }
+}
