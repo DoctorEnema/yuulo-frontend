@@ -207,7 +207,7 @@
         <button
           class="add-member"
           data-cmp="add-member"
-          @click.stop="setModalType"
+          @click.stop="setModalType($event), setCoords($event)"
         >
           Members
         </button>
@@ -253,6 +253,7 @@
           :card="card"
           :labels="labelsToShow"
           :users="usersToShow"
+          :style="'left:'+coords.x+'px;'+'top:'+ coords.y+'px;'"
         ></component>
       </section>
       <card-edit-preview
@@ -316,6 +317,7 @@ export default {
       isLoading: false,
       isDragOver: false,
       link: "",
+      coords:{x:null, y:null}
     };
   },
   async created() {
@@ -423,6 +425,36 @@ export default {
     },
   },
   methods: {
+    setCoords(ev) {
+      const btnPos = ev.getBoundingClientRect()
+      const viewport = this.getViewportSize()
+      const mouseLoc = {x: ev.clientX, y: ev.clientY}
+      console.log('btnPos', btnPos);
+      if (viewport.w - mouseLoc.x < 300) mouseLoc.x -= 300 - viewport.w - mouseLoc.x
+      console.log('viewport', viewport);
+      console.log('mouseLoc', mouseLoc);
+      this.coords.x = mouseLoc.x
+      this.coords.y = mouseLoc.y
+    },
+    getViewportSize(w) {
+
+    // Use the specified window or the current window if no argument
+    w = w || window;
+
+    // This works for all browsers except IE8 and before
+    if (w.innerWidth != null) return { w: w.innerWidth, h: w.innerHeight };
+
+    // For IE (or any browser) in Standards mode
+    var d = w.document;
+    if (document.compatMode == "CSS1Compat")
+        return { w: d.documentElement.clientWidth,
+           h: d.documentElement.clientHeight };
+
+    // For browsers in Quirks mode
+    return { w: d.body.clientWidth, h: d.body.clientHeight };
+
+},
+
     saveImg(link) {
       this.link = link;
       this.linkAdded(link);
