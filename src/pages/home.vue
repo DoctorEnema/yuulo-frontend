@@ -43,7 +43,7 @@
           <h2>{{ loggedinUser.fullname.split(" ")[0] }}'s boards</h2>
         </div>
         <div v-if="favBoards.length">
-          <h2 class="boards-headline">Starred boards</h2>
+          <h2 class="boards-headline first">Starred boards</h2>
           <div v-if="boards" class="board-display starred">
             <button
               class="board-btn"
@@ -63,7 +63,7 @@
             </button>
           </div>
         </div>
-        <h2 class="boards-headline">My boards</h2>
+        <h2 class="boards-headline second">My boards</h2>
         <div class="board-display all-boards">
           <button
             class="board-btn"

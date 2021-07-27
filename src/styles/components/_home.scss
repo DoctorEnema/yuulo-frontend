@@ -337,6 +337,24 @@ $button-active-blue: #1669F2;
         white-space: nowrap;
         // color: #172b4d;
         // font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+        &.first{
+            &:before {
+                font-family: fontAwesome,sans serif;
+                content: "\f005 ";
+                margin-right: 10px;
+                font-size: 18px;
+                color: #f2c844;
+            }
+        }
+        &.second{
+            &:before {
+                font-family: fontAwesome,sans serif;
+                content: "\f868 ";
+                margin-right: 10px;
+                font-size: 18px;
+                // color: #f2c844;
+            }
+        }
     }
 }
 
