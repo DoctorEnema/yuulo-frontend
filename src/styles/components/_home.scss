@@ -38,6 +38,26 @@
         }
     }
 
+    .yuumi-boards{
+        top: 0px;
+        width: 270px;
+        height: 270px;
+        position: absolute;
+        right: -90px;
+        transform: rotate(-0.1turn);
+        @include for-mobile-layout {
+            width: 0;
+            height: 0;
+        }
+        @include for-narrow-layout {
+            top: -0px;
+        }
+        @include for-normal-layout {
+            top: 0px;
+        }
+    }
+    
+
 
     .yuumi-container {
         animation: yuumiMove ease normal forwards 1000ms;

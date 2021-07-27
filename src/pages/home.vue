@@ -34,6 +34,9 @@
       :isSignup="isSignup"
     ></login-user>
     <div v-if="boards">
+    <div class="yuumi-container">
+      <img src="@/assets/img/yuumi-mation.svg" class="yuumi-boards" />
+    </div>
       <div class="home-boards" v-if="loggedinUser">
         <div class="boards-username">
           <img v-if="loggedinUser.imgUrl" :src="loggedinUser.imgUrl" />
@@ -83,9 +86,6 @@
           </button>
         </div>
       </div>
-    </div>
-    <div v-if="loggedinUser" class="yuumi-container">
-      <yuumi></yuumi>
     </div>
   </section>
 </template>
