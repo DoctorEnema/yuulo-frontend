@@ -65,15 +65,20 @@
           </label>
         </div>
         <button>Login</button>
-
       </form>
 
       <div>
-         <button @click="handleClickGoogleLogin">
-            Google Login
-          </button>
+        <div @click="handleClickGoogleLogin" class="google-btn">
+          <div class="google-icon-wrapper">
+            <img
+              class="google-icon"
+              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+            />
+          </div>
+          <p class="btn-text"><b>Sign in with google</b></p>
+        </div>
       </div>
-        <!-- <div>
+      <!-- <div>
           <button @click="handleClickGetAuth" :disabled="!isInit">
             get auth code
           </button>
@@ -127,9 +132,7 @@ export default {
       // isSignIn: false,
     };
   },
-  async created() {
-
-  },
+  async created() {},
   computed: {
     loggedInUser() {
       return this.$store.getters.loggedinUser;
@@ -181,18 +184,16 @@ export default {
 
     async handleClickGoogleLogin() {
       try {
-        const resp =await userService.loginGoogle()
+        const resp = await userService.loginGoogle();
         // const response = await this.$http.get(
         //   "google/login/url/",
         //   {  }
-        // ); 
-        window.location.href = resp
+        // );
+        window.location.href = resp;
       } catch (error) {
         // On fail do something
       }
     },
-
-    
 
     async handleClickSignIn() {
       try {
