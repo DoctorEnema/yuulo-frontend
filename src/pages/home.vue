@@ -15,7 +15,7 @@
     </header>
     <div class="background"></div>
     <div v-if="userOrModal" class="yuumi-container">
-      <img src="@/assets/img/yuumi-mation.svg" class="yuumi">
+      <img src="@/assets/img/yuumi-mation.svg" class="yuumi" />
     </div>
     <div v-if="userOrModal" class="hero">
       <!-- <h2>Yuulo helps you stay organized and be productive.</h2> -->
@@ -176,7 +176,8 @@ export default {
       }
     },
   },
-  created() {
+  async created() {
+  
     this.$store.commit({ type: "clearBaord" });
     this.$store.dispatch("loadBoards");
     if (this.loggedinUser) this.setUpdatedLoggedInUser();
@@ -187,6 +188,15 @@ export default {
       "77664739327-oa9va2n4jgbeho5h4gvl2i0pp45hqhnu.apps.googleusercontent.com"
     );
     document.getElementsByTagName("head")[0].appendChild(meta);
+    try {
+      const user = await userService.checkIfLoggedInUser();
+    if (user){
+      this.$store.commit({ type: "setLoggedinUser", user })
+      this.$store.dispatch({ type: "loadUserCardWatch", userId: user._id })
+       }
+    } catch (err) {
+      console.log('no google user signed in');
+    }
   },
   mounted() {
     document.title = `Yuulo - Home`;

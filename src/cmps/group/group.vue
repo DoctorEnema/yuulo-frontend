@@ -32,7 +32,7 @@
       @end="onDragEnd"
       :animation="200"
       ghostClass="moving-card"
-      :delay="170"
+      :delay="140"
       :delayOnTouchOnly="true"
     >
       <card-preview

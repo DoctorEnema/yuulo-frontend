@@ -80,7 +80,7 @@
           :animation="200"
           ghostClass="moving-group"
           chosenClass="group-moving"
-          :delay="170"
+          :delay="140"
           :delayOnTouchOnly="true"
         >
           <group
@@ -141,6 +141,15 @@ export default {
       await this.$store.dispatch({ type: "loadUsers" });
     } catch (err) {
       console.log("cannot load users", err);
+    }
+    try {
+      const user = await userService.checkIfLoggedInUser();
+    if (user){
+      this.$store.commit({ type: "setLoggedinUser", user })
+      this.$store.dispatch({ type: "loadUserCardWatch", userId: user._id })
+       }
+    } catch (err) {
+      console.log('no google user signed in');
     }
     this.setUpdatedLoggedInUser();
     socketService.emit("board topic", this.boardId);

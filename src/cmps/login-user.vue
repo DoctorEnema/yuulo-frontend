@@ -67,6 +67,12 @@
         <button>Login</button>
 
       </form>
+
+      <div>
+         <button @click="handleClickGoogleLogin">
+            Google Login
+          </button>
+      </div>
         <!-- <div>
           <button @click="handleClickGetAuth" :disabled="!isInit">
             get auth code
@@ -122,17 +128,7 @@ export default {
     };
   },
   async created() {
-    //loggs in a user automatically
-    // try {
-    // const user = await this.$store.dispatch({
-    //   type: "login",
-    //   userCred: this.credentials,
-    // });
-    // socketService.emit("user-watch", user._id);
-    // this.$store.dispatch({type: 'loadUserCardWatch', userId: user._id})
-    // } catch (err) {
-    //   console.log("cannot login", err);
-    // }
+
   },
   computed: {
     loggedInUser() {
@@ -174,14 +170,29 @@ export default {
     async handleClickGetAuth() {
       try {
         const authCode = await this.$gAuth.getAuthCode();
-        const response = await this.$http.post(
-          "auth/",
-          { code: authCode, redirect_uri: "postmessage" }
-        );
+        // const response = await this.$http.post(
+        //   "auth/",
+        //   { code: authCode, redirect_uri: "postmessage" }
+        // );
       } catch (error) {
         // On fail do something
       }
     },
+
+    async handleClickGoogleLogin() {
+      try {
+        const resp =await userService.loginGoogle()
+        // const response = await this.$http.get(
+        //   "google/login/url/",
+        //   {  }
+        // ); 
+        window.location.href = resp
+      } catch (error) {
+        // On fail do something
+      }
+    },
+
+    
 
     async handleClickSignIn() {
       try {

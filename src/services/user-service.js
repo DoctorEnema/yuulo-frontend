@@ -61,7 +61,9 @@ export const userService = {
     getLoggedinUser,
     updateUserNotifications,
     clearNotifications,
-    markRead
+    markRead,
+    loginGoogle,
+    checkIfLoggedInUser
 }
 
 // window.userService = userService
@@ -70,14 +72,19 @@ export const userService = {
 // userService.signup({fullname: 'Master Adminov', username: 'admin', password:'123', score: 100, isAdmin: true})
 // userService.signup({fullname: 'Muki G', username: 'muki', password:'123', score: 100})
 
+async function loginGoogle() {
+    console.log('service')
+    return httpService.get('auth/google/login/url')
+}
+
 async function login(userCred) {
     // const users = await storageService.query('user')
     // const user = users.find(user => user.username === userCred.username)
     // return _saveLocalUser(user)
-
     const user = await httpService.post('auth/login', userCred)
     if (user) return _saveLocalUser(user)
 }
+
 async function signup(userCred) {
     console.log("userCred", userCred)
     // const user = await storageService.post('user', userCred)
@@ -128,6 +135,23 @@ function _saveLocalUser(user) {
 
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem('loggedinUser') || 'null')
+}
+// seeIfLoggedInUser()
+async function getGoogleUser() {
+    try {
+        const loggedinUser = await httpService.get('auth/google/login/check')
+        if (loggedinUser) _saveLocalUser(loggedinUser)
+        return loggedinUser
+    } catch (err) {
+        console.log('cannot get google user', err);
+    }
+}
+
+async function checkIfLoggedInUser() {
+    var loggedinUser = getLoggedinUser()
+    console.log('loggedinUser', loggedinUser);
+    if (!loggedinUser) loggedinUser = await getGoogleUser()
+    return loggedinUser
 }
 
 async function updateUserNotifications(data) {
