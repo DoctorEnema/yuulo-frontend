@@ -181,13 +181,6 @@ export default {
     this.$store.commit({ type: "clearBaord" });
     this.$store.dispatch("loadBoards");
     if (this.loggedinUser) this.setUpdatedLoggedInUser();
-    var meta = document.createElement("meta");
-    meta.name = "google-signin-client_id";
-    meta.setAttribute(
-      "content",
-      "77664739327-oa9va2n4jgbeho5h4gvl2i0pp45hqhnu.apps.googleusercontent.com"
-    );
-    document.getElementsByTagName("head")[0].appendChild(meta);
     try {
       const user = await userService.checkIfLoggedInUser();
     if (user){

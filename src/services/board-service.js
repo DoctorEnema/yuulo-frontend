@@ -39,15 +39,15 @@ export const boardService = {
 
 
 
-function _createBoards() {
-    let boards = utilService.loadFromStorage(BOARD_KEY);
-    if (!boards || !boards.length) {
-        boards = newBoard;
+// function _createBoards() {
+//     let boards = utilService.loadFromStorage(BOARD_KEY);
+//     if (!boards || !boards.length) {
+//         boards = newBoard;
 
-        utilService.saveToStorage(BOARD_KEY, boards);
-    }
-    return boards;
-}
+//         utilService.saveToStorage(BOARD_KEY, boards);
+//     }
+//     return boards;
+// }
 
 // function query() {
 //     return storageService.query(BOARD_KEY);
@@ -63,8 +63,11 @@ function remove(boardId) {
     return httpService.delete(`board/${boardId}`)
 }
 
-function getById(boardId) {
-    return httpService.get(`board/${boardId}`)
+async function getById(boardId) {
+    // console.log(boardId, 'boardId');
+    const board =await  httpService.get(`board/${boardId}`)
+    console.log('board',board);
+    return board
     // return storageService.get(BOARD_KEY, boardId);
 }
 
