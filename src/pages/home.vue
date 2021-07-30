@@ -151,11 +151,11 @@ export default {
       try {
         const user = await this.$store.dispatch({
           type: "login",
-          // userCred: { username: "Guest", password: "1234" },
-          userCred: { username: "liran", password: "1234" },
+          userCred: { username: "Guest", password: "1234" },
+          // userCred: { username: "liran", password: "1234" },
         });
         this.$store.dispatch({ type: "loadUserCardWatch", userId: user._id });
-        this.$router.push("/board/60fa7a223d6d273440477d69");
+        // this.$router.push("/board/60fa7a223d6d273440477d69");
       } catch (err) {
         console.log("cannot login", err);
       }
