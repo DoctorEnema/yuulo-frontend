@@ -1,5 +1,5 @@
 <template>
-  <section class="home">
+  <section class="home" :class="{boards: loggedinUser}">
     <header v-if="!loggedinUser" class="home-header">
       <div class="home-logo">
         <img src="@/assets/img/yuulo1.png" />
@@ -34,7 +34,7 @@
       :isSignup="isSignup"
     ></login-user>
     <div v-if="boards">
-    <div class="yuumi-container">
+    <div v-if="loggedinUser" class="yuumi-container">
       <img src="@/assets/img/yuumi-mation.svg" class="yuumi-boards" />
     </div>
       <div class="home-boards" v-if="loggedinUser">
@@ -155,7 +155,7 @@ export default {
           // userCred: { username: "liran", password: "1234" },
         });
         this.$store.dispatch({ type: "loadUserCardWatch", userId: user._id });
-        // this.$router.push("/board/60fa7a223d6d273440477d69");
+        this.$router.push("/board/60ffd8e64d44eb001519078c");
       } catch (err) {
         console.log("cannot login", err);
       }

@@ -1,5 +1,14 @@
 .home {
     // width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    @include for-mobile-layout {
+        overflow-y: hidden;
+    }
+    &.boards {
+        height: calc(100vh - 40px);
+    }
     button {
         padding: 14px 36px;
         background-color: #0065ff;
